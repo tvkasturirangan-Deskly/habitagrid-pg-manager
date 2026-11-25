@@ -1,0 +1,2612 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>HabitaGrid PG Manager</title>
+<style>
+:root{--nav:#14213d;--blue:#2563eb;--bg:#f4f6fa;--card:#fff;--text:#172033;--muted:#667085;--line:#e5e7eb;--green:#16834b;--amber:#b7791f;--red:#c53030}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.top{height:60px;background:var(--nav);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:10}.brand{font-size:20px;font-weight:800}.topright{display:flex;gap:10px;align-items:center}.pill{background:#2a3b60;padding:8px 14px;border-radius:20px;font-size:13px}.btn{background:var(--blue);color:#fff;padding:9px 14px;border-radius:7px;font-weight:600}.btn.secondary{background:#eef2f7;color:#24324a}.btn.danger{background:#dc3545}.layout{display:flex;min-height:calc(100vh - 60px)}.side{width:245px;background:#fff;border-right:1px solid var(--line);padding:14px 10px;position:sticky;top:60px;height:calc(100vh - 60px);overflow:auto}.navbtn{width:100%;text-align:left;background:transparent;padding:10px 12px;border-radius:7px;margin:2px 0;color:#344054}.navbtn:hover,.navbtn.active{background:#eaf0ff;color:#1859d1;font-weight:700}.main{flex:1;padding:24px;min-width:0}.pagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px}.pagehead h1{margin:0 0 5px;font-size:26px}.muted{color:var(--muted);font-size:13px}.cards{display:grid;grid-template-columns:repeat(5,minmax(150px,1fr));gap:14px;margin-bottom:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:0 1px 2px #00000008}.metric{font-size:25px;font-weight:800;margin:7px 0}.green{color:var(--green)}.amber{color:var(--amber)}.red{color:var(--red)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.section{margin-bottom:18px}.section h2{font-size:17px;margin:0 0 12px}.tablewrap{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:auto}.table{width:100%;border-collapse:collapse;min-width:760px}.table th,.table td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:left;font-size:13px;vertical-align:top}.table th{background:#f8fafc;color:#475467}.tag{display:inline-block;padding:4px 8px;border-radius:14px;background:#eef2f7;font-size:11px;font-weight:700}.tag.green{background:#e7f7ef}.tag.amber{background:#fff5db}.tag.red{background:#fdeaea}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.search{padding:9px 11px;border:1px solid #d0d5dd;border-radius:7px;min-width:240px}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field label{display:block;font-size:12px;font-weight:700;color:#475467;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;padding:9px;border:1px solid #d0d5dd;border-radius:7px;background:#fff}.field textarea{min-height:80px;resize:vertical}.modal{position:fixed;inset:0;background:#0007;display:none;align-items:center;justify-content:center;z-index:30;padding:20px}.modal.show{display:flex}.modalbox{background:#fff;width:min(760px,100%);max-height:90vh;overflow:auto;border-radius:12px;padding:20px}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.close{background:#eef2f7;border-radius:7px;padding:7px 10px}.actions{display:flex;gap:7px;justify-content:flex-end;margin-top:15px}.notice{padding:12px;border-left:4px solid var(--blue);background:#f0f5ff;border-radius:6px;margin-bottom:8px}.mini{font-size:12px}.empty{padding:30px;text-align:center;color:var(--muted)}.error{position:fixed;inset:0;background:#fff;padding:30px;z-index:99}.error pre{white-space:pre-wrap;color:#a00}
+@media(max-width:1050px){.cards{grid-template-columns:repeat(3,1fr)}}@media(max-width:760px){.side{width:190px}.main{padding:15px}.cards{grid-template-columns:1fr 1fr}.grid2,.formgrid{grid-template-columns:1fr}.top{padding:0 12px}.brand{font-size:16px}}
+
+/* HABITAGRID PG MANAGER - PREMIUM DESIGN SYSTEM */
+:root{
+ --nav:#101c32;
+ --blue:#b58b48;
+ --bg:#f4f2ed;
+ --card:#ffffff;
+ --text:#202b3c;
+ --muted:#778091;
+ --line:#e8e5de;
+ --green:#23856d;
+ --amber:#b58b48;
+ --red:#c65353;
+ --gold:#c5a46a;
+ --soft:#f8f6f1;
+}
+body{
+ background:var(--bg);
+ color:var(--text);
+ font-family:Inter,"Segoe UI",Arial,sans-serif;
+ letter-spacing:.05px;
+}
+.top{
+ height:68px;
+ background:linear-gradient(110deg,#101c32,#1a2b46);
+ padding:0 30px;
+ box-shadow:0 3px 18px #101c321c;
+ border-bottom:1px solid #c5a46a55;
+}
+.brand{
+ font-size:21px;
+ font-weight:750;
+ letter-spacing:.3px;
+ color:#f5e6c8;
+}
+.pill{
+ background:#ffffff16;
+ border:1px solid #ffffff25;
+ color:#f3e8d4;
+ padding:9px 15px;
+}
+.layout{
+ min-height:calc(100vh - 68px);
+}
+.side{
+ width:255px;
+ top:68px;
+ height:calc(100vh - 68px);
+ background:#fff;
+ border-right:1px solid #e8e5de;
+ padding:22px 13px;
+ box-shadow:4px 0 18px #17203308;
+}
+.navbtn{
+ padding:12px 14px;
+ margin:4px 0;
+ border-radius:9px;
+ color:#596477;
+ font-size:13px;
+ font-weight:550;
+ transition:background .18s ease,color .18s ease;
+}
+.navbtn:hover{
+ background:#f5f1e8;
+ color:#8b6936;
+}
+.navbtn.active{
+ background:linear-gradient(100deg,#f4eee2,#faf8f3);
+ color:#87632e;
+ font-weight:750;
+ box-shadow:inset 3px 0 0 #b58b48;
+}
+.main{
+ padding:30px 34px;
+}
+.pagehead{
+ align-items:center;
+ margin-bottom:25px;
+}
+.pagehead h1{
+ font-size:27px;
+ font-weight:750;
+ letter-spacing:-.6px;
+ color:#18253a;
+}
+.muted{
+ color:#7b8492;
+}
+.cards{
+ gap:17px;
+ margin-bottom:22px;
+}
+.card{
+ background:#fff;
+ border:1px solid #eae7e0;
+ border-radius:14px;
+ padding:19px;
+ box-shadow:0 4px 16px #17203308;
+ transition:transform .18s ease,box-shadow .18s ease;
+}
+.cards .card:hover{
+ transform:translateY(-2px);
+ box-shadow:0 9px 24px #17203310;
+}
+.metric{
+ font-size:27px;
+ font-weight:750;
+ letter-spacing:-.6px;
+ color:#17253b;
+ margin:10px 0 6px;
+}
+.grid2{
+ gap:20px;
+}
+.section{
+ margin-bottom:23px;
+}
+.section h2{
+ font-size:17px;
+ font-weight:700;
+ color:#26344a;
+}
+.btn{
+ background:linear-gradient(110deg,#a98142,#c4a36a);
+ color:#fff;
+ padding:10px 17px;
+ border-radius:8px;
+ font-size:13px;
+ font-weight:700;
+ box-shadow:0 3px 9px #a9814220;
+ transition:filter .18s ease,transform .18s ease;
+}
+.btn:hover{
+ filter:brightness(1.06);
+ transform:translateY(-1px);
+}
+.btn.secondary{
+ background:#f2f0eb;
+ color:#465166;
+ border:1px solid #e5e1d8;
+ box-shadow:none;
+}
+.btn.danger{
+ background:#bd5555;
+ color:#fff;
+}
+.tablewrap{
+ border:1px solid #e8e5de;
+ border-radius:13px;
+ box-shadow:0 3px 14px #17203307;
+}
+.table{
+ border-collapse:separate;
+ border-spacing:0;
+}
+.table th{
+ background:#f7f5f0;
+ color:#596477;
+ font-size:11px;
+ text-transform:uppercase;
+ letter-spacing:.55px;
+ font-weight:750;
+ padding:14px 13px;
+}
+.table td{
+ padding:13px;
+ color:#364256;
+}
+.table tr:last-child td{
+ border-bottom:0;
+}
+.table tbody tr:hover{
+ background:#fcfaf6;
+}
+.tag{
+ border-radius:20px;
+ padding:5px 10px;
+ font-size:10px;
+ letter-spacing:.15px;
+}
+.tag.green{
+ background:#e8f4ef;
+ color:#26765f;
+}
+.tag.amber{
+ background:#f8f0df;
+ color:#96703b;
+}
+.tag.red{
+ background:#faeaea;
+ color:#ae4545;
+}
+.toolbar{
+ gap:10px;
+ margin-bottom:15px;
+}
+.search,.field input,.field select,.field textarea{
+ border:1px solid #dedbd3;
+ border-radius:8px;
+ padding:11px 12px;
+ color:#26344a;
+ background:#fff;
+ outline:none;
+ transition:border .18s ease,box-shadow .18s ease;
+}
+.search:focus,.field input:focus,.field select:focus,.field textarea:focus{
+ border-color:#b58b48;
+ box-shadow:0 0 0 3px #b58b4818;
+}
+.field label{
+ color:#465166;
+ font-size:12px;
+ font-weight:700;
+}
+.modal{
+ background:#101c3275;
+ backdrop-filter:blur(4px);
+}
+.modalbox{
+ border:1px solid #e8e2d6;
+ border-radius:16px;
+ box-shadow:0 24px 70px #101c3240;
+ padding:25px;
+}
+.modalhead h2{
+ color:#1b2940;
+ font-size:20px;
+}
+.close{
+ background:#f3f0e9;
+ color:#596477;
+ border-radius:8px;
+}
+.notice{
+ background:#f8f5ee;
+ border-left:4px solid #b58b48;
+ border-radius:8px;
+ padding:14px;
+}
+.empty{
+ padding:38px 24px;
+ color:#89909c;
+}
+@media(max-width:1050px){
+ .main{padding:23px}
+ .cards{grid-template-columns:repeat(3,minmax(140px,1fr))}
+}
+@media(max-width:760px){
+ .top{height:60px;padding:0 13px}
+ .side{width:185px;top:60px;height:calc(100vh - 60px);padding:13px 8px}
+ .main{padding:17px 13px}
+ .pagehead h1{font-size:22px}
+ .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .card{padding:14px}
+ .metric{font-size:23px}
+ .brand{font-size:16px}
+}
+
+/* HABITAGRID PG MANAGER - PREMIUM LOGIN */
+.pg-login{min-height:100vh;background:radial-gradient(circle at 15% 15%,#263c55 0,#142338 38%,#0b1422 100%);display:grid;grid-template-columns:1.05fr .95fr;align-items:center;padding:6vw;gap:5vw;color:#fff;font-family:Inter,Segoe UI,Arial,sans-serif}
+.pg-login-brand{max-width:620px}
+.pg-login-logo{display:flex;align-items:center;gap:14px;margin-bottom:55px}
+.pg-login-symbol{width:52px;height:52px;border:1px solid #c9aa69;border-radius:15px;display:grid;place-items:center;color:#e4c887;font-size:25px}
+.pg-login-wordmark{font-size:23px;letter-spacing:3px;font-weight:700;color:#f5e8c8}
+.pg-login-submark{font-size:10px;letter-spacing:4px;color:#c9aa69;margin-top:5px}
+.pg-login-brand h1{font-size:clamp(36px,5vw,62px);line-height:1.08;letter-spacing:-1.8px;color:#fff;margin:0 0 22px}
+.pg-login-brand>p{font-size:17px;line-height:1.8;color:#c3cedb;max-width:510px}
+.pg-login-features{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.pg-login-features span{border:1px solid #526174;border-radius:30px;padding:9px 14px;color:#e1d3b4;font-size:12px}
+.pg-login-panel{background:#fff;color:#17263b;border-radius:22px;padding:clamp(26px,4vw,46px);width:100%;max-width:440px;justify-self:center;box-shadow:0 25px 80px #0005}
+.pg-login-panel h2{font-size:27px;margin:0 0 8px;color:#17263b}
+.pg-login-panel .pg-login-intro{color:#718096;font-size:14px;margin-bottom:30px}
+.pg-login-panel .field{margin-bottom:17px}
+.pg-login-panel .field label{color:#46566c;font-size:12px;font-weight:700;letter-spacing:.5px}
+.pg-login-panel .field input{width:100%;box-sizing:border-box;min-height:48px;border:1px solid #dce2e9;border-radius:9px;padding:12px;font-size:15px;background:#fbfcfd;color:#17263b}
+.pg-login-panel .field input:focus{outline:2px solid #d5bd88;border-color:#b99b60}
+.pg-login-submit{width:100%;min-height:50px;border:0;border-radius:9px;background:linear-gradient(110deg,#b89452,#dfc78e);color:#172235;font-weight:800;letter-spacing:1px;cursor:pointer;margin-top:8px}
+.pg-login-submit:hover{filter:brightness(1.05)}
+.pg-login-demo{margin-top:22px;padding:13px;background:#f5f3ee;border-radius:9px;color:#697386;font-size:12px;line-height:1.7}
+.pg-login-demo strong{color:#28374a}
+.pg-demo-countdown{color:#f0d59b;font-size:12px;font-weight:700;white-space:nowrap}
+@media(max-width:800px){.pg-login{grid-template-columns:1fr;padding:32px 20px;gap:25px}.pg-login-logo{margin-bottom:25px}.pg-login-brand h1{font-size:38px}.pg-login-brand>p{font-size:14px}.pg-login-panel{max-width:none;box-sizing:border-box}}
+@media(max-width:420px){.pg-login{padding:24px 15px}.pg-login-brand h1{font-size:32px}.pg-login-panel{padding:23px}}
+
+/* HABITAGRID PG MANAGER - PUBLIC LANDING PAGE */
+.pg-site{background:#f7f6f2;color:#17263b;font-family:Inter,"Segoe UI",Arial,sans-serif;overflow:hidden}
+.pg-site *{box-sizing:border-box}
+.pg-nav{position:sticky;top:0;z-index:20;background:#101c32;color:#fff;padding:15px 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #c5a46a66}
+.pg-brand{display:flex;align-items:center;gap:12px}
+.pg-brand-mark{width:42px;height:42px;border:1px solid #c5a46a;border-radius:12px;display:grid;place-items:center;color:#e3c78f;font-size:23px}
+.pg-brand-name{font-weight:800;letter-spacing:2px;color:#f5e6c8;font-size:18px}
+.pg-brand-sub{font-size:9px;letter-spacing:3px;color:#c5a46a;margin-top:3px}
+.pg-nav-links{display:flex;gap:25px;align-items:center}
+.pg-nav-links a{color:#e6eaf0;text-decoration:none;font-size:13px}
+.pg-nav-links a:hover{color:#e3c78f}
+.pg-nav-cta,.pg-cta{display:inline-block;background:linear-gradient(110deg,#b89452,#e2cc98);color:#17263b!important;text-decoration:none;border-radius:7px;padding:12px 19px;font-weight:800;font-size:12px;letter-spacing:.5px}
+.pg-hero{background:radial-gradient(circle at 80% 20%,#263d5b 0,#172941 42%,#0d1728 100%);color:#fff;padding:78px 7% 86px;display:grid;grid-template-columns:1.08fr .92fr;gap:55px;align-items:center}
+.pg-eyebrow{color:#d9bd82;font-size:11px;letter-spacing:2.5px;font-weight:800;text-transform:uppercase}
+.pg-hero h1{font-size:clamp(39px,5vw,65px);line-height:1.08;letter-spacing:-2px;margin:20px 0;color:#fff;max-width:680px}
+.pg-hero h1 span{color:#e0c58e}
+.pg-hero-copy{color:#c8d1dc;font-size:16px;line-height:1.85;max-width:570px}
+.pg-hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:28px}
+.pg-hero-secondary{color:#f2e6ce;text-decoration:none;border:1px solid #8b9aae;border-radius:7px;padding:11px 17px;font-size:12px}
+.pg-hero-note{color:#aebaca;font-size:11px;margin-top:20px}
+.pg-preview{background:#fff;border:1px solid #d9c69e;border-radius:15px;padding:16px;box-shadow:0 25px 70px #0005;transform:rotate(1deg);color:#17263b}
+.pg-preview-top{display:flex;justify-content:space-between;align-items:center;padding:5px 3px 15px;border-bottom:1px solid #e8e5de;font-size:12px;font-weight:800}
+.pg-preview-tag{background:#f4efe4;color:#8a6a35;border-radius:20px;padding:6px 10px;font-size:9px}
+.pg-preview-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}
+.pg-preview-stat{background:#f7f6f2;border:1px solid #ece8df;border-radius:9px;padding:13px}
+.pg-preview-stat small{display:block;color:#7b8492;font-size:10px}
+.pg-preview-stat strong{display:block;font-size:23px;margin-top:5px}
+.pg-preview-bottom{background:#14233a;color:#fff;padding:15px;border-radius:9px;font-size:11px;line-height:1.8}
+.pg-section{padding:76px 7%;max-width:1500px;margin:auto}
+.pg-section-heading{text-align:center;max-width:760px;margin:0 auto 38px}
+.pg-section-heading .pg-eyebrow{color:#9a753d}
+.pg-section-heading h2{font-size:clamp(28px,3.5vw,42px);line-height:1.2;margin:13px 0;color:#17263b}
+.pg-section-heading p{color:#727d8d;line-height:1.8;font-size:14px}
+.pg-feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.pg-feature{background:#fff;border:1px solid #e6e0d3;border-radius:13px;padding:26px;box-shadow:0 5px 20px #18263b08}
+.pg-feature-top{display:flex;align-items:center;gap:13px;margin-bottom:15px}
+.pg-feature-icon{width:43px;height:43px;border-radius:11px;background:#f4efe4;color:#99743e;display:grid;place-items:center;font-size:20px}
+.pg-feature h3{font-size:17px;margin:0;color:#17263b}
+.pg-feature-kicker{font-size:9px;letter-spacing:1.5px;color:#a17c45;font-weight:800;margin-bottom:5px}
+.pg-feature p{font-size:13px;line-height:1.75;color:#6d7787}
+.pg-feature ul{padding-left:18px;margin:13px 0 0;color:#34445a;font-size:12px;line-height:2}
+.pg-feature-preview{background:#f7f6f2;border:1px solid #ebe6dc;border-radius:9px;margin-top:18px;padding:14px}
+.pg-feature-preview strong{font-size:11px;color:#17263b}
+.pg-preview-chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.pg-preview-chips span{background:#fff;border:1px solid #e5dfd3;padding:6px 9px;border-radius:6px;font-size:10px;color:#5e6878}
+.pg-why{background:#101c32;color:#fff}
+.pg-why .pg-section-heading h2{color:#fff}
+.pg-why .pg-section-heading p{color:#c0cad6}
+.pg-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pg-benefit{border:1px solid #ffffff25;border-radius:11px;padding:22px}
+.pg-benefit strong{display:block;color:#e3c78f;margin-bottom:9px;font-size:14px}
+.pg-benefit p{color:#c2ccd8;font-size:12px;line-height:1.8;margin:0}
+.pg-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pg-step{background:#fff;border:1px solid #e8e2d7;border-radius:12px;padding:23px}
+.pg-step-no{font-size:25px;font-weight:800;color:#b18a4c}
+.pg-step h3{font-size:15px;margin:12px 0 8px}
+.pg-step p{font-size:12px;line-height:1.8;color:#737d8b}
+.pg-types{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.pg-types span{padding:12px 17px;background:#fff;border:1px solid #e5dfd3;border-radius:30px;color:#35445a;font-size:12px}
+.pg-final-cta{background:linear-gradient(110deg,#172941,#101c32);text-align:center;color:#fff;padding:65px 7%}
+.pg-final-cta h2{font-size:clamp(28px,4vw,42px);margin:0 0 13px}
+.pg-final-cta p{color:#c5ced9;font-size:14px;line-height:1.8;margin:0 auto 25px;max-width:620px}
+.pg-footer{background:#0b1422;color:#9eabba;padding:22px 7%;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;font-size:11px}
+.pg-footer strong{color:#e3c78f}
+@media(max-width:850px){.pg-hero{grid-template-columns:1fr;padding:55px 6%;gap:35px}.pg-nav-links{gap:12px}.pg-nav-links a:not(.pg-nav-cta){display:none}.pg-feature-grid{grid-template-columns:1fr}.pg-benefits{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.pg-nav{padding:12px 5%}.pg-brand-name{font-size:15px}.pg-hero{padding:43px 6%}.pg-hero h1{font-size:39px}.pg-section{padding:52px 6%}.pg-benefits,.pg-steps{grid-template-columns:1fr}.pg-preview{transform:none}.pg-footer{flex-direction:column}}
+</style>
+<style id="habitat-premium-theme">
+
+:root{
+ --nav:#101d36;--blue:#3167e8;--bg:#f3f6fb;--card:#ffffff;
+ --text:#18243a;--muted:#718096;--line:#e4eaf2;
+ --green:#16834b;--amber:#b7791f;--red:#c53030;
+}
+body{background:var(--bg);color:var(--text);font-family:Inter,"Segoe UI",Arial,sans-serif}
+.top{
+ background:linear-gradient(110deg,#101d36,#1b3155);
+ min-height:66px;height:auto;padding:12px 24px;
+ box-shadow:0 3px 14px #10203b20;
+}
+.brand{font-size:21px;letter-spacing:.2px;font-weight:800}
+.pill{background:#2c4268;border:1px solid #ffffff20}
+.layout{min-height:calc(100vh - 66px)}
+.side{
+ width:252px;background:#111f39;border-right:0;
+ padding:18px 12px;top:66px;height:calc(100vh - 66px);
+ box-shadow:3px 0 14px #10203b0b;
+}
+.side .navbtn{
+ color:#d5deef;padding:11px 13px;border-radius:9px;
+ margin:3px 0;transition:background .15s,color .15s;
+}
+.side .navbtn:hover{background:#243958;color:#fff}
+.side .navbtn.active{
+ background:#2d63d9;color:#fff;font-weight:700;
+ box-shadow:0 4px 12px #00000020;
+}
+.main{padding:28px 30px;min-width:0}
+.pagehead{margin-bottom:22px}
+.pagehead h1{font-size:27px;letter-spacing:-.45px;color:#172640}
+.card,.tablewrap{
+ border:1px solid var(--line);border-radius:14px;
+ box-shadow:0 3px 12px #1b31550a;
+}
+.card{padding:18px}
+.dashboard-metrics{gap:17px;margin-bottom:24px}
+.dashboard-metric-card{
+ border:1px solid var(--line);border-radius:14px;
+ background:#fff;padding:19px;min-height:116px;
+ box-shadow:0 3px 12px #1b31550a;
+}
+.dashboard-metric-card:hover,.dashboard-metric-card:focus-visible{
+ box-shadow:0 10px 24px #17203318;
+ outline:2px solid #8baaf5;outline-offset:2px;
+}
+.metric{font-size:27px;letter-spacing:-.5px}
+.tablewrap{overflow:auto}
+.table th{
+ background:#f1f5fb;color:#40516b;font-weight:700;
+ text-transform:none;
+}
+.table th,.table td{padding:12px 13px}
+.btn{border-radius:8px;box-shadow:0 2px 5px #1b315518}
+.btn:hover{filter:brightness(.96)}
+.btn.secondary{border:1px solid #e0e6ef}
+.field input,.field select,.field textarea,.search{
+ border-color:#d7e0ec;border-radius:8px;
+}
+.field input:focus,.field select:focus,.field textarea:focus,.search:focus{
+ outline:2px solid #c5d6ff;border-color:#6d93ee;
+}
+.modalbox{border-radius:16px;box-shadow:0 18px 60px #0003}
+.notice{border-radius:9px}
+@media(max-width:1050px){
+ .main{padding:22px}
+ .side{width:220px}
+}
+@media(max-width:760px){
+ .top{padding:11px 14px;gap:10px;flex-wrap:wrap}
+ .brand{font-size:18px}
+ .layout{display:block}
+ .side{
+  width:100%;height:auto;position:sticky;top:0;
+  display:flex;gap:5px;overflow-x:auto;padding:8px;
+  z-index:9;white-space:nowrap;
+ }
+ .side .navbtn{width:auto;flex:0 0 auto;margin:0;padding:9px 12px}
+ .main{padding:16px}
+ .dashboard-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .dashboard-metric-card{padding:14px;min-height:100px}
+ .grid2{grid-template-columns:1fr}
+ .pagehead{flex-wrap:wrap}
+ .formgrid{grid-template-columns:1fr}
+}
+@media(max-width:420px){
+ .dashboard-metrics{grid-template-columns:1fr 1fr}
+ .metric{font-size:22px}
+}
+
+</style>
+<style id="habitagrid-luxe-login">
+/* HABITAGRID LUXE - LANDING PAGE ONLY */
+.pg-site {
+  background:#0b1425;
+  color:#f8f5ee;
+}
+.pg-site .pg-nav {
+  padding:17px 5%;
+  background:#101c32;
+  border-bottom:1px solid #c5a46a66;
+  box-shadow:0 12px 35px #0004;
+}
+.pg-site .pg-nav-links {gap:12px}
+.pg-site .pg-nav-links a {
+  padding:10px 14px;
+  border-radius:30px;
+  transition:all .2s ease;
+}
+.pg-site .pg-nav-links a:hover {
+  color:#f4d99e;
+  background:#ffffff12;
+}
+.pg-site .pg-nav-links a:last-child {
+  color:#172238;
+  background:linear-gradient(110deg,#b99350,#f0d99f);
+  font-weight:750;
+}
+.pg-site .pg-hero {
+  background:
+    radial-gradient(ellipse at 12% 18%,#34507888,transparent 38%),
+    radial-gradient(ellipse at 85% 78%,#b38b4a20,transparent 34%),
+    linear-gradient(125deg,#101d34,#172b48 52%,#0b1425);
+  padding:clamp(55px,8vw,100px) 6%;
+}
+.pg-site .pg-hero h1 {
+  font-size:clamp(40px,5.3vw,72px);
+  line-height:1.08;
+  letter-spacing:-2px;
+}
+.pg-site .pg-hero p {
+  color:#d0d9e5;
+  line-height:1.85;
+}
+.pg-site .pg-login-features {gap:12px}
+.pg-site .pg-login-features span {
+  padding:10px 15px;
+  border:1px solid #d7bd8055;
+  border-radius:30px;
+  background:#ffffff0c;
+  color:#f0dfbb;
+}
+.pg-site .pg-hero-link {
+  display:inline-flex;
+  gap:10px;
+  padding:13px 19px;
+  border:1px solid #d7bd8070;
+  border-radius:8px;
+  color:#f4d99e;
+  text-decoration:none;
+}
+.pg-site .pg-login-panel {
+  max-width:470px;
+  padding:clamp(25px,4vw,45px);
+  border:1px solid #ffffff;
+  border-radius:22px;
+  background:#fffefa;
+  box-shadow:0 30px 80px #0006;
+}
+.pg-site .pg-login-panel h2 {color:#17243a}
+.pg-site .pg-login-panel .field input {
+  min-height:52px;
+  border:1px solid #d9d5ca;
+  border-radius:10px;
+}
+.pg-site .pg-login-panel .field input:focus {
+  outline:0;
+  border-color:#b89452;
+  box-shadow:0 0 0 4px #c5a46a25;
+}
+.pg-site .pg-login-submit {
+  min-height:54px;
+  border-radius:10px;
+  background:linear-gradient(110deg,#ae8744,#e8d19a);
+}
+.pg-site .pg-login-demo {
+  border:1px solid #e8dfcc;
+  border-radius:11px;
+  padding:15px;
+  background:#f8f5ee;
+}
+.pg-site .pg-section {background:#f8f7f3}
+.pg-site .pg-feature {border-radius:13px}
+.pg-site .pg-final-cta {
+  background:linear-gradient(120deg,#101d34,#1c3455);
+}
+@media(max-width:800px) {
+  .pg-site .pg-hero {padding:55px 6%}
+  .pg-site .pg-login-panel {max-width:560px}
+}
+</style>
+<style id="habitagrid-visual-refinement">
+.pg-site .pg-section-heading h2 { color:#17263b !important; }
+.pg-site .pg-section-heading p { color:#596779 !important; }
+.pg-site .pg-section-heading .pg-eyebrow { color:#9a753d !important; }
+.pg-site .pg-feature-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:22px;
+}
+.pg-site .pg-feature {
+    background:#ffffff;
+    border:1px solid #e6e0d3;
+    color:#17263b;
+}
+.pg-site .pg-feature h3,
+.pg-site .pg-feature-preview strong { color:#17263b; }
+.pg-site .pg-feature p { color:#596779; }
+.pg-site .pg-feature ul { color:#34445a; }
+@media(max-width:800px) {
+    .pg-site .pg-feature-grid { grid-template-columns:1fr !important; }
+}
+</style>
+<style id="habitagrid-benefits-contrast">
+.pg-site .pg-benefits {
+    background:#F8F7F3 !important;
+    padding:30px 6% !important;
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:20px !important;
+}
+.pg-site .pg-benefits > div {
+    background:#FFFFFF !important;
+    border:1px solid #E6E0D3 !important;
+    border-radius:14px !important;
+    padding:24px !important;
+    box-shadow:0 8px 24px rgba(23,38,59,0.06);
+}
+.pg-site .pg-benefits h3 {
+    color:#17263B !important;
+    margin-top:0;
+}
+.pg-site .pg-benefits p {
+    color:#596779 !important;
+    line-height:1.7;
+}
+@media(max-width:800px) {
+    .pg-site .pg-benefits {
+        grid-template-columns:1fr !important;
+    }
+}
+</style>
+<style id="habitagrid-accommodation-contrast">
+.pg-site .pg-types {
+    background:#F8F7F3 !important;
+}
+.pg-site .pg-types .pg-section-heading h2 {
+    color:#17263B !important;
+}
+.pg-site .pg-types .pg-section-heading p {
+    color:#596779 !important;
+}
+.pg-site .pg-types .pg-section-heading .pg-eyebrow {
+    color:#9A753D !important;
+}
+.pg-site .pg-types span {
+    display:inline-block;
+    background:#FFFFFF !important;
+    color:#17263B !important;
+    border:1px solid #E6E0D3;
+    border-radius:30px;
+    padding:11px 17px;
+    margin:5px;
+    font-weight:600;
+}
+@media(max-width:800px) {
+    .pg-site .pg-types span {
+        margin:4px 2px;
+        padding:9px 12px;
+    }
+}
+</style>
+<style id="habitagrid-workflow-accommodation-contrast">
+
+/* SIMPLE WORKFLOW — PREMIUM NAVY */
+.pg-site #how-it-works {
+    background: #17263B !important;
+    color: #FFFFFF !important;
+    padding: 64px 6% !important;
+}
+
+.pg-site #how-it-works .pg-login-submark {
+    color: #D6B36A !important;
+}
+
+.pg-site #how-it-works .pg-section-heading h2 {
+    color: #FFFFFF !important;
+}
+
+.pg-site #how-it-works .pg-section-heading p {
+    color: #DCE3EC !important;
+}
+
+.pg-site #how-it-works .pg-steps > div {
+    background: rgba(255,255,255,0.07) !important;
+    border: 1px solid rgba(255,255,255,0.20) !important;
+    border-radius: 16px !important;
+    padding: 26px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.pg-site #how-it-works .pg-steps > div > span:first-child {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #D6B36A !important;
+    color: #17263B !important;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.pg-site #how-it-works .pg-steps h3 {
+    color: #FFFFFF !important;
+}
+
+.pg-site #how-it-works .pg-steps p {
+    color: #DCE3EC !important;
+    line-height: 1.7;
+}
+
+/* ACCOMMODATION POSITIONING — CHAMPAGNE */
+.pg-site .pg-types {
+    background: #EDE5D7 !important;
+}
+
+.pg-site .pg-types .pg-section-heading h2 {
+    color: #17263B !important;
+}
+
+.pg-site .pg-types .pg-section-heading p {
+    color: #596779 !important;
+}
+
+.pg-site .pg-types .pg-section-heading .pg-eyebrow {
+    color: #9A753D !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.pg-site .pg-types span {
+    display: inline-block;
+    background: #FFFFFF !important;
+    color: #17263B !important;
+    border: 1px solid #D9CEBB !important;
+    border-radius: 30px;
+    padding: 11px 17px;
+    margin: 5px;
+    font-weight: 600;
+}
+
+@media(max-width:800px) {
+    .pg-site #how-it-works {
+        padding: 42px 5% !important;
+    }
+
+    .pg-site #how-it-works .pg-steps > div {
+        padding: 20px !important;
+    }
+
+    .pg-site .pg-types span {
+        margin: 4px 2px;
+        padding: 9px 12px;
+    }
+}
+
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="modal" id="modal"><div class="modalbox"><div class="modalhead"><h2 id="modalTitle">Edit</h2><button class="close" onclick="closeModal()">X</button></div><div id="modalBody"></div></div></div>
+<script>
+(function(){
+'use strict';
+const KEY='habitagrid_pg_client_demo_v1';
+const demoUsers=[
+ {email:'pgowner@example.com',pass:'pgdemo123',role:'PG Owner / Admin'}
+];const seed=()=>({
+ account:{ownerName:'',email:'',phone:''},
+ properties:[],
+ activePropertyId:null,
+ propertySettings:{currency:'INR',timeZone:'Asia/Kolkata',dateFormat:'DD-MM-YYYY'},
+ buildings:[],
+ rooms:[],
+ beds:[],
+ residents:[],
+ reservations:[],
+ charges:[],
+ deposits:[],
+ society:{name:'Your PG',address:'',totalFlats:0,monthlyDue:0,lateFee:0,financialYear:'',gstin:'',email:'',phone:'',emergency:'',waterUnit:'KL',electricityUnit:'kWh'},
+ flats:[],
+ payments:[],
+ complaints:[],
+ visitors:[],
+ parking:[],
+ staff:[],
+ vendors:[],
+ amenities:[],
+ bookings:[],
+ expenses:[],
+ notices:[],
+ meetings:[],
+ assets:[],
+ utilities:[],
+ tasks:[],
+ tenants:[],
+ documents:[]
+});
+ const seedClientDemo=()=>{
+  const d=seed();
+  const propertyId='DEMO-PROP-001';
+  const buildingId='DEMO-BLDG-001';
+  const room1Id='DEMO-ROOM-101';
+  const room2Id='DEMO-ROOM-102';
+  const iso=date=>date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0');
+  const ago=days=>{const date=new Date();date.setDate(date.getDate()-days);return iso(date);};
+
+  d.account={ownerName:'HabitaGrid Demo',email:'pgowner@example.com',phone:''};
+  d.activePropertyId=propertyId;
+  d.propertySettings={currency:'INR',timeZone:'Asia/Kolkata',dateFormat:'DD-MM-YYYY'};
+
+  d.properties=[{
+   id:propertyId,name:'HabitaGrid Demo Residence',code:'HG-DEMO-01',
+   accommodationType:'Mens PG / Hostel',genderCategory:'Men only',
+   address:'Demo Property, Knowledge District',city:'Hyderabad',state:'Telangana',
+   pincode:'500081',contactName:'Demo Property Manager',phone:'',
+   email:'demo@habitagrid.example',currency:'INR',stayModel:'Long-stay',status:'Active'
+  }];
+
+  d.buildings=[{
+   id:buildingId,propertyId:propertyId,name:'Main Residence Block',code:'MAIN-01',
+   floorCount:5,floorNames:['Ground Floor','First Floor','Second Floor','Third Floor','Fourth Floor']
+  }];
+
+  d.rooms=[
+   {id:room1Id,propertyId:propertyId,buildingId:buildingId,floorName:'Ground Floor',name:'Room 101',code:'R101',sharingType:'Double Sharing',bedCount:2,rentalMode:'Bed-wise Rental'},
+   {id:room2Id,propertyId:propertyId,buildingId:buildingId,floorName:'First Floor',name:'Room 102',code:'R102',sharingType:'Triple Sharing',bedCount:3,rentalMode:'Bed-wise Rental'}
+  ];
+
+  d.residents=[
+   {id:'DEMO-RES-001',name:'Arjun Kumar',mobile:'',email:'arjun.demo@example.com',joinDate:ago(45),status:'Active',foodType:'Veg',menuDetails:'Vegetarian meals',idProofType:'Not Provided',idProofRef:'',addressProofType:'Not Provided',addressProofRef:'',kycStatus:'Pending',bloodGroup:'Unknown',emergencyContactName:'',emergencyContactRelation:'',emergencyContactPhone:'',bedId:'DEMO-BED-001',roomId:room1Id,propertyId:propertyId,billingFrequency:'Monthly',agreedRent:8500,monthlyRent:8500,dailyRate:0,firstMonthRent:0,firstMonthDays:0,advanceAmount:0},
+   {id:'DEMO-RES-002',name:'Rahul Sharma',mobile:'',email:'rahul.demo@example.com',joinDate:ago(18),status:'Active',foodType:'Non-Veg',menuDetails:'Non-vegetarian meals',idProofType:'Not Provided',idProofRef:'',addressProofType:'Not Provided',addressProofRef:'',kycStatus:'Pending',bloodGroup:'Unknown',emergencyContactName:'',emergencyContactRelation:'',emergencyContactPhone:'',bedId:'DEMO-BED-002',roomId:room1Id,propertyId:propertyId,billingFrequency:'Monthly',agreedRent:9000,monthlyRent:9000,dailyRate:0,firstMonthRent:0,firstMonthDays:0,advanceAmount:0},
+   {id:'DEMO-RES-003',name:'Kiran Reddy',mobile:'',email:'kiran.demo@example.com',joinDate:ago(8),status:'Active',foodType:'Veg',menuDetails:'No special menu instructions',idProofType:'Not Provided',idProofRef:'',addressProofType:'Not Provided',addressProofRef:'',kycStatus:'Pending',bloodGroup:'Unknown',emergencyContactName:'',emergencyContactRelation:'',emergencyContactPhone:'',bedId:'DEMO-BED-003',roomId:room2Id,propertyId:propertyId,billingFrequency:'Monthly',agreedRent:7800,monthlyRent:7800,dailyRate:0,firstMonthRent:0,firstMonthDays:0,advanceAmount:0}
+  ];
+
+  d.beds=[
+   {id:'DEMO-BED-001',roomId:room1Id,propertyId:propertyId,label:'Bed 1',status:'Occupied',residentId:'DEMO-RES-001',residentName:'Arjun Kumar',monthlyRate:8500,weeklyRate:0,dailyRate:0},
+   {id:'DEMO-BED-002',roomId:room1Id,propertyId:propertyId,label:'Bed 2',status:'Occupied',residentId:'DEMO-RES-002',residentName:'Rahul Sharma',monthlyRate:9000,weeklyRate:0,dailyRate:0},
+   {id:'DEMO-BED-003',roomId:room2Id,propertyId:propertyId,label:'Bed 1',status:'Occupied',residentId:'DEMO-RES-003',residentName:'Kiran Reddy',monthlyRate:7800,weeklyRate:0,dailyRate:0},
+   {id:'DEMO-BED-004',roomId:room2Id,propertyId:propertyId,label:'Bed 2',status:'Available',residentName:'',monthlyRate:7800,weeklyRate:0,dailyRate:0},
+   {id:'DEMO-BED-005',roomId:room2Id,propertyId:propertyId,label:'Bed 3',status:'Available',residentName:'',monthlyRate:7800,weeklyRate:0,dailyRate:0}
+  ];
+
+  return d;
+ };
+ let db=JSON.parse(localStorage.getItem(KEY)||'null')||seedClientDemo();
+ if(!(db.properties||[]).length&&!(db.residents||[]).length){
+  db=seedClientDemo();
+  localStorage.setItem(KEY,JSON.stringify(db));
+ } if(!Array.isArray(db.tenants))db.tenants=seed().tenants; if(!Array.isArray(db.charges))db.charges=[]; if(!Array.isArray(db.deposits))db.deposits=[]; if(!Array.isArray(db.pgPayments))db.pgPayments=[]; if(!Array.isArray(db.pgExpenses))db.pgExpenses=[]; if(!Array.isArray(db.pgAdvances))db.pgAdvances=[]; if(!Array.isArray(db.pgPricingPlans))db.pgPricingPlans=[]; if(!Array.isArray(db.pgServiceSettings))db.pgServiceSettings=[]; if(!Array.isArray(db.pgOtherIncome))db.pgOtherIncome=[]; let current=null; let page='dashboard';
+function save(){localStorage.setItem(KEY,JSON.stringify(db));}
+function todayISO(){let d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function esc(x){return String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function money(n){return '₹'+Number(n||0).toLocaleString('en-IN',{maximumFractionDigits:0});}
+function tag(s){let c=['Paid','Resolved','Completed','Operational','Available','Confirmed','Current','Published','Active'].includes(s)?'green':['Open','Pending','High','In Progress'].includes(s)?'amber':['Overdue','Critical','Vacant'].includes(s)?'red':'';return '<span class="tag '+c+'">'+esc(s)+'</span>';}
+const PG_DEMO_KEY='habitagrid_pg_demo_first_login_v1';
+const PG_DEMO_DURATION=24*60*60*1000;
+let pgDemoTimer=null;
+
+function pgDemoStartTime(){
+ const value=Number(localStorage.getItem(PG_DEMO_KEY));
+ return Number.isFinite(value)&&value>0?value:0;
+}
+
+function pgDemoEnsureStartTime(){
+ if(!pgDemoStartTime()){
+  const now=Date.now();
+  localStorage.setItem(PG_DEMO_KEY,String(now));
+  return now;
+ }
+ return pgDemoStartTime();
+}
+
+function pgDemoExpired(){
+ const started=pgDemoStartTime();
+ return started>0&&Date.now()>=started+PG_DEMO_DURATION;
+}
+
+function pgDemoRemaining(){
+ const started=pgDemoStartTime();
+ if(!started)return PG_DEMO_DURATION;
+ return Math.max(0,started+PG_DEMO_DURATION-Date.now());
+}
+
+function pgDemoFormat(ms){
+ const total=Math.ceil(ms/1000);
+ const hours=Math.floor(total/3600);
+ const minutes=Math.floor((total%3600)/60);
+ const seconds=total%60;
+ return [hours,minutes,seconds].map(v=>String(v).padStart(2,'0')).join(':');
+}
+
+function updatePgDemoClock(){
+ const el=document.getElementById('pgDemoClock');
+
+ if(pgDemoExpired()){
+  if(pgDemoTimer){clearInterval(pgDemoTimer);pgDemoTimer=null;}
+  current=null;
+  login();
+  return;
+ }
+
+ if(el){
+  el.textContent='DEMO TIME LEFT · '+pgDemoFormat(pgDemoRemaining());
+ }
+}
+
+function startPgDemoClock(){
+ if(pgDemoTimer){clearInterval(pgDemoTimer);pgDemoTimer=null;}
+ updatePgDemoClock();
+ if(!pgDemoExpired()){
+  pgDemoTimer=setInterval(updatePgDemoClock,1000);
+ }
+}
+function login(){
+ pgDemoEnsureStartTime();
+ const expired=pgDemoExpired();
+ if(expired){
+  if(pgDemoTimer){clearInterval(pgDemoTimer);pgDemoTimer=null;}
+  document.getElementById('app').innerHTML=`
+   <div class="pg-site" style="min-height:100vh;display:grid;place-items:center;background:#101D30;padding:28px;box-sizing:border-box;">
+    <section style="max-width:560px;width:100%;background:#fff;border:1px solid #D6B36A;border-radius:20px;padding:42px;text-align:center;box-sizing:border-box;box-shadow:0 24px 70px rgba(0,0,0,.28);">
+     <div style="font-size:11px;letter-spacing:4px;color:#9A753D;font-weight:700;">HABITAGRID · PG MANAGER</div>
+     <h1 style="color:#17263B;font-size:30px;margin:24px 0 12px;">Your demo period has ended</h1>
+     <p style="color:#596779;line-height:1.7;">Thank you for exploring HabitaGrid PG Manager. This 24-hour browser demonstration is now complete.</p>
+     <p style="color:#9A753D;font-size:12px;letter-spacing:1px;margin-top:28px;">PREMIUM PG, HOSTEL & CO-LIVING MANAGEMENT</p>
+    </section>
+   </div>`;
+  return;
+ }
+ document.getElementById('app').innerHTML=`
+ <div class="pg-site">
+  <nav class="pg-nav">
+   <a class="pg-brand" href="#top">
+    <span class="pg-login-symbol">H</span>
+    <span><span class="pg-login-wordmark">HABITAGRID</span><br><span class="pg-login-submark">PG MANAGER</span></span>
+   </a>
+   <div class="pg-nav-links">
+    <a href="#features">Features</a>
+    <a href="#how-it-works">How it works</a>
+    <a href="#accommodation">Accommodation</a>
+    <a href="#owner-login">Owner sign in</a>
+   </div>
+  </nav>
+
+  <main id="top">
+   <section class="pg-hero">
+    <div>
+     <div class="pg-login-submark">PREMIUM PG, HOSTEL & CO-LIVING MANAGEMENT</div>
+     <h1>Accommodation management, refined.</h1>
+     <p>Bring your properties, rooms, residents and everyday operations together in one organised management workspace.</p>
+     <div class="pg-login-features">
+      <span>PROPERTY MANAGEMENT</span>
+      <span>ROOMS & BEDS</span>
+      <span>RESIDENTS</span>
+      <span>RENT & OPERATIONS</span>
+     </div>
+     <p><a class="pg-hero-link" href="#features">Explore the platform ↓</a></p>
+    </div>
+
+    <section class="pg-login-panel" id="owner-login">
+     <div class="pg-login-submark">HABITAGRID OWNER ACCESS</div>
+     <h2>Welcome back.</h2>
+     <div class="pg-login-intro">Sign in to access your accommodation management workspace.</div><div class="pg-demo-countdown" id="pgDemoClock">DEMO TIME LEFT · 24:00:00</div>
+     ${expired?'<div class="pg-login-demo"><strong>Demo access expired.</strong><br>Your 24-hour demonstration period has ended.</div>':''}
+     <div class="field"><label>OWNER EMAIL</label><input id="lemail" type="email" autocomplete="username" placeholder="Enter owner email" value="pgowner@example.com"></div>
+     <div class="field"><label>PASSWORD</label><input id="lpass" type="password" autocomplete="current-password" placeholder="Enter password"></div>
+     <button class="pg-login-submit" onclick="doLogin()">SIGN IN</button>
+     <div class="pg-login-demo"><strong>24-hour demonstration access</strong><br>Demo email: pgowner@example.com<br>Demo password: pgdemo123<br>Your 24-hour countdown begins when this demo page is first opened in this browser.</div>
+    </section>
+   </section>
+
+   <section class="pg-section" id="features">
+    <div class="pg-section-heading">
+     <div class="pg-login-submark">ONE WORKSPACE. CONNECTED OPERATIONS.</div>
+     <h2>Everything starts with better organisation.</h2>
+     <p>Explore the four key areas of the HabitaGrid PG Manager experience.</p>
+    </div>
+    <div class="pg-feature-grid">
+     <details class="pg-feature">
+      <summary><strong>01 · PROPERTY MANAGEMENT</strong><span>+</span></summary>
+      <div class="pg-feature-preview">
+       <h3>Manage your properties</h3>
+       <p>Organise property information, accommodation settings and building details in one place.</p>
+       <div class="pg-preview">PROPERTY OVERVIEW<br><strong>Property details · Building · Floors · Settings</strong></div>
+      </div>
+     </details>
+     <details class="pg-feature">
+      <summary><strong>02 · ROOMS & BEDS</strong><span>+</span></summary>
+      <div class="pg-feature-preview">
+       <h3>See your occupancy clearly</h3>
+       <p>Organise floors, rooms, sharing configurations and individual bed assignments.</p>
+       <div class="pg-preview">ROOM & BED OVERVIEW<br><strong>Floors · Rooms · Sharing · Bed occupancy</strong></div>
+      </div>
+     </details>
+     <details class="pg-feature">
+      <summary><strong>03 · RESIDENTS</strong><span>+</span></summary>
+      <div class="pg-feature-preview">
+       <h3>Keep resident information organised</h3>
+       <p>Maintain resident profiles and accommodation-related details in a structured workspace.</p>
+       <div class="pg-preview">RESIDENT OVERVIEW<br><strong>Resident profiles · Occupancy · Records</strong></div>
+      </div>
+     </details>
+     <details class="pg-feature">
+      <summary><strong>04 · RENT & OPERATIONS</strong><span>+</span></summary>
+      <div class="pg-feature-preview">
+       <h3>Bring daily administration together</h3>
+       <p>Access rent and operational management areas from your central workspace.</p>
+       <div class="pg-preview">OPERATIONS OVERVIEW<br><strong>Rent · Payments · Expenses · Daily records</strong></div>
+      </div>
+     </details>
+    </div>
+   </section>
+
+   <section class="pg-section pg-why">
+    <div class="pg-section-heading">
+     <div class="pg-login-submark">WHY HABITAGRID</div>
+     <h2>Less scattered work. More clarity.</h2>
+    </div>
+    <div class="pg-benefits">
+     <div><h3>One organised workspace</h3><p>Keep important property and resident information together.</p></div>
+     <div><h3>Property-level visibility</h3><p>Structure accommodation information around your properties and buildings.</p></div>
+     <div><h3>Designed for everyday use</h3><p>A management experience focused on practical accommodation operations.</p></div>
+    </div>
+   </section>
+
+   <section class="pg-section" id="how-it-works">
+    <div class="pg-section-heading">
+     <div class="pg-login-submark">A SIMPLE WORKFLOW</div>
+     <h2>Get organised in three steps.</h2>
+    </div>
+    <div class="pg-steps">
+     <div><span>01</span><h3>Set up your property</h3><p>Add property and building information.</p></div>
+     <div><span>02</span><h3>Organise rooms and residents</h3><p>Set up rooms, beds and resident records.</p></div>
+     <div><span>03</span><h3>Manage your operations</h3><p>Use the available management sections to organise daily work.</p></div>
+    </div>
+   </section>
+
+   <section class="pg-section pg-types" id="accommodation">
+    <div class="pg-section-heading">
+     <div class="pg-login-submark">FLEXIBLE ACCOMMODATION POSITIONING</div>
+     <h2>One platform for different accommodation models.</h2>
+     <p>Positioned for a range of accommodation operators.</p>
+    </div>
+    <div class="pg-login-features">
+     <span>MEN'S HOSTELS</span><span>WOMEN'S HOSTELS</span>
+     <span>STUDENT HOSTELS</span><span>WORKING PROFESSIONALS</span>
+     <span>CO-ED HOSTELS</span><span>CO-LIVING SPACES</span><span>PG ACCOMMODATION</span>
+    </div>
+   </section>
+
+   <section class="pg-final-cta">
+    <div class="pg-login-submark">YOUR ACCOMMODATION. ONE WORKSPACE.</div>
+    <h2>Bring your operations together.</h2>
+    <p>Access your HabitaGrid PG Manager workspace.</p>
+    <a href="#owner-login">OWNER SIGN IN ↑</a>
+   </section>
+  </main>
+  <footer class="pg-footer">HABITAGRID PG MANAGER · Premium PG, Hostel & Co-living Management Platform</footer>
+ </div>`;
+ startPgDemoClock();
+}window.doLogin=function(){
+ let e=document.getElementById('lemail').value.trim();
+ let p=document.getElementById('lpass').value;
+ let u=demoUsers.find(x=>x.email===e&&x.pass===p);
+ if(!u){alert('Invalid demo login. Please check your email and password.');return;}
+ if(pgDemoExpired()){alert('Your 24-hour PG demonstration access has expired.');login();return;}
+ current=u;
+ render();
+};
+window.logout=function(){current=null;login()};
+const nav=[['dashboard','Dashboard'],['properties','Properties'],['buildings','Buildings & Floors'],['rooms','Rooms & Beds'],['reservations','Bookings & Reservations'],['residents','Residents'],['kyc','KYC & Verification'],['pricing','Pricing & Packages'],['checkin','Check-in & Check-out'],['payments','Rent & Payments'],['deposits','Deposits & Advances'],['services','Food & Services'],['finance','Expenses & Income'],['staff','Staff & Operations'],['complaints','Complaints & Maintenance'],['visitors','Visitors & Security'],['notices','Notices'],['reports','Reports'],['settings','Settings']];
+function shell(){return `<div class="top"><div class="brand">HabitaGrid PG Manager</div><div class="topright"><span id="pgDemoClock" class="pg-demo-countdown"></span><span class="pill">${esc(current.role)}</span><button class="btn" onclick="logout()">Sign Out</button></div></div><div class="layout"><aside class="side">${nav.map(n=>`<button class="navbtn ${page===n[0]?'active':''}" onclick="go('${n[0]}')">${n[1]}</button>`).join('')}</aside><main class="main" id="main"></main></div>`}
+window.go=function(p){page=p;render()};
+function render(){if(pgDemoExpired()){current=null;login();return}if(!current){login();return}document.getElementById('app').innerHTML=shell();startPgDemoClock();try{if(typeof pages[page]==='function'){pages[page]()}else{document.getElementById('main').innerHTML=head('Module under development','This PG Manager module is not implemented yet. Your existing records and other modules are unchanged.')+'<div class="notice"><b>'+esc(nav.find(n=>n[0]===page)?.[1]||page)+'</b><p>This screen will be added as a dedicated PG workflow.</p></div>'}}catch(e){document.getElementById('main').innerHTML='<div class="error"><h2>Page error</h2><pre>'+esc(e.stack||e.message)+'</pre></div>'}}
+function head(title,sub,button=''){return `<div class="pagehead"><div><h1>${title}</h1><div class="muted">${sub}</div></div>${button}</div>`}
+function cards(arr){return '<div class="cards">'+arr.map(x=>`<div class="card"><div class="muted">${x[0]}</div><div class="metric ${x[2]||''}">${x[1]}</div><div class="muted">${x[3]||''}</div></div>`).join('')+'</div>'}
+function table(headers,rows){if(typeof rows==='string')rows=rows?[rows]:[];if(!rows.length)return '<div class="empty">No records found.</div>';return `<div class="tablewrap"><table class="table"><thead><tr>${headers.map(h=>'<th>'+h+'</th>').join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`}
+function modal(title,body){document.getElementById('modalTitle').textContent=title;document.getElementById('modalBody').innerHTML=body;document.getElementById('modal').classList.add('show')}
+window.closeModal=function(){document.getElementById('modal').classList.remove('show')};
+function field(label,name,value='',type='text',extra=''){return `<div class="field"><label>${label}</label><input name="${name}" type="${type}" value="${esc(value)}" ${extra}></div>`}
+function fileField(label,name,existing=''){
+ return `<div class="field"><label>${label}</label><input type="hidden" name="${name}" value="${esc(existing)}"><input name="${name}Upload" type="file" accept=".pdf,.jpg,.jpeg,.png"><small class="mini">Existing: ${esc(existing||'No file selected')}</small></div>`;
+}
+function select(label,name,opts,value=''){return `<div class="field"><label>${label}</label><select name="${name}">${opts.map(o=>`<option ${o===value?'selected':''}>${esc(o)}</option>`).join('')}</select></div>`}
+function formActions(){return '<div class="actions"><button type="button" class="btn secondary" onclick="closeModal()">Cancel</button><button class="btn">Save</button></div>'}
+function validateHabitaGridForm(title,o){
+ let t=title.toLowerCase(),required=[];
+ if(t.includes('payment'))required=['flat','resident','month','date'];
+ else if(t.includes('complaint'))required=['flat','subject','date'];
+ else if(t.includes('expense'))required=['date','category','vendor'];
+ else if(t.includes('tenant'))required=['name','flat','mobile','start','end','idType','idFile','addressType','addressFile','ref1Name','ref1Mobile','ref2Name','ref2Mobile','agreementFile','agreementStart','agreementEnd'];
+ for(let k of required){if(!String(o[k]??'').trim())return 'Please complete the required field: '+k+'.';}
+ if(t.includes('tenant')){
+  for(let k of ['mobile','ref1Mobile','ref2Mobile']){
+   let v=String(o[k]||'').trim();
+   let valid=/^[6-9]\d{9}$/.test(v)||/^\+91[6-9]\d{9}$/.test(v)||/^\+[1-9]\d{7,14}$/.test(v);
+   if(!valid)return 'Enter a valid mobile number for '+k+': use 10 Indian digits starting 6ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“9, or an international number with + and country code.';
+  }
+  if(o.end<o.start)return 'Occupancy end date cannot be before the start date.';
+  if(o.agreementEnd<o.agreementStart)return 'Agreement end date cannot be before its start date.';
+  if(o.addressStatus==='Verified'){
+   if(o.identityStatus!=='Verified')return 'Identity verification must be completed before address verification.';
+   if(!['Yes','No'].includes(o.addressMatch))return 'Confirm whether the document address matches before verifying the address.';
+   if(o.addressMatch==='No'&&o.ownerApproval!=='Approved')return 'Flat Owner approval is required when the document address does not match.';
+   if(o.addressType==='Other'&&o.ownerApproval!=='Approved')return 'Flat Owner approval is required for Other address proof.';
+   if(o.ownerApproval==='Rejected')return 'Flat Owner approval was rejected. Address verification is not allowed.';
+  }
+  if(o.status==='Verified'){
+   if(o.identityStatus==='Rejected'||o.addressStatus==='Rejected'||o.agreementStatus==='Rejected'||o.ref1Status==='Rejected'||o.ref2Status==='Rejected')return 'A KYC item is rejected. Please review the record.';
+   if(o.ownerApproval==='Rejected')return 'Flat Owner approval was rejected. Overall KYC cannot be Verified.';
+   if(o.identityStatus!=='Verified')return 'Identity verification must be completed first.';
+   if(!['Yes','No'].includes(o.addressMatch))return 'Please confirm whether the document address matches the declared address.';
+   if(o.addressMatch==='No'&&o.ownerApproval!=='Approved')return 'Flat Owner approval is required when the document address does not match.';
+   if(o.addressType==='Other'&&o.ownerApproval!=='Approved')return 'Flat Owner approval is required for Other address proof.';
+   if(o.addressStatus!=='Verified')return 'Address verification must be completed first.';
+   if(o.agreementStatus!=='Verified')return 'Agreement verification must be completed first.';
+   if(o.ref1Status!=='Verified'||o.ref2Status!=='Verified')return 'Both reference contacts must be verified first.';
+  }
+ }
+ if(t.includes('notice')){
+  for(let k of ['title','date','startTime','endTime','area','message'])if(!String(o[k]||'').trim())return 'Please complete the required notice field: '+k+'.';
+  if(o.endTime<=o.startTime)return 'Expected end time must be later than start time.';
+  if(o.audience==='Specific Flat'&&!String(o.targetFlat||'').trim())return 'Please enter the flat number for a Specific Flat notice.';
+ }
+ if(t.includes('payment')||t.includes('expense')){let amount=Number(o.amount);if(!Number.isFinite(amount)||amount<=0)return 'Please enter an amount greater than zero.';}
+ if(o.date){let m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(o.date);if(!m)return 'Please enter a valid date.';let d=new Date(Date.UTC(Number(m[1]),Number(m[2])-1,Number(m[3])));if(d.getUTCFullYear()!==Number(m[1])||d.getUTCMonth()!==Number(m[2])-1||d.getUTCDate()!==Number(m[3]))return 'Please enter a valid date.';}
+ return '';
+}
+function addForm(title,fields,callback){
+ modal(title,`<form id="genericForm"><div class="formgrid">${fields.join('')}</div>${formActions()}</form>`);
+ document.getElementById('genericForm').onsubmit=e=>{
+  e.preventDefault();
+  let o=Object.fromEntries(new FormData(e.target).entries());
+  for(let k of ['idFile','addressFile','agreementFile']){
+   let f=e.target.elements[k+'Upload']?.files?.[0];
+   if(f){
+    if(f.size>10*1024*1024){alert('Please select a file smaller than 10 MB.');return;}
+    o[k]=f.name+' ('+Math.ceil(f.size/1024)+' KB)';
+   }
+   delete o[k+'Upload'];
+  }
+  let problem=validateHabitaGridForm(title,o);
+  if(problem){alert(problem);return}
+  let result=callback(o);
+  if(result===false)return;
+  closeModal();
+  save();
+  render();
+ }
+}
+function dashboard(){
+ const properties=db.properties||[],buildings=db.buildings||[],rooms=db.rooms||[],beds=db.beds||[],residents=db.residents||[],reservations=db.reservations||[];
+ const occupiedBeds=beds.filter(b=>String(b.status||'').toLowerCase()==='occupied'||!!(b.residentId||b.resident));
+ const availableBeds=beds.filter(b=>String(b.status||'').toLowerCase()==='available');
+ const activeResidents=residents.filter(r=>['active','checked in','occupied'].includes(String(r.status||'').toLowerCase()));
+ const today=typeof todayISO==='function'?todayISO():new Date().toISOString().slice(0,10);
+ const arrivals=reservations.filter(r=>(r.expectedJoinDate||r.checkInDate||r.arrivalDate||r.date)===today&&String(r.status||'').toLowerCase()==='confirmed');
+ const departures=residents.filter(r=>(r.checkOutDate||r.departureDate)===today&&String(r.status||'').toLowerCase()==='checked out');
+ const occupancy=beds.length?Math.round(occupiedBeds.length/beds.length*100):0;
+ const collected='—',outstanding='—';
+
+ const metricCards=[
+  ['Properties',properties.length,'properties'],
+  ['Buildings',buildings.length,'buildings'],
+  ['Rooms',rooms.length,'rooms'],
+  ['Total Beds',beds.length,'beds'],
+  ['Occupied Beds',occupiedBeds.length,'occupied'],
+  ['Available Beds',availableBeds.length,'available'],
+  ['Active Residents',activeResidents.length,'residents'],
+  ['Occupancy',occupancy+'%','occupancy'],
+  ['Rent Collected',collected,'rent'],
+  ['Pending Dues',outstanding,'dues'],
+  ['Today&#39;s Arrivals',arrivals.length,'arrivals'],
+  ['Today&#39;s Departures',departures.length,'departures']
+ ];
+
+ document.getElementById('main').innerHTML=
+ head('PG Operations Dashboard','A live overview of your properties, rooms, beds, stays and collections')+
+ '<style>.dashboard-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px;margin-bottom:22px}.dashboard-metric-card{display:block;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;transition:transform .15s,box-shadow .15s}.dashboard-metric-card:hover,.dashboard-metric-card:focus-visible{transform:translateY(-2px);box-shadow:0 9px 24px #17203320;outline:2px solid var(--green);outline-offset:2px}.dashboard-detail{margin:20px 0}.dashboard-detail-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}@media(max-width:1050px){.dashboard-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:760px){.dashboard-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}</style>'+
+ '<div class="dashboard-metrics">'+metricCards.map(x=>`<button type="button" class="card dashboard-metric-card" onclick="showDashboardDetail('${x[2]}')"><div class="muted">${x[0]}</div><div class="metric">${x[1]}</div><div class="muted">Click to view details</div></button>`).join('')+'</div>'+
+ '<div id="dashboardDetail"></div>'+
+ `<div class="grid2"><div class="section"><div class="card"><h2>Bed Occupancy</h2><div style="font-size:30px;font-weight:700">${occupancy}%</div><p class="muted">${occupiedBeds.length} occupied · ${availableBeds.length} available · ${beds.length} total beds</p><div class="progress"><div style="width:${occupancy}%;height:100%;background:var(--green);border-radius:20px"></div></div></div></div><div class="section"><div class="card"><h2>Financial Snapshot</h2><p>PG rent collected: <b>Not tracked yet</b></p><p>PG outstanding dues: <b>Not tracked yet</b></p><p class="muted">PG-specific rent collection and dues tracking will be connected when those modules are implemented.</p></div></div></div>`+
+ `<div class="section"><div class="card"><h2>Getting Started</h2><p class="muted">Add your first PG property, configure its buildings and rooms, then create beds and resident bookings. Your dashboard will update as records are added.</p></div></div>`;
+
+ window.showDashboardDetail=function(key){
+  const propName=id=>properties.find(x=>x.id===id)?.name||'—';
+  const buildingName=id=>buildings.find(x=>x.id===id)?.name||'—';
+  const roomName=id=>rooms.find(x=>x.id===id)?.name||'—';
+  const bedLocation=bed=>{
+   const room=rooms.find(x=>x.id===bed.roomId);
+   const building=room?buildings.find(x=>x.id===room.buildingId):null;
+   return [propName(bed.propertyId||room?.propertyId),building?.name,room?.name,bed.label].filter(Boolean).join(' / ')||'—';
+  };
+  const cell=x=>`<td>${esc(x??'—')}</td>`;
+  let title='',headers=[],rows=[],note='';
+
+  if(key==='properties'){
+   title='Properties';headers=['Property','Code','Accommodation Type','Category','City','State','Contact','Status'];
+   rows=properties.map(p=>`<tr>${cell(p.name)}${cell(p.code)}${cell(p.accommodationType)}${cell(p.genderCategory)}${cell(p.city)}${cell(p.state)}${cell(p.phone)}${cell(p.status)}</tr>`);
+  }else if(key==='buildings'){
+   title='Buildings';headers=['Building','Code','Property','Floors','Floor Names'];
+   rows=buildings.map(b=>`<tr>${cell(b.name)}${cell(b.code)}${cell(propName(b.propertyId))}${cell(b.floorCount)}${cell((b.floorNames||[]).join(', '))}</tr>`);
+  }else if(key==='rooms'){
+   title='Rooms';headers=['Room','Code','Property','Building','Floor','Sharing','Beds'];
+   rows=rooms.map(r=>`<tr>${cell(r.name)}${cell(r.code)}${cell(propName(r.propertyId))}${cell(buildingName(r.buildingId))}${cell(r.floorName)}${cell(r.sharingType)}${cell(beds.filter(b=>b.roomId===r.id).length)}</tr>`);
+  }else if(key==='beds'||key==='occupied'||key==='available'||key==='occupancy'){
+   title=key==='beds'?'All Beds':key==='occupied'?'Occupied Beds':key==='available'?'Available Beds':'Bed Occupancy Details';
+   headers=['Bed','Property / Building / Room','Status','Resident'];
+   const selected=key==='occupied'?occupiedBeds:key==='available'?availableBeds:beds;
+   rows=selected.map(b=>{
+    const resident=residents.find(r=>r.id===b.residentId||r.bedId===b.id);
+    return `<tr>${cell(b.label||b.id)}${cell(bedLocation(b))}${cell(b.status)}${cell(resident?.name||b.residentName||b.reservationName||'—')}</tr>`;
+   });
+  }else if(key==='residents'){
+   title='Active Residents';headers=['Resident','Mobile','Property','Room / Bed','Joining Date','Food Type'];
+   rows=activeResidents.map(r=>{
+    const bed=beds.find(b=>b.residentId===r.id||b.id===r.bedId);
+    const room=bed?rooms.find(x=>x.id===bed.roomId):null;
+    return `<tr>${cell(r.name)}${cell(r.mobile)}${cell(propName(r.propertyId||bed?.propertyId))}${cell(room?[room.name,bed?.label].filter(Boolean).join(' / '):'Not assigned')}${cell(r.joinDate)}${cell(r.foodType)}</tr>`;
+   });
+  }else if(key==='arrivals'){
+   title="Today's Expected Arrivals";headers=['Resident','Mobile','Property','Building','Room / Bed','Expected Joining Date','Rent'];
+   rows=arrivals.map(r=>`<tr>${cell(r.name)}${cell(r.mobile)}${cell(propName(r.propertyId))}${cell(buildingName(r.buildingId))}${cell([roomName(r.roomId),(beds.find(b=>b.id===r.bedId)?.label)].filter(x=>x!=='—'&&x).join(' / '))}${cell(r.expectedJoinDate||r.checkInDate||r.arrivalDate||r.date)}${cell(money(r.agreedRent||0))}</tr>`);
+  }else if(key==='departures'){
+   title="Today's Completed Check-outs";headers=['Resident','Mobile','Previous Property','Previous Room','Previous Bed','Checkout Date'];
+   rows=departures.map(r=>{
+    const oldRoom=rooms.find(x=>x.id===r.lastRoomId);
+    const oldBed=beds.find(x=>x.id===r.lastBedId);
+    return `<tr>${cell(r.name)}${cell(r.mobile)}${cell(propName(r.lastPropertyId))}${cell(oldRoom?.name||'—')}${cell(oldBed?.label||'—')}${cell(r.checkOutDate||r.departureDate)}</tr>`;
+   });
+  }else if(key==='rent'||key==='dues'){
+   title=key==='rent'?'Rent Collected':'Pending Dues';
+   note='<div class="notice">PG-specific rent payment and dues records are not yet available. Society Manager financial records are kept separate and are not shown here.</div>';
+  }else{
+   return;
+  }
+
+  const detail=document.getElementById('dashboardDetail');
+  if(!detail)return;
+  detail.innerHTML=`<div class="card dashboard-detail"><div class="dashboard-detail-head"><h2>${title}</h2><button class="btn secondary" type="button" onclick="closeDashboardDetail()">Close</button></div>${note}${headers.length?table(headers,rows):''}<p class="muted">${headers.length?rows.length+' record(s) shown.':'Financial tracking is not yet implemented for PG Manager.'}</p></div>`;
+  detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+ };
+ window.closeDashboardDetail=function(){
+  const detail=document.getElementById('dashboardDetail');
+  if(detail)detail.innerHTML='';
+ };
+}
+function flats(){let rows=db.flats.map((x,i)=>`<tr><td>${esc(x.flat)}</td><td>${esc(x.owner)}</td><td>${esc(x.resident)}</td><td>${esc(x.phone)}</td><td>${tag(x.status)}</td><td>${esc(x.parking)}</td><td>${x.dues?tag('₹'+x.dues):tag('Paid')}</td><td><button class="btn secondary" onclick="editFlat(${i})">Edit</button></td></tr>`);document.getElementById('main').innerHTML=head('Flats & Residents','Owner/resident register, occupancy, contact and parking allocation','<button class="btn" onclick="addFlat()">+ Add Flat</button>')+`<div class="toolbar"><input class="search" placeholder="Search flat / resident / phone" oninput="filterTable(this)"></div>`+table(['Flat','Owner','Resident','Phone','Status','Parking','Dues','Action'],rows)}
+window.filterTable=function(inp){let q=inp.value.toLowerCase();document.querySelectorAll('.table tbody tr').forEach(r=>r.style.display=r.innerText.toLowerCase().includes(q)?'':'none')};
+window.addFlat=function(){addForm('Add Flat',[field('Flat No.','flat'),field('Block','block','A'),field('Floor','floor','1','number'),field('Owner','owner'),field('Resident','resident'),field('Phone','phone'),select('Status','status',['Occupied','Vacant']),field('Parking Slot','parking'),field('Current Dues','dues','0','number')],o=>db.flats.push({id:'F-'+Date.now(),...o,dues:Number(o.dues||0)}))};
+window.editFlat=function(i){let x=db.flats[i];addForm('Edit Flat',[field('Flat No.','flat',x.flat),field('Block','block',x.block),field('Floor','floor',x.floor,'number'),field('Owner','owner',x.owner),field('Resident','resident',x.resident),field('Phone','phone',x.phone),select('Status','status',['Occupied','Vacant'],x.status),field('Parking Slot','parking',x.parking),field('Current Dues','dues',x.dues,'number')],o=>{db.flats[i]={...x,...o,dues:Number(o.dues||0)}})};
+function maintenance(){let due=db.flats.reduce((a,x)=>a+Number(x.dues||0),0),paid=db.payments.reduce((a,x)=>a+Number(x.amount||0),0);let rows=db.payments.map((x,i)=>`<tr><td>${esc(x.id)}</td><td>${esc(x.flat)}</td><td>${esc(x.resident)}</td><td>${esc(x.month)}</td><td>${money(x.amount)}</td><td>${esc(x.date)}</td><td>${esc(x.mode)}</td><td>${esc(x.ref)}</td><td><button class="btn secondary" onclick="editPayment(${i})">Edit</button> <button class="btn danger" onclick="del('payments',${i})">Delete</button></td></tr>`);document.getElementById('main').innerHTML=head('Maintenance & Dues','Monthly maintenance billing, receipts, part payments and outstanding balances','<button class="btn" onclick="addPayment()">+ Record Payment</button>')+cards([['Monthly Billing',money(db.society.monthlyDue*db.flats.filter(x=>x.status==='Occupied').length)],['Collected',money(paid),'green'],['Outstanding',money(due),'amber'],['Collection %',Math.round((paid/(paid+due||1))*100)+'%'],['Part/Partial',db.payments.filter(x=>Number(x.amount)<Number(db.society.monthlyDue)).length,'amber']])+table(['Receipt','Flat','Resident','Month','Amount','Date','Mode','Reference','Action'],rows)}
+window.addPayment=function(){addForm('Record Maintenance Payment',[field('Receipt No.','id','PAY-'+String(Date.now()).slice(-5)),field('Flat','flat','A-01'),field('Resident','resident'),field('Month','month','Sep-2026'),field('Amount','amount','3500','number'),field('Date','date',todayISO(),'date'),select('Mode','mode',['UPI','Cash','Bank Transfer','Cheque','Card']),field('Reference','ref')],o=>{o.amount=Number(o.amount||0);db.payments.push(o);let f=db.flats.find(x=>x.flat===o.flat);if(f)f.dues=Math.max(0,Number(f.dues||0)+Number(db.society.monthlyDue)-o.amount)})};
+window.editPayment=function(i){let x=db.payments[i];addForm('Edit Payment',[field('Receipt No.','id',x.id),field('Flat','flat',x.flat),field('Resident','resident',x.resident),field('Month','month',x.month),field('Amount','amount',x.amount,'number'),field('Date','date',x.date,'date'),select('Mode','mode',['UPI','Cash','Bank Transfer','Cheque','Card'],x.mode),field('Reference','ref',x.ref)],o=>{o.amount=Number(o.amount||0);db.payments[i]=o})};
+function complaints(){let rows=db.complaints.map((x,i)=>`<tr><td>${esc(x.id)}</td><td>${esc(x.flat)}</td><td>${esc(x.subject)}</td><td>${esc(x.category)}</td><td>${tag(x.priority)}</td><td>${tag(x.status)}</td><td>${esc(x.assigned)}</td><td>${esc(x.date)}</td><td><button class="btn secondary" onclick="editComplaint(${i})">Edit</button></td></tr>`);document.getElementById('main').innerHTML=head('Complaints & Service Requests','Track resident issues from registration to resolution','<button class="btn" onclick="addComplaint()">+ New Complaint</button>')+table(['ID','Flat','Subject','Category','Priority','Status','Assigned','Date','Action'],rows)}
+window.addComplaint=function(){addForm('New Complaint',[field('ID','id','CMP-'+String(Date.now()).slice(-5)),field('Flat','flat'),field('Resident','resident'),field('Subject','subject'),select('Category','category',['Plumbing','Electrical','Security','Housekeeping','Lift','Water','Parking','Other']),select('Priority','priority',['Low','Medium','High','Critical']),select('Status','status',['Open','In Progress','Resolved']),field('Assigned','assigned'),field('Date','date',todayISO(),'date'),field('Notes','notes')],o=>db.complaints.push(o))};
+window.editComplaint=function(i){let x=db.complaints[i];addForm('Edit Complaint',[field('ID','id',x.id),field('Flat','flat',x.flat),field('Resident','resident',x.resident),field('Subject','subject',x.subject),select('Category','category',['Plumbing','Electrical','Security','Housekeeping','Lift','Water','Parking','Other'],x.category),select('Priority','priority',['Low','Medium','High','Critical'],x.priority),select('Status','status',['Open','In Progress','Resolved'],x.status),field('Assigned','assigned',x.assigned),field('Date','date',x.date,'date'),field('Notes','notes',x.notes)],o=>db.complaints[i]=o)};
+function visitors(){let rows=db.visitors.map((x,i)=>`<tr><td>${esc(x.id)}</td><td>${esc(x.date)}</td><td>${esc(x.flat)}</td><td>${esc(x.name)}</td><td>${esc(x.phone)}</td><td>${esc(x.purpose)}</td><td>${esc(x.inTime)}</td><td>${esc(x.outTime||'-')}</td><td>${tag(x.status)}</td><td><button class="btn secondary" onclick="editVisitor(${i})">Edit</button></td></tr>`);document.getElementById('main').innerHTML=head('Visitors & Gate Log','Visitor entry/exit register for security','<button class="btn" onclick="addVisitor()">+ Visitor Entry</button>')+table(['ID','Date','Flat','Visitor','Phone','Purpose','In','Out','Status','Action'],rows)}
+window.addVisitor=function(){addForm('Visitor Entry',[field('ID','id','VIS-'+String(Date.now()).slice(-5)),field('Date','date',todayISO(),'date'),field('Flat','flat'),field('Visitor Name','name'),field('Phone','phone'),select('Purpose','purpose',['Visit','Delivery','Service','Cab','Other']),field('In Time','inTime',''),field('Out Time','outTime',''),select('Status','status',['Inside','Exited','Denied'])],o=>db.visitors.push(o))};window.editVisitor=function(i){let x=db.visitors[i];addForm('Edit Visitor',[field('ID','id',x.id),field('Date','date',x.date,'date'),field('Flat','flat',x.flat),field('Visitor Name','name',x.name),field('Phone','phone',x.phone),select('Purpose','purpose',['Visit','Delivery','Service','Cab','Other'],x.purpose),field('In Time','inTime',x.inTime),field('Out Time','outTime',x.outTime),select('Status','status',['Inside','Exited','Denied'],x.status)],o=>db.visitors[i]=o)};
+function parking(){let rows=db.parking.map((x,i)=>`<tr><td>${esc(x.slot)}</td><td>${esc(x.flat)}</td><td>${esc(x.vehicle)}</td><td>${esc(x.number)}</td><td>${tag(x.status)}</td><td><button class="btn secondary" onclick="editParking(${i})">Edit</button></td></tr>`);document.getElementById('main').innerHTML=head('Parking & Vehicles','Parking allocation and vehicle register','<button class="btn" onclick="addParking()">+ Add Vehicle</button>')+table(['Slot','Flat','Vehicle','Registration','Status','Action'],rows)}
+window.addParking=function(){addForm('Add Vehicle',[field('Slot','slot'),field('Flat','flat'),select('Vehicle','vehicle',['Car','Bike','Scooter','Other']),field('Registration','number'),select('Status','status',['Allocated','Available','Visitor'])],o=>db.parking.push(o))};window.editParking=function(i){let x=db.parking[i];addForm('Edit Vehicle',[field('Slot','slot',x.slot),field('Flat','flat',x.flat),select('Vehicle','vehicle',['Car','Bike','Scooter','Other'],x.vehicle),field('Registration','number',x.number),select('Status','status',['Allocated','Available','Visitor'],x.status)],o=>db.parking[i]=o)};
+function amenities(){let rows=db.bookings.map((x,i)=>`<tr><td>${esc(x.id)}</td><td>${esc(x.amenity)}</td><td>${esc(x.flat)}</td><td>${esc(x.resident)}</td><td>${esc(x.date)}</td><td>${esc(x.from)}-${esc(x.to)}</td><td>${money(x.fee)}</td><td>${tag(x.status)}</td><td><button class="btn secondary" onclick="editBooking(${i})">Edit</button></td></tr>`);document.getElementById('main').innerHTML=head('Amenities & Bookings','Clubhouse, hall, gym and other common-area reservations','<button class="btn" onclick="addBooking()">+ New Booking</button>')+`<div class="grid2"><div class="card"><h2>Amenities</h2>${db.amenities.map(x=>`<div class="notice"><b>${esc(x.name)}</b> Ãƒâ€š· Capacity ${x.capacity} Ãƒâ€š· Booking fee ${money(x.fee)} Ãƒâ€š· ${tag(x.status)}</div>`).join('')}</div><div class="card"><h2>Booking rules</h2><p class="muted">Use this register for reservations, fees, time slots and resident accountability.</p></div></div>`+table(['ID','Amenity','Flat','Resident','Date','Time','Fee','Status','Action'],rows)}
+window.addBooking=function(){addForm('New Amenity Booking',[field('ID','id','BK-'+String(Date.now()).slice(-5)),field('Amenity','amenity',db.amenities[0]?.name||''),field('Flat','flat'),field('Resident','resident'),field('Date','date','2026-10-01','date'),field('From','from','18:00'),field('To','to','20:00'),field('Purpose','purpose'),field('Fee','fee','0','number'),select('Status','status',['Pending','Confirmed','Cancelled'])],o=>{o.fee=Number(o.fee||0);db.bookings.push(o)})};window.editBooking=function(i){let x=db.bookings[i];addForm('Edit Booking',[field('ID','id',x.id),field('Amenity','amenity',x.amenity),field('Flat','flat',x.flat),field('Resident','resident',x.resident),field('Date','date',x.date,'date'),field('From','from',x.from),field('To','to',x.to),field('Purpose','purpose',x.purpose),field('Fee','fee',x.fee,'number'),select('Status','status',['Pending','Confirmed','Cancelled'],x.status)],o=>{o.fee=Number(o.fee||0);db.bookings[i]=o})};
+function staff(){let srows=db.staff.map((x,i)=>`<tr><td>${esc(x.id)}</td><td>${esc(x.name)}</td><td>${esc(x.role)}</td><td>${esc(x.phone)}</td><td>${esc(x.joining)}</td><td>${money(x.salary)}</td><td>${tag(x.status)}</td><td><button class="btn secondary" onclick="editStaff(${i})">Edit</button></td></tr>`),vrows=db.vendors.map((x,i)=>`<tr><td>${esc(x.id)}</td><td>${esc(x.name)}</td><td>${esc(x.service)}</td><td>${esc(x.contact)}</td><td>${esc(x.contract)}</td><td>${money(x.amount)}</td><td>${tag(x.status)}</td><td><button class="btn secondary" onclick="editVendor(${i})">Edit</button></td></tr>`);document.getElementById('main').innerHTML=head('Staff & Vendors','Security, housekeeping, maintenance staff and service contracts','<button class="btn" onclick="addStaff()">+ Staff</button> <button class="btn secondary" onclick="addVendor()">+ Vendor</button>')+'<div class="section"><h2>Staff</h2>'+table(['ID','Name','Role','Phone','Joining','Salary','Status','Action'],srows)+'</div><div class="section"><h2>Vendors / Service Contracts</h2>'+table(['ID','Vendor','Service','Contact','Contract','Amount','Status','Action'],vrows)+'</div>'}
+window.addStaff=function(){addForm('Add Staff',[field('ID','id','ST-'+String(Date.now()).slice(-5)),field('Name','name'),field('Role','role'),field('Phone','phone'),field('Joining','joining','2026-09-30','date'),field('Salary','salary','0','number'),
+select('ID Proof Type','idProofType',['Not Provided','Aadhaar (masked)','PAN','Passport','Voter ID','Driving Licence','Other']),
+field('ID Proof Reference (last 4 only)','idProofRef'),
+select('Address Proof Type','addressProofType',['Not Provided','Aadhaar (masked)','Passport','Utility Bill','Rental Agreement','Other']),
+field('Address Proof Reference (last 4 only)','addressProofRef'),
+select('Blood Group','bloodGroup',['Unknown','A+','A-','B+','B-','AB+','AB-','O+','O-']),
+field('Emergency Contact Name','emergencyContactName'),
+field('Emergency Contact Relationship','emergencyContactRelation'),
+field('Emergency Contact Phone','emergencyContactPhone','','tel'),
+select('Status','status',['Active','Inactive'])],o=>{o.salary=Number(o.salary||0);db.staff.push(o)})};window.editStaff=function(i){let x=db.staff[i];addForm('Edit Staff',[field('ID','id',x.id),field('Name','name',x.name),field('Role','role',x.role),field('Phone','phone',x.phone),field('Joining','joining',x.joining,'date'),field('Salary','salary',x.salary,'number'),
+select('ID Proof Type','idProofType',['Not Provided','Aadhaar (masked)','PAN','Passport','Voter ID','Driving Licence','Other'],x.idProofType||'Not Provided'),
+field('ID Proof Reference (last 4 only)','idProofRef',x.idProofRef||''),
+select('Address Proof Type','addressProofType',['Not Provided','Aadhaar (masked)','Passport','Utility Bill','Rental Agreement','Other'],x.addressProofType||'Not Provided'),
+field('Address Proof Reference (last 4 only)','addressProofRef',x.addressProofRef||''),
+select('Blood Group','bloodGroup',['Unknown','A+','A-','B+','B-','AB+','AB-','O+','O-'],x.bloodGroup||'Unknown'),
+field('Emergency Contact Name','emergencyContactName',x.emergencyContactName||''),
+field('Emergency Contact Relationship','emergencyContactRelation',x.emergencyContactRelation||''),
+field('Emergency Contact Phone','emergencyContactPhone',x.emergencyContactPhone||'','tel'),
+select('Status','status',['Active','Inactive'],x.status)],o=>{o.salary=Number(o.salary||0);db.staff[i]=o})};window.addVendor=function(){addForm('Add Vendor',[field('ID','id','VEN-'+String(Date.now()).slice(-5)),field('Name','name'),field('Service','service'),field('Contact','contact'),field('Contract','contract'),field('Annual/Contract Amount','amount','0','number'),
+select('Business ID Type','businessIdType',['Not Provided','GSTIN','PAN','Company Registration','Other']),
+field('Business ID Reference (masked)','businessIdRef'),
+select('Business Address Proof Type','businessAddressProofType',['Not Provided','Utility Bill','Rental Agreement','Property Tax Receipt','Other']),
+field('Business Address Proof Reference (masked)','businessAddressProofRef'),
+field('Authorised Contact Name','authorisedContactName'),
+field('Emergency Contact Phone','emergencyContactPhone','','tel'),
+select('Status','status',['Active','Expired','On Hold'])],o=>{o.amount=Number(o.amount||0);db.vendors.push(o)})};window.editVendor=function(i){let x=db.vendors[i];addForm('Edit Vendor',[field('ID','id',x.id),field('Name','name',x.name),field('Service','service',x.service),field('Contact','contact',x.contact),field('Contract','contract',x.contract),field('Annual/Contract Amount','amount',x.amount,'number'),
+select('Business ID Type','businessIdType',['Not Provided','GSTIN','PAN','Company Registration','Other'],x.businessIdType||'Not Provided'),
+field('Business ID Reference (masked)','businessIdRef',x.businessIdRef||''),
+select('Business Address Proof Type','businessAddressProofType',['Not Provided','Utility Bill','Rental Agreement','Property Tax Receipt','Other'],x.businessAddressProofType||'Not Provided'),
+field('Business Address Proof Reference (masked)','businessAddressProofRef',x.businessAddressProofRef||''),
+field('Authorised Contact Name','authorisedContactName',x.authorisedContactName||''),
+field('Emergency Contact Phone','emergencyContactPhone',x.emergencyContactPhone||'','tel'),
+select('Status','status',['Active','Expired','On Hold'],x.status)],o=>{o.amount=Number(o.amount||0);db.vendors[i]=o})};
+function noticeState(n){
+ if(n.status!=='Published')return n.status||'Draft';
+ if(!n.date||!n.endTime)return 'Legacy / no expiry';
+ let end=new Date(n.date+'T'+n.endTime);
+ if(!Number.isFinite(end.getTime()))return 'Check schedule';
+ return end.getTime()<Date.now()?'Expired':'Published';
+}
+function notices(){
+ let current=db.notices.filter(x=>noticeState(x)==='Published');
+ let currentHtml=current.length?current.map(x=>{
+  let time=x.startTime||x.endTime?(x.startTime||'Not set')+' - '+(x.endTime||'Not set'):'Not scheduled';
+  return '<div class="notice"><b>'+esc(x.title)+'</b><div class="mini">'+esc(x.type||'Notice')+' | '+esc(x.date||'Date not set')+' | '+esc(time)+' | '+esc(x.area||'Not specified')+'</div><p>'+esc(x.message||'')+'</p></div>';
+ }).join(''):'<div class="empty">No current published alerts.</div>';
+ let rows=db.notices.map((x,i)=>{
+  let state=noticeState(x);
+  let time=x.startTime||x.endTime?(x.startTime||'Not set')+' - '+(x.endTime||'Not set'):'Not scheduled';
+  return '<tr><td>'+esc(x.id)+'</td><td>'+esc(x.date||'Not scheduled')+'</td><td>'+esc(x.title||'')+'</td><td>'+esc(x.type||'General Update')+'</td><td>'+esc(time)+'</td><td>'+esc(x.area||'Not specified')+'</td><td>'+esc(x.audience||'')+'</td><td>'+tag(state)+'</td><td><button class="btn secondary" onclick="editNotice('+i+')">Edit</button> '+(state==='Published'?'<button class="btn secondary" onclick="shareNotice('+i+')">Share</button>':'')+'</td></tr>';
+ });
+ document.getElementById('main').innerHTML=head('Notices & Communication','Create, schedule and share important resident announcements','<button class="btn" onclick="addNotice()">+ Notice</button>')+'<div class="section"><h2>Current Alerts</h2>'+currentHtml+'</div><div class="section"><h2>All Notices</h2>'+table(['ID','Date','Title','Type','Time','Affected Area','Audience','Status','Actions'],rows)+'</div>';
+}
+function nextNoticeId(){
+ let used=new Set(db.notices.map(n=>String(n.id||'').toUpperCase()));
+ let highest=0;
+ db.notices.forEach(n=>{
+  let match=String(n.id||'').match(/^NOT-(\d+)$/i);
+  if(match)highest=Math.max(highest,Number(match[1]));
+ });
+ let next=highest+1;
+ let id='NOT-'+String(next).padStart(2,'0');
+ while(used.has(id.toUpperCase())){
+  next++;
+  id='NOT-'+String(next).padStart(2,'0');
+ }
+ return id;
+}function noticeFields(x){
+ return [field('Notice ID','id',x.id||nextNoticeId(),'text','readonly'),select('Notice Type','type',['Meeting','Power Interruption','Water Interruption','Maintenance','Emergency','General Update'],x.type||'General Update'),field('Title','title',x.title||''),field('Date','date',x.date||todayISO(),'date'),field('Start Time','startTime',x.startTime||'09:00','time'),field('Expected End Time','endTime',x.endTime||'10:00','time'),field('Affected Area','area',x.area||'All Blocks / Common Areas'),select('Audience','audience',['All Residents','Committee','Security','Specific Flat'],x.audience||'All Residents'),field('Flat Number (only for Specific Flat)','targetFlat',x.targetFlat||''),field('Message','message',x.message||'','text','required'),select('Status','status',['Draft','Published','Cancelled','Archived'],x.status||'Draft')];
+}
+window.addNotice=function(){addForm('Create Notice',noticeFields({}),o=>db.notices.push(o))};
+window.editNotice=function(i){let x=db.notices[i];addForm('Edit Notice',noticeFields(x),o=>db.notices[i]=o)};
+window.shareNotice=function(i){
+ let n=db.notices[i];
+ if(!n||noticeState(n)!=='Published'){alert('Only current published notices can be shared.');return}
+ if(!['All Residents','Specific Flat'].includes(n.audience)){alert('Resident sharing is available for All Residents or Specific Flat notices.');return}
+ let people=(db.tenants||[]).filter(t=>n.audience!=='Specific Flat'||String(t.flat||'').trim().toLowerCase()===String(n.targetFlat||'').trim().toLowerCase());
+ let message='HabitaGrid Notice: '+n.title+'\nType: '+(n.type||'General Update')+'\nDate: '+n.date+'\nTime: '+(n.startTime||'')+' to '+(n.endTime||'')+'\nAffected area: '+(n.area||'Not specified')+'\n\n'+n.message;
+ let subject=encodeURIComponent('Society Notice: '+n.title);
+ let body=encodeURIComponent(message);
+ let rows=people.map(t=>{
+  let email=String(t.email||'').trim();
+  let emailLink=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)?'<a class="btn secondary" href="mailto:'+esc(email)+'?subject='+subject+'&body='+body+'">Email</a>':'<span class="mini">No valid email</span>';
+  let raw=String(t.mobile||'').trim(),digits=raw.replace(/\D/g,'');
+  if(digits.length===10&&/^[6-9]/.test(digits))digits='91'+digits;
+  else if(!(digits.length===12&&digits.startsWith('91'))&&!(raw.startsWith('+')&&digits.length>=8&&digits.length<=15))digits='';
+  let wa=digits?'<a class="btn secondary" target="_blank" rel="noopener" href="https://wa.me/'+digits+'?text='+body+'">WhatsApp</a>':'<span class="mini">No valid mobile</span>';
+  return '<tr><td>'+esc(t.name||'Resident')+'</td><td>'+esc(t.flat||'')+'</td><td>'+emailLink+'</td><td>'+wa+'</td></tr>';
+ });
+ let content='<p>Choose Email or WhatsApp for each resident. Your device or browser will open the selected app with the notice prefilled. You must review and send it yourself.</p>'+table(['Resident','Flat','Email','WhatsApp'],rows);
+ if(!people.length)content+='<p>No matching resident records found.</p>';
+ content+='<p class="mini">Sample contact details may not be real or deliverable. No messages are sent automatically and no delivery or read status is tracked.</p>';
+ modal('Share Notice',content);
+};
+function meetings(){let rows=db.meetings.map((x,i)=>`<tr><td>${esc(x.id)}</td><td>${esc(x.date)}</td><td>${esc(x.type)}</td><td>${esc(x.agenda)}</td><td>${esc(x.attendees)}</td><td>${esc(x.minutes)}</td><td>${tag(x.status)}</td><td><button class="btn secondary" onclick="editMeeting(${i})">Edit</button></td></tr>`);document.getElementById('main').innerHTML=head('Meetings & Minutes','Committee meetings, AGM/GBM records, agenda and minutes','<button class="btn" onclick="addMeeting()">+ Meeting</button>')+table(['ID','Date','Type','Agenda','Attendees','Minutes','Status','Action'],rows)}
+window.addMeeting=function(){addForm('Meeting Record',[field('ID','id','MT-'+String(Date.now()).slice(-5)),field('Date','date','2026-10-01','date'),select('Type','type',['Committee Meeting','AGM','GBM','Emergency Meeting']),field('Agenda','agenda'),field('Attendees','attendees'),field('Minutes','minutes'),select('Status','status',['Scheduled','Completed','Cancelled'])],o=>db.meetings.push(o))};window.editMeeting=function(i){let x=db.meetings[i];addForm('Edit Meeting',[field('ID','id',x.id),field('Date','date',x.date,'date'),select('Type','type',['Committee Meeting','AGM','GBM','Emergency Meeting'],x.type),field('Agenda','agenda',x.agenda),field('Attendees','attendees',x.attendees),field('Minutes','minutes',x.minutes),select('Status','status',['Scheduled','Completed','Cancelled'],x.status)],o=>db.meetings[i]=o)};
+function expenses(){let total=db.expenses.reduce((a,x)=>a+Number(x.amount||0),0);let rows=db.expenses.map((x,i)=>`<tr><td>${esc(x.id)}</td><td>${esc(x.date)}</td><td>${esc(x.category)}</td><td>${esc(x.vendor)}</td><td>${money(x.amount)}</td><td>${esc(x.mode)}</td><td>${esc(x.notes)}</td><td><button class="btn secondary" onclick="editExpense(${i})">Edit</button> <button class="btn danger" onclick="del('expenses',${i})">Delete</button></td></tr>`);document.getElementById('main').innerHTML=head('Expenses & Budget','Society spending, vendor payments and budget control','<button class="btn" onclick="addExpense()">+ Expense</button>')+cards([['Recorded Expenses',money(total),'amber'],['Security',money(db.expenses.filter(x=>x.category==='Security').reduce((a,x)=>a+Number(x.amount),0))],['Repairs',money(db.expenses.filter(x=>x.category==='Repairs').reduce((a,x)=>a+Number(x.amount),0))],['Utilities',money(db.expenses.filter(x=>x.category==='Electricity').reduce((a,x)=>a+Number(x.amount),0))],['Transactions',db.expenses.length]])+table(['ID','Date','Category','Vendor','Amount','Mode','Notes','Action'],rows)}
+window.addExpense=function(){addForm('Add Expense',[field('ID','id','EXP-'+String(Date.now()).slice(-5)),field('Date','date',todayISO(),'date'),field('Category','category'),field('Vendor','vendor'),field('Amount','amount','0','number'),select('Mode','mode',['UPI','Cash','Bank Transfer','Cheque','Card']),field('Notes','notes')],o=>{o.amount=Number(o.amount||0);db.expenses.push(o)})};window.editExpense=function(i){let x=db.expenses[i];addForm('Edit Expense',[field('ID','id',x.id),field('Date','date',x.date,'date'),field('Category','category',x.category),field('Vendor','vendor',x.vendor),field('Amount','amount',x.amount,'number'),select('Mode','mode',['UPI','Cash','Bank Transfer','Cheque','Card'],x.mode),field('Notes','notes',x.notes)],o=>{o.amount=Number(o.amount||0);db.expenses[i]=o})};
+function utilities(){let rows=db.utilities.map((x,i)=>`<tr><td>${esc(x.id)}</td><td>${esc(x.month)}</td><td>${esc(x.type)}</td><td>${esc(x.meter)}</td><td>${esc(x.units)}</td><td>${money(x.amount)}</td><td>${esc(x.due)}</td><td>${tag(x.status)}</td><td><button class="btn secondary" onclick="editUtility(${i})">Edit</button></td></tr>`);document.getElementById('main').innerHTML=head('Utilities','Common electricity, water, generator and other utility tracking','<button class="btn" onclick="addUtility()">+ Utility Bill</button>')+table(['ID','Month','Type','Meter','Units','Amount','Due','Status','Action'],rows)}
+window.addUtility=function(){addForm('Utility Bill',[field('ID','id','UT-'+String(Date.now()).slice(-5)),field('Month','month','Sep-2026'),select('Type','type',['Electricity','Water','Generator Fuel','Internet','Other']),field('Meter','meter'),field('Units','units','0','number'),field('Amount','amount','0','number'),field('Due Date','due','2026-10-10','date'),select('Status','status',['Pending','Paid','Overdue'])],o=>{o.units=Number(o.units||0);o.amount=Number(o.amount||0);db.utilities.push(o)})};window.editUtility=function(i){let x=db.utilities[i];addForm('Edit Utility',[field('ID','id',x.id),field('Month','month',x.month),select('Type','type',['Electricity','Water','Generator Fuel','Internet','Other'],x.type),field('Meter','meter',x.meter),field('Units','units',x.units,'number'),field('Amount','amount',x.amount,'number'),field('Due Date','due',x.due,'date'),select('Status','status',['Pending','Paid','Overdue'],x.status)],o=>{o.units=Number(o.units||0);o.amount=Number(o.amount||0);db.utilities[i]=o})};
+function assets(){let rows=db.assets.map((x,i)=>`<tr><td>${esc(x.id)}</td><td>${esc(x.name)}</td><td>${esc(x.category)}</td><td>${esc(x.location)}</td><td>${esc(x.purchase)}</td><td>${money(x.value)}</td><td>${esc(x.warranty)}</td><td>${tag(x.status)}</td><td><button class="btn secondary" onclick="editAsset(${i})">Edit</button></td></tr>`);document.getElementById('main').innerHTML=head('Assets & AMC','Common assets, equipment, warranties and maintenance contracts','<button class="btn" onclick="addAsset()">+ Asset</button>')+table(['ID','Asset','Category','Location','Purchase','Value','Warranty/AMC','Status','Action'],rows)}
+window.addAsset=function(){addForm('Add Asset',[field('ID','id','AST-'+String(Date.now()).slice(-5)),field('Asset Name','name'),field('Category','category'),field('Location','location'),field('Purchase Date','purchase','2026-09-30','date'),field('Value','value','0','number'),field('Warranty / AMC Till','warranty','2027-09-30','date'),select('Status','status',['Operational','Under Repair','Disposed'])],o=>{o.value=Number(o.value||0);db.assets.push(o)})};window.editAsset=function(i){let x=db.assets[i];addForm('Edit Asset',[field('ID','id',x.id),field('Asset Name','name',x.name),field('Category','category',x.category),field('Location','location',x.location),field('Purchase Date','purchase',x.purchase,'date'),field('Value','value',x.value,'number'),field('Warranty / AMC Till','warranty',x.warranty,'date'),select('Status','status',['Operational','Under Repair','Disposed'],x.status)],o=>{o.value=Number(o.value||0);db.assets[i]=o})};
+function tasks(){let rows=db.tasks.map((x,i)=>`<tr><td>${esc(x.id)}</td><td>${esc(x.title)}</td><td>${esc(x.assigned)}</td><td>${esc(x.due)}</td><td>${tag(x.priority)}</td><td>${tag(x.status)}</td><td><button class="btn secondary" onclick="editTask(${i})">Edit</button></td></tr>`);document.getElementById('main').innerHTML=head('Tasks & Calendar','Secretary checklist, deadlines, renewals and committee actions','<button class="btn" onclick="addTask()">+ Task</button>')+table(['ID','Task','Assigned','Due','Priority','Status','Action'],rows)}
+window.addTask=function(){addForm('Add Task',[field('ID','id','TSK-'+String(Date.now()).slice(-5)),field('Task','title'),field('Assigned To','assigned'),field('Due Date','due','2026-10-01','date'),select('Priority','priority',['Low','Medium','High','Critical']),select('Status','status',['Open','In Progress','Completed'])],o=>db.tasks.push(o))};window.editTask=function(i){let x=db.tasks[i];addForm('Edit Task',[field('ID','id',x.id),field('Task','title',x.title),field('Assigned To','assigned',x.assigned),field('Due Date','due',x.due,'date'),select('Priority','priority',['Low','Medium','High','Critical'],x.priority),select('Status','status',['Open','In Progress','Completed'],x.status)],o=>db.tasks[i]=o)};
+function documents(){let rows=db.documents.map((x,i)=>`<tr><td>${esc(x.id)}</td><td>${esc(x.name)}</td><td>${esc(x.category)}</td><td>${esc(x.date)}</td><td>${esc(x.owner)}</td><td>${tag(x.status)}</td><td><button class="btn secondary" onclick="editDoc(${i})">Edit</button></td></tr>`);document.getElementById('main').innerHTML=head('Documents','Society registration, bylaws, insurance, contracts, minutes and records','<button class="btn" onclick="addDoc()">+ Document Record</button>')+`<div class="notice">Browser prototype: this module stores document metadata only. It does not upload confidential files to a server.</div>`+table(['ID','Document','Category','Date','Owner','Status','Action'],rows)}
+window.addDoc=function(){addForm('Document Record',[field('ID','id','DOC-'+String(Date.now()).slice(-5)),field('Document Name','name'),field('Category','category'),field('Date','date',todayISO(),'date'),field('Owner','owner','Society'),select('Status','status',['Current','Expired','Pending Renewal','Archived'])],o=>db.documents.push(o))};window.editDoc=function(i){let x=db.documents[i];addForm('Edit Document',[field('ID','id',x.id),field('Document Name','name',x.name),field('Category','category',x.category),field('Date','date',x.date,'date'),field('Owner','owner',x.owner),select('Status','status',['Current','Expired','Pending Renewal','Archived'],x.status)],o=>db.documents[i]=o)};
+function tenants(){
+ let list=Array.isArray(db.tenants)?db.tenants:[];
+ let today=todayISO();
+ let soon=new Date();
+ soon.setDate(soon.getDate()+30);
+ let soonISO=soon.toISOString().slice(0,10);
+ let pending=list.filter(x=>x.status==='Pending').length;
+ let verified=list.filter(x=>x.status==='Verified').length;
+ let expiring=list.filter(x=>x.end&&x.end>=today&&x.end<=soonISO).length;
+ let incomplete=list.filter(x=>!x.idFile||!x.addressFile||!x.agreementFile||!x.ref1Name||!x.ref2Name).length;
+ let rows=list.map((x,i)=>`<tr>
+ <td>${esc(x.id)}</td><td>${esc(x.name)}</td><td>${esc(x.flat)}</td>
+ <td>${esc(x.mobile)}</td><td>${esc(x.idType)}<br><span class="mini">${esc(x.idRef)}</span></td>
+ <td>${esc(x.addressType)}</td><td>${esc(x.end)}</td><td>${tag(x.status)}</td>
+ <td><button class="btn secondary" onclick="editTenant(${i})">View / Edit</button></td>
+ </tr>`);
+ document.getElementById('main').innerHTML=
+ head('Tenant KYC & Verification','Tenant registration, identity and address proof, references, lease records and renewal monitoring','<button class="btn" onclick="addTenant()">+ Add Tenant</button>')+
+ `<div class="notice"><b>Prototype safety notice:</b> Use fictional sample data only. Store filenames and masked references only. Do not enter real identity numbers, personal contact details or actual document contents. Secure backend storage, access control, encryption and backups are not yet implemented.</div>`+
+ cards([['Total Tenants',list.length],['Pending Verification',pending,'amber'],['Verified',verified,'green'],['Agreements Expiring in 30 Days',expiring,'amber'],['Incomplete KYC Records',incomplete,'red']])+
+ `<div class="card"><h2>Tenant KYC Register</h2><p class="muted">Review tenant records and verification status. Renewal and missing-document alerts are shown above.</p></div>`+
+ table(['Tenant ID','Tenant','Flat','Mobile (sample)','Identity Proof','Address Proof','Agreement End','Status','Action'],rows);
+}
+function tenantFields(x={}){
+ return [
+ field('Tenant ID','id',x.id||'TEN-'+String(Date.now()).slice(-6)),
+ field('Full Name','name',x.name||''),
+ field('Flat Number','flat',x.flat||''),
+ field('Mobile (fictional only)','mobile',x.mobile||''),
+ field('Email (test address only)','email',x.email||''),
+ field('Permanent Address (sample only)','address',x.address||''),
+ field('Flat Owner','owner',x.owner||''),
+ field('Occupancy Start','start',x.start||todayISO(),'date'),
+ field('Expected Occupancy End','end',x.end||'','date'),
+ select('Identity Proof Type','idType',['PAN Card','Driving Licence','Voter ID','Aadhaar Card','Passport','Other'],x.idType||'PAN Card'),
+ field('Masked Identity Reference','idRef',x.idRef||''),
+ fileField('Upload Identity Proof (PDF / Image)','idFile',x.idFile||''),
+ select('Address Proof Type','addressType',['Utility Bill','Bank Statement','Passport','Driving Licence','Voter ID','Aadhaar Card','Other'],x.addressType||'Utility Bill'),
+ field('Masked Address Reference','addressRef',x.addressRef||''),
+ fileField('Upload Address Proof (PDF / Image)','addressFile',x.addressFile||''),
+ field('Reference 1 Name','ref1Name',x.ref1Name||''),
+ field('Reference 1 Relationship','ref1Relation',x.ref1Relation||''),
+ field('Reference 1 Mobile (fictional)','ref1Mobile',x.ref1Mobile||''),
+ field('Reference 1 Address (sample)','ref1Address',x.ref1Address||''),
+ select('Reference 1 Status','ref1Status',['Pending','Not Recorded','Verified','Rejected'],x.id?(x.ref1Status||'Not Recorded'):'Pending'),
+ field('Reference 2 Name','ref2Name',x.ref2Name||''),
+ field('Reference 2 Relationship','ref2Relation',x.ref2Relation||''),
+ field('Reference 2 Mobile (fictional)','ref2Mobile',x.ref2Mobile||''),
+ field('Reference 2 Address (sample)','ref2Address',x.ref2Address||''),
+ select('Reference 2 Status','ref2Status',['Pending','Not Recorded','Verified','Rejected'],x.id?(x.ref2Status||'Not Recorded'):'Pending'),
+ fileField('Upload Signed Rental / Lease Agreement','agreementFile',x.agreementFile||''),
+ field('Agreement Start','agreementStart',x.agreementStart||'','date'),
+ field('Agreement End','agreementEnd',x.agreementEnd||'','date'),
+ field('Tenant Photo Filename Only','photoFile',x.photoFile||''),
+ field('Supporting Document Filenames','supportFiles',x.supportFiles||''),
+ select('Identity Verification','identityStatus',['Pending','Not Recorded','Verified','Rejected'],x.id?(x.identityStatus||'Not Recorded'):'Pending'),
+ select('Does document address match declared address?','addressMatch',['Pending','Not Recorded','Yes','No'],x.id?(x.addressMatch||'Not Recorded'):'Pending'),
+ select('Flat Owner Address Approval','ownerApproval',['Not Required','Pending','Not Recorded','Approved','Rejected'],x.id?(x.ownerApproval||'Not Recorded'):'Pending'),
+ select('Address Verification','addressStatus',['Pending','Not Recorded','Verified','Rejected'],x.id?(x.addressStatus||'Not Recorded'):'Pending'),
+ select('Agreement Verification','agreementStatus',['Pending','Not Recorded','Verified','Rejected'],x.id?(x.agreementStatus||'Not Recorded'):'Pending'),
+ field('Reviewer Remarks','reviewRemarks',x.reviewRemarks||''),
+ select('Overall KYC Status','status',['Pending','Verified','Rejected','Expired'],x.status||'Pending')
+ ];
+}
+window.addTenant=function(){
+ addForm('Add Tenant',tenantFields(),o=>db.tenants.push(o));
+};
+window.editTenant=function(i){
+ let x=db.tenants[i];
+ if(!x)return;
+ addForm('Edit Tenant',tenantFields(x),o=>db.tenants[i]={...x,...o});
+};
+function reports(){let collected=db.payments.reduce((a,x)=>a+Number(x.amount||0),0),due=db.flats.reduce((a,x)=>a+Number(x.dues||0),0),expense=db.expenses.reduce((a,x)=>a+Number(x.amount||0),0);let net=collected-expense;document.getElementById('main').innerHTML=head('Reports & Analytics','Secretary-level financial and operational summary','<button class="btn" onclick="window.print()">Print Report</button>')+cards([['Payments Collected',money(collected),'green'],['Outstanding Dues',money(due),'amber'],['Expenses',money(expense),'red'],['Net Cash Movement',money(net),net>=0?'green':'red'],['Complaint Resolution',Math.round(db.complaints.filter(x=>x.status==='Resolved').length/(db.complaints.length||1)*100)+'%']])+`<div class="grid2"><div class="card"><h2>Society KPIs</h2><p>Flats: <b>${db.flats.length}</b></p><p>Occupied: <b>${db.flats.filter(x=>x.status==='Occupied').length}</b></p><p>Vacant: <b>${db.flats.filter(x=>x.status==='Vacant').length}</b></p><p>Visitors today: <b>${db.visitors.filter(x=>x.date===todayISO()).length}</b></p><p>Active staff: <b>${db.staff.filter(x=>x.status==='Active').length}</b></p><p>Active vendors: <b>${db.vendors.filter(x=>x.status==='Active').length}</b></p></div><div class="card"><h2>Financial controls</h2><p>Monthly expected maintenance: <b>${money(db.society.monthlyDue*db.flats.filter(x=>x.status==='Occupied').length)}</b></p><p>Payments recorded: <b>${db.payments.length}</b></p><p>Expenses recorded: <b>${db.expenses.length}</b></p><p>Pending utilities: <b>${db.utilities.filter(x=>x.status!=='Paid').length}</b></p></div></div>`}
+function propertyFields(x={}){
+ const accommodationTypes=['Mens PG / Hostel','Womens PG / Hostel','Co-ed PG / Hostel','Working Mens Hostel','Working Womens Hostel','Student Hostel','Co-living Accommodation','Other / Custom'];
+ const genderTypes=['Men only','Women only','Co-ed / All genders','Custom'];
+ const statuses=['Active','Under Setup','Temporarily Closed'];
+ const currencies=['INR','USD','GBP','EUR','AED','SAR','SGD','MYR','AUD','CAD','JPY'];
+ const stayModels=['Long-stay','Short-stay','Hybrid'];
+ const makeSelect=(label,name,options,value)=>`<div class="field"><label>${label}</label><select name="${name}" required>${options.map(v=>`<option value="${esc(v)}" ${v===value?'selected':''}>${esc(v)}</option>`).join('')}</select></div>`;
+ return [
+  field('Property Name','name',x.name||'','text','required'),
+  field('Property Code','code',x.code||'','text','required'),
+  makeSelect('Accommodation Type','accommodationType',accommodationTypes,x.accommodationType||accommodationTypes[0]),
+  makeSelect('Resident Category','genderCategory',genderTypes,x.genderCategory||genderTypes[0]),
+  field('Property Address','address',x.address||'','text','required'),
+  field('City','city',x.city||'','text','required'),
+  field('State','state',x.state||'','text','required'),
+  field('PIN Code','pincode',x.pincode||'','text'),
+  field('Property Manager / Contact Person','contactName',x.contactName||''),
+  field('Contact Phone','phone',x.phone||'','tel','required'),
+  field('Contact Email','email',x.email||'','email'),
+  makeSelect('Currency','currency',currencies,x.currency||'INR'),
+  makeSelect('Accommodation Operating Model','stayModel',stayModels,x.stayModel||'Long-stay'),
+  makeSelect('Property Status','status',statuses,x.status||'Active')
+ ];
+}
+function properties(){
+ if(!Array.isArray(db.properties))db.properties=[];
+ const rows=db.properties.map((x,i)=>`<tr><td><b>${esc(x.name)}</b></td><td>${esc(x.code)}</td><td>${esc(x.accommodationType)}</td><td>${esc(x.genderCategory)}</td><td>${esc(x.city)}, ${esc(x.state)}</td><td>${esc(x.phone)}</td><td>${tag(x.status)}</td><td><button class="btn secondary" onclick="editProperty(${i})">Edit</button></td></tr>`);
+ document.getElementById('main').innerHTML=head('Properties','Manage your PGs, hostels and co-living properties independently','<button class="btn" onclick="addProperty()">+ Add Property</button>')+
+ '<div class="notice">Each property can have its own accommodation type, resident category, facilities, food schedules and operating rules.</div>'+
+ cards([['Total Properties',db.properties.length],['Active Properties',db.properties.filter(x=>x.status==='Active').length],['Under Setup',db.properties.filter(x=>x.status==='Under Setup').length]])+
+ table(['Property Name','Property Code','Accommodation Type','Resident Category','Location','Contact','Status','Action'],rows);
+}
+window.addProperty=function(){
+ addForm('Add Property',propertyFields(),o=>{
+  if(db.properties.some(x=>String(x.code||'').trim().toLowerCase()===o.code.trim().toLowerCase())){alert('This property code already exists. Please use a unique code.');return}
+  o.id='PROP-'+Date.now();
+  o.code=o.code.trim().toUpperCase();
+  o.name=o.name.trim();
+  db.properties.push(o);
+  if(!db.activePropertyId)db.activePropertyId=o.id;
+ });
+};
+window.editProperty=function(i){
+ const x=db.properties[i];
+ if(!x)return;
+ addForm('Edit Property',propertyFields(x),o=>{
+  if(db.properties.some((p,j)=>j!==i&&String(p.code||'').trim().toLowerCase()===o.code.trim().toLowerCase())){alert('This property code already exists. Please use a unique code.');return}
+  o.id=x.id;
+  o.code=o.code.trim().toUpperCase();
+  o.name=o.name.trim();
+  db.properties[i]=o;
+ });
+};
+function pgBuildings(){
+ if(!Array.isArray(db.buildings))db.buildings=[];
+ const properties=db.properties||[];
+ const rows=db.buildings.map((b,i)=>{
+  const p=properties.find(x=>x.id===b.propertyId);
+  return `<tr>
+   <td><b>${esc(b.name)}</b><div class="muted">${esc(b.code)}</div></td>
+   <td>${esc(p?p.name:'Property not found')}</td>
+   <td>${Number(b.floorCount||0)}</td>
+   <td>${esc((b.floorNames||[]).join(', '))}</td>
+   <td><button class="btn secondary" onclick="editBuilding(${i})">Edit</button>
+   <button class="btn danger" onclick="deleteBuilding(${i})">Delete</button></td>
+  </tr>`;
+ });
+ document.getElementById('main').innerHTML=
+  head('Buildings & Floors','Organise each accommodation property into buildings and individually named floors.',
+  '<button class="btn" onclick="addBuilding()">+ Add Building</button>')+
+  cards([['Properties',properties.length],['Buildings',db.buildings.length],['Total Floors',db.buildings.reduce((s,b)=>s+Number(b.floorCount||0),0)]])+
+  table(['Building / Code','Property','Floors','Floor Names','Actions'],rows);
+}
+function buildingFields(x={}){
+ const options=(db.properties||[]).map(p=>`<option value="${esc(p.id)}" ${p.id===(x.propertyId||db.activePropertyId)?'selected':''}>${esc(p.name)} (${esc(p.code)})</option>`).join('');
+ const floorCount=Number(x.floorCount||5);
+ const config=['3','4','5','6'].includes(String(floorCount))?String(floorCount):'custom';
+ const presets=[['3','G+2 — 3 floors'],['4','G+3 — 4 floors'],['5','G+4 — 5 floors'],['6','G+5 — 6 floors']];
+ const configOptions=presets.map(([v,label])=>`<option value="${v}" ${config===v?'selected':''}>${label}</option>`).join('')+`<option value="custom" ${config==='custom'?'selected':''}>Custom floor count</option>`;
+ return [
+  `<div class="field"><label>Property</label><select name="propertyId" required>${options}</select></div>`,
+  field('Building Name','name',x.name||'','text','required'),
+  field('Building Code','code',x.code||'','text','required'),
+  `<div class="field"><label>Building Configuration</label><select name="buildingConfig" onchange="const f=this.form.elements.floorCount;const n=this.form.elements.floorNames;if(this.value==='custom'){f.readOnly=false;}else{f.value=this.value;f.readOnly=true;const a=['Ground Floor','First Floor','Second Floor','Third Floor','Fourth Floor','Fifth Floor'];n.value=a.slice(0,Number(this.value)).join(String.fromCharCode(10));}">${configOptions}</select><small class="muted">Choose G+4 or G+5 for a typical PG building, or select Custom.</small></div>`,
+  field('Total Number of Floors','floorCount',floorCount,'number',`min="1" max="100" required ${config==='custom'?'':'readonly'}`),
+  `<div class="field"><label>Floor Names (one per line, optional)</label><textarea name="floorNames" rows="7" placeholder="Ground Floor&#10;First Floor&#10;Second Floor&#10;Third Floor&#10;Fourth Floor">${esc((x.floorNames||[]).join('\n'))}</textarea><small class="muted">Enter exactly one name per floor, or leave blank for automatic names.</small></div>`
+ ];
+}
+function makeFloorNames(count,custom){
+ const names=String(custom||'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+ if(names.length&&names.length!==count)return null;
+ if(names.length)return names;
+ return Array.from({length:count},(_,i)=>i===0?'Ground Floor':i===1?'First Floor':i===2?'Second Floor':i===3?'Third Floor':`Floor ${i}`);
+}
+window.addBuilding=function(){
+ if(!db.properties.length){alert('Please add a property before adding a building.');return;}
+ addForm('Add Building',buildingFields(),o=>{
+  o.name=o.name.trim();
+  o.code=o.code.trim().toUpperCase();
+  o.floorCount=Number(o.floorCount);
+  const names=makeFloorNames(o.floorCount,o.floorNames);
+  if(!o.name||!o.code||!Number.isInteger(o.floorCount)||o.floorCount<1||o.floorCount>100){alert('Enter a building name, code and a floor count between 1 and 100.');return false;}
+  if(!names){alert('The number of floor names must match the floor count.');return false;}
+  if(db.buildings.some(b=>b.propertyId===o.propertyId&&String(b.code).toLowerCase()===o.code.toLowerCase())){alert('This building code already exists in this property.');return false;}
+  o.floorNames=names;
+  o.id='BLDG-'+Date.now();
+  db.buildings.push(o);
+ });
+};
+window.editBuilding=function(i){
+ const x=db.buildings[i];
+ if(!x)return;
+ addForm('Edit Building',buildingFields(x),o=>{
+  o.name=o.name.trim();
+  o.code=o.code.trim().toUpperCase();
+  o.floorCount=Number(o.floorCount);
+  const names=makeFloorNames(o.floorCount,o.floorNames);
+  if(!o.name||!o.code||!Number.isInteger(o.floorCount)||o.floorCount<1||o.floorCount>100){alert('Enter a building name, code and a floor count between 1 and 100.');return false;}
+  if(!names){alert('The number of floor names must match the floor count.');return false;}
+  if(db.buildings.some((b,j)=>j!==i&&b.propertyId===o.propertyId&&String(b.code).toLowerCase()===o.code.toLowerCase())){alert('This building code already exists in this property.');return false;}
+  o.id=x.id;
+  o.floorNames=names;
+  db.buildings[i]=o;
+ });
+};
+window.deleteBuilding=function(i){
+ const b=db.buildings[i];
+ if(!b)return;
+ if((db.rooms||[]).some(r=>r.buildingId===b.id)){alert('This building is linked to rooms. Remove or reassign those rooms before deleting it.');return;}
+ if(confirm('Delete this building and its floor configuration?')){db.buildings.splice(i,1);save();render();}
+};
+function pgRooms(){
+ if(!Array.isArray(db.rooms))db.rooms=[];
+ if(!Array.isArray(db.beds))db.beds=[];
+ const rows=db.rooms.map((r,i)=>{
+  const p=(db.properties||[]).find(x=>x.id===r.propertyId);
+  const b=(db.buildings||[]).find(x=>x.id===r.buildingId);
+  const beds=db.beds.filter(x=>x.roomId===r.id);
+  const occupied=beds.filter(x=>String(x.status||'').toLowerCase()==='occupied').length;
+  const reserved=beds.filter(x=>String(x.status||'').toLowerCase()==='reserved').length;
+  const available=beds.filter(x=>String(x.status||'').toLowerCase()==='available').length;
+  return `<tr>
+   <td><b>${esc(r.name)}</b><div class="muted">${esc(r.code)}</div></td>
+   <td>${esc(p?p.name:'Property not found')}</td>
+   <td>${esc(b?b.name:'Building not found')}<div class="muted">${esc(r.floorName)}</div></td>
+   <td>${esc(r.sharingType)}</td>
+   <td>${beds.length}</td>
+   <td>${occupied} occupied / ${reserved} reserved / ${available} available</td>
+   <td><button class="btn secondary" onclick="manageRoomBeds(${i})">Manage Beds</button> <button class="btn secondary" onclick="editPgRoom(${i})">Edit</button> <button class="btn danger" onclick="deletePgRoom(${i})">Delete</button></td>
+  </tr>`;
+ });
+ document.getElementById('main').innerHTML=
+  head('Rooms & Beds','Manage rooms, sharing configurations and individual bed availability.','<button class="btn" onclick="addPgRoom()">+ Add Room</button>')+
+  cards([['Properties',(db.properties||[]).length],['Buildings',(db.buildings||[]).length],['Rooms',db.rooms.length],['Total Beds',db.beds.length],['Occupied Beds',db.beds.filter(x=>x.status==='Occupied').length],['Reserved Beds',db.beds.filter(x=>x.status==='Reserved').length],['Available Beds',db.beds.filter(x=>x.status==='Available').length]])+
+  table(['Room / Code','Property','Building / Floor','Sharing','Beds','Occupancy','Actions'],rows);
+}
+function pgRoomFields(x={}){
+ const properties=db.properties||[];
+ const buildings=db.buildings||[];
+ const selectedPropertyId=x.propertyId||db.activePropertyId||(properties[0]?.id||'');
+ const propertyOptions=properties.map(p=>`<option value="${esc(p.id)}" ${p.id===selectedPropertyId?'selected':''}>${esc(p.name)} (${esc(p.code)})</option>`).join('');
+ const matchingBuildings=buildings.filter(b=>b.propertyId===selectedPropertyId);
+ const selectedBuilding=matchingBuildings.find(b=>b.id===x.buildingId)||matchingBuildings[0];
+ const buildingOptions=matchingBuildings.map(b=>`<option value="${esc(b.id)}" ${selectedBuilding&&b.id===selectedBuilding.id?'selected':''}>${esc(b.name)} (${esc(b.code)})</option>`).join('')||'<option value="">No buildings available</option>';
+ const floors=selectedBuilding?(selectedBuilding.floorNames||[]):[];
+ const selectedFloor=floors.includes(x.floorName)?x.floorName:(floors[0]||'');
+ const floorOptions=floors.map(f=>`<option value="${esc(f)}" ${f===selectedFloor?'selected':''}>${esc(f)}</option>`).join('')||'<option value="">No floors available</option>';
+ const select=(label,name,options,change='')=>`<div class="field"><label>${label}</label><select name="${name}" ${change} required>${options}</select></div>`;
+ const sharing=['Single Sharing','Double Sharing','Triple Sharing','Four Sharing','Custom Sharing'];
+ const modes=['Bed-wise Rental','Whole-room Rental'];
+ return [
+  select('Property','propertyId',propertyOptions,'onchange="pgRoomPropertyChanged()"'),
+  select('Building','buildingId',buildingOptions,'onchange="pgRoomBuildingChanged()"'),
+  select('Floor','floorName',floorOptions),
+  field('Room Number / Name','name',x.name||'','text','required'),
+  field('Room Code','code',x.code||'','text','required'),
+  select('Sharing Configuration','sharingType',sharing.map(v=>`<option value="${v}" ${v===(x.sharingType||'Single Sharing')?'selected':''}>${v}</option>`).join('')),
+  field('Number of Beds','bedCount',x.bedCount||1,'number','min="1" required'),
+  select('Rental Mode','rentalMode',modes.map(v=>`<option value="${v}" ${v===(x.rentalMode||'Bed-wise Rental')?'selected':''}>${v}</option>`).join(''))
+ ];
+}
+window.pgRoomPropertyChanged=function(){
+ const form=document.getElementById('genericForm');
+ if(!form)return;
+ const propertyId=form.elements.propertyId.value;
+ const buildings=(db.buildings||[]).filter(b=>b.propertyId===propertyId);
+ const buildingSelect=form.elements.buildingId;
+ buildingSelect.innerHTML=buildings.map((b,i)=>`<option value="${esc(b.id)}" ${i===0?'selected':''}>${esc(b.name)} (${esc(b.code)})</option>`).join('')||'<option value="">No buildings available</option>';
+ window.pgRoomBuildingChanged();
+};
+window.pgRoomBuildingChanged=function(){
+ const form=document.getElementById('genericForm');
+ if(!form)return;
+ const building=(db.buildings||[]).find(b=>b.id===form.elements.buildingId.value);
+ const floors=building?(building.floorNames||[]):[];
+ form.elements.floorName.innerHTML=floors.map((f,i)=>`<option value="${esc(f)}" ${i===0?'selected':''}>${esc(f)}</option>`).join('')||'<option value="">No floors available</option>';
+};
+window.addPgRoom=function(){
+ if(!(db.properties||[]).length){alert('Please add a property first.');return;}
+ if(!(db.buildings||[]).length){alert('Please add a building and its floors first.');return;}
+ addForm('Add Room',pgRoomFields(),o=>{
+  o.name=o.name.trim();
+  o.code=o.code.trim().toUpperCase();
+  o.bedCount=Number(o.bedCount);
+  const building=(db.buildings||[]).find(b=>b.id===o.buildingId);
+  const expected={'Single Sharing':1,'Double Sharing':2,'Triple Sharing':3,'Four Sharing':4};
+  if(!building||building.propertyId!==o.propertyId){alert('Please select a building belonging to the selected property.');return false;}
+  if(!(building.floorNames||[]).includes(o.floorName)){alert('Please select a valid floor for this building.');return false;}
+  if(!o.name||!o.code||!Number.isInteger(o.bedCount)||o.bedCount<1){alert('Enter a room name, code and a bed count between 1 and 30.');return false;}
+  if(expected[o.sharingType]&&o.bedCount!==expected[o.sharingType]){alert(o.sharingType+' requires exactly '+expected[o.sharingType]+' bed(s).');return false;}
+  if(db.rooms.some(r=>r.buildingId===o.buildingId&&String(r.code).toLowerCase()===o.code.toLowerCase())){alert('This room code already exists in the selected building.');return false;}
+  o.id='ROOM-'+Date.now();
+  db.rooms.push(o);
+  for(let i=1;i<=o.bedCount;i++){
+   db.beds.push({id:'BED-'+Date.now()+'-'+i,roomId:o.id,propertyId:o.propertyId,label:'Bed '+i,status:'Available',residentName:'',monthlyRate:0,weeklyRate:0,dailyRate:0});
+  }
+ });
+};
+window.editPgRoom=function(i){
+ const x=db.rooms[i];
+ if(!x)return;
+ addForm('Edit Room',pgRoomFields(x),o=>{
+  o.name=o.name.trim();
+  o.code=o.code.trim().toUpperCase();
+  o.bedCount=Number(o.bedCount);
+  const building=(db.buildings||[]).find(b=>b.id===o.buildingId);
+  if(!building||building.propertyId!==o.propertyId){alert('Please select a building belonging to the selected property.');return false;}
+  if(!(building.floorNames||[]).includes(o.floorName)){alert('Please select a valid floor.');return false;}
+  if(!o.name||!o.code||!Number.isInteger(o.bedCount)||o.bedCount<1){alert('Enter a room name, code and a bed count between 1 and 30.');return false;}
+  const expected={'Single Sharing':1,'Double Sharing':2,'Triple Sharing':3,'Four Sharing':4};
+  if(expected[o.sharingType]&&o.bedCount!==expected[o.sharingType]){alert(o.sharingType+' requires exactly '+expected[o.sharingType]+' bed(s).');return false;}
+  if(db.rooms.some((r,j)=>j!==i&&r.buildingId===o.buildingId&&String(r.code).toLowerCase()===o.code.toLowerCase())){alert('This room code already exists in the selected building.');return false;}
+  const currentBeds=db.beds.filter(b=>b.roomId===x.id);
+  const protectedBeds=currentBeds.filter(b=>['Occupied','Reserved'].includes(b.status));
+  if(o.bedCount<protectedBeds.length){alert('Cannot reduce bed count below '+protectedBeds.length+' because occupied or reserved beds must be preserved.');return false;}
+  const removeCount=currentBeds.length-o.bedCount;
+  if(removeCount>0){
+   const removable=currentBeds.filter(b=>b.status==='Available');
+   if(removable.length<removeCount){alert('Only available beds can be removed. Please release unused beds first.');return false;}
+   const removeIds=new Set(removable.slice(-removeCount).map(b=>b.id));
+   db.beds=db.beds.filter(b=>!removeIds.has(b.id));
+  }
+  if(o.bedCount>currentBeds.length){
+   const usedLabels=new Set(currentBeds.map(b=>String(b.label||'')));
+   let nextLabel=1;
+   currentBeds.forEach(b=>{const m=String(b.label||'').match(/^Bed\s+(\d+)$/i);if(m)nextLabel=Math.max(nextLabel,Number(m[1])+1);});
+   for(let n=currentBeds.length;n<o.bedCount;n++){
+    let label;
+    do{label='Bed '+nextLabel++;}while(usedLabels.has(label));
+    usedLabels.add(label);
+    let serial=Date.now();
+    let id;
+    do{id='BED-'+serial++;}while(db.beds.some(b=>b.id===id));
+    db.beds.push({id,roomId:x.id,propertyId:o.propertyId,label,status:'Available',residentName:'',monthlyRate:0,weeklyRate:0,dailyRate:0});
+   }
+  }
+  o.id=x.id;
+  db.rooms[i]=o;
+  db.beds.filter(b=>b.roomId===x.id).forEach(b=>b.propertyId=o.propertyId);
+ });
+};
+window.manageRoomBeds=function(i){
+ const r=db.rooms[i];
+ if(!r)return;
+ const beds=db.beds.filter(b=>b.roomId===r.id);
+ const rows=beds.map(b=>{
+  return `<tr><td><b>${esc(b.label)}</b></td><td>${tag(b.status)}</td><td>${esc(b.residentName||'—')}</td><td>${money(b.monthlyRate)}</td><td>${money(b.weeklyRate)}</td><td>${money(b.dailyRate)}</td><td><button class="btn secondary" onclick="editPgBed('${b.id}')">Edit Bed</button></td></tr>`;
+ });
+ document.getElementById('main').innerHTML=
+  head('Manage Beds — '+esc(r.name),'Update each bed label, occupancy status, resident name and rental rates.','<button class="btn secondary" onclick="go(\'rooms\')">Back to Rooms</button>')+
+  '<div class="notice">Rates are owner-defined and stored separately for each bed. You can manually mark a bed as Reserved to hold it without creating a customer booking. For customer reservations, use Bookings & Reservations to record the prospective resident and booking details.</div>'+
+  table(['Bed','Status','Resident','Monthly Rate','Weekly Rate','Daily Rate','Action'],rows);
+};
+window.editPgBed=function(id){
+ const b=db.beds.find(x=>x.id===id);
+ if(!b)return;
+ const statuses=['Available','Reserved','Occupied','Under Maintenance'];
+ const statusOptions=statuses.map(v=>`<option value="${v}" ${v===b.status?'selected':''}>${v}</option>`).join('');
+ const fields=[
+  field('Bed Label','label',b.label||'','text','required'),
+  `<div class="field"><label>Bed Status</label><select name="status" required>${statusOptions}</select></div>`,
+  field('Resident Name (optional)','residentName',b.residentName||''),
+  field('Monthly Rate (₹)','monthlyRate',b.monthlyRate||0,'number','min="0" step="0.01" required'),
+  field('Weekly Rate (₹)','weeklyRate',b.weeklyRate||0,'number','min="0" step="0.01" required'),
+  field('Daily Rate (₹)','dailyRate',b.dailyRate||0,'number','min="0" step="0.01" required')
+ ];
+ addForm('Edit Bed — '+b.label,fields,o=>{
+  for(const k of ['monthlyRate','weeklyRate','dailyRate']){
+   o[k]=Number(o[k]);
+   if(!Number.isFinite(o[k])||o[k]<0){alert('Rental rates must be zero or greater.');return false;}
+  }
+  if(!o.label.trim()){alert('Please enter a bed label.');return false;}
+  o.label=o.label.trim();
+  o.residentName=o.residentName.trim();
+  if(b.status==='Reserved'&&b.reservationId&&o.status!=='Reserved'){alert('This bed is reserved by an active booking. Cancel or convert that booking first.');return false;}
+  if(b.status==='Occupied'&&o.status!=='Occupied'){alert('This bed is assigned to an occupied resident. Reassign the resident or remove the bed assignment through Residents before changing its status.');return false;}
+  Object.assign(b,o);
+ });
+};
+window.deletePgRoom=function(i){
+ const r=db.rooms[i];
+ if(!r)return;
+ const beds=db.beds.filter(b=>b.roomId===r.id);
+ if(beds.some(b=>['Occupied','Reserved'].includes(b.status)||b.residentName)){alert('This room has occupied or reserved beds, or a resident name. Clear or reassign those beds before deleting the room.');return;}
+ if(confirm('Delete this room and its bed records?')){db.beds=db.beds.filter(b=>b.roomId!==r.id);db.rooms.splice(i,1);save();render();}
+};
+function residentForm(r){
+ const beds=(db.beds||[]).filter(b=>b.status==='Available'||(r&&b.residentId===r.id));
+ const bedOptions=beds.map(b=>{
+  const room=db.rooms.find(x=>x.id===b.roomId);
+  const building=db.buildings.find(x=>x.id===room?.buildingId);
+  const property=db.properties.find(x=>x.id===b.propertyId);
+  const label=[property?.name,building?.name,room?.name,b.label].filter(Boolean).join(' / ');
+  return `<option value="${esc(b.id)}" ${b.id===(r?.bedId||'')?'selected':''}>${esc(label)}</option>`;
+ }).join('');
+ const fields=[
+  field('Resident Name','name',r?.name||'','text','required'),
+  field('Mobile Number','mobile',r?.mobile||'','tel'),
+  field('Email','email',r?.email||'','email'),
+  field('Joining Date','joinDate',r?.joinDate||todayISO(),'date'),
+  select('Resident Status','status',['Active','Inactive','Checked Out'],r?.status||'Active'),
+  select('Food Type','foodType',['Veg','Non-Veg'],r?.foodType||'Veg'),
+  `<div class="field"><label>Menu Details</label><textarea name="menuDetails" rows="3" placeholder="Enter meal preferences, restrictions or menu instructions">${esc(r?.menuDetails||'')}</textarea></div>`,
+   select('ID Proof Type','idProofType',['Not Provided','Aadhaar (masked)','PAN','Passport','Voter ID','Driving Licence','Other'],r?.idProofType||'Not Provided'),
+   field('ID Proof Reference (last 4 characters only)','idProofRef',r?.idProofRef||''),
+   select('Address Proof Type','addressProofType',['Not Provided','Aadhaar (masked)','Passport','Utility Bill','Rental Agreement','Other'],r?.addressProofType||'Not Provided'),
+   field('Address Proof Reference (last 4 characters only)','addressProofRef',r?.addressProofRef||''),
+   select('KYC Verification Status','kycStatus',['Pending','Submitted','Verified','Rejected'],r?.kycStatus||'Pending'),
+   select('Blood Group','bloodGroup',['Unknown','A+','A-','B+','B-','AB+','AB-','O+','O-'],r?.bloodGroup||'Unknown'),
+   field('Emergency Contact Name','emergencyContactName',r?.emergencyContactName||''),
+   field('Emergency Contact Relationship','emergencyContactRelation',r?.emergencyContactRelation||''),
+   field('Emergency Contact Phone','emergencyContactPhone',r?.emergencyContactPhone||'','tel'),
+  `<div class="field"><label>Assign Bed</label><select name="bedId"><option value="">Not assigned</option>${bedOptions}</select></div>`
+ ];
+ addForm(r?'Edit PG Resident':'Add PG Resident',fields,o=>{
+  o.name=String(o.name||'').trim();
+  if(!o.name){alert('Please enter the resident name.');return false;}
+  const nextBed=o.bedId?(db.beds||[]).find(b=>b.id===o.bedId):null;
+  if(o.bedId&&!nextBed){alert('The selected bed could not be found.');return false;}
+  if(nextBed&&nextBed.status!=='Available'&&nextBed.residentId!==r?.id){alert('This bed is no longer available. Please select another bed.');return false;}
+  if(nextBed&&o.status!=='Active'){alert('Only an Active resident can be assigned to a bed.');return false;}
+  const record=r||{id:'RES-'+Date.now()};
+  const oldBed=(db.beds||[]).find(b=>b.residentId===record.id);
+  if(oldBed&&oldBed!==nextBed){oldBed.status='Available';oldBed.residentName='';delete oldBed.residentId;}
+  Object.assign(record,{
+   name:o.name,mobile:String(o.mobile||'').trim(),email:String(o.email||'').trim(),
+   joinDate:o.joinDate,status:o.status,foodType:o.foodType,menuDetails:String(o.menuDetails||'').trim(),
+   idProofType:o.idProofType||'Not Provided',idProofRef:String(o.idProofRef||'').trim(),
+   addressProofType:o.addressProofType||'Not Provided',addressProofRef:String(o.addressProofRef||'').trim(),
+   kycStatus:o.kycStatus||'Pending',bloodGroup:o.bloodGroup||'Unknown',
+   emergencyContactName:String(o.emergencyContactName||'').trim(),
+   emergencyContactRelation:String(o.emergencyContactRelation||'').trim(),
+   emergencyContactPhone:String(o.emergencyContactPhone||'').trim(),
+   bedId:nextBed?.id||'',roomId:nextBed?.roomId||'',propertyId:nextBed?.propertyId||''
+  });
+  if(!r)db.residents.push(record);
+  if(nextBed){nextBed.status='Occupied';nextBed.residentId=record.id;nextBed.residentName=record.name;}
+ });
+}
+function residents(){
+ if(!Array.isArray(db.residents))db.residents=[];
+ const all=db.residents;
+ const counts={
+  all:all.length,
+  active:all.filter(r=>(r.status||'Active')==='Active').length,
+  checkedOut:all.filter(r=>r.status==='Checked Out').length,
+  inactive:all.filter(r=>r.status==='Inactive').length
+ };
+ const currentFilter=window.residentListFilter||'all';
+ const search=String(window.residentListSearch||'').trim().toLowerCase();
+ const filtered=all.filter(r=>{
+  const status=r.status||'Active';
+  const matchesStatus=currentFilter==='all'||
+   (currentFilter==='active'&&status==='Active')||
+   (currentFilter==='checkedOut'&&status==='Checked Out')||
+   (currentFilter==='inactive'&&status==='Inactive');
+  const matchesSearch=!search||
+   String(r.name||'').toLowerCase().includes(search)||
+   String(r.mobile||'').toLowerCase().includes(search);
+  return matchesStatus&&matchesSearch;
+ });
+ const rows=filtered.map(r=>{
+  const bed=(db.beds||[]).find(b=>b.residentId===r.id);
+  const room=bed?(db.rooms||[]).find(x=>x.id===bed.roomId):null;
+  const oldRoom=(db.rooms||[]).find(x=>x.id===r.lastRoomId);
+  const oldBed=(db.beds||[]).find(x=>x.id===r.lastBedId);
+  const oldBuilding=(db.buildings||[]).find(x=>x.id===oldRoom?.buildingId);
+  const oldProperty=(db.properties||[]).find(x=>x.id===r.lastPropertyId);
+  const previousBed=r.status==='Checked Out'?
+   [oldProperty?.name,oldBuilding?.name,oldRoom?.name,oldBed?.label].filter(Boolean).join(' / '):
+   '';
+  const assignedBed=bed?
+   [room?.name,bed.label].filter(Boolean).join(' / '):
+   (r.status==='Checked Out'?(previousBed||'Previous bed not recorded'):'Not assigned');
+  return `<tr><td><b>${esc(r.name||'')}</b><br><small>${esc(r.mobile||'')}</small></td><td>${esc(r.foodType||'Not set')}</td><td>${esc(r.menuDetails||'—')}</td><td>${esc(assignedBed)}</td><td>${esc(r.joinDate||'—')}</td><td>${esc(r.status==='Checked Out'?(r.checkOutDate||'Not recorded'):'—')}</td><td>${tag(r.status||'Active')}</td><td><button class="btn secondary" onclick="editResident('${esc(r.id)}')">Edit</button></td></tr>`;
+ });
+ const filters=[
+  ['all','All Residents',counts.all],
+  ['active','Active',counts.active],
+  ['checkedOut','Checked Out',counts.checkedOut],
+  ['inactive','Inactive',counts.inactive]
+ ];
+ const filterButtons=filters.map(([key,label,count])=>
+  `<button class="btn ${currentFilter===key?'':'secondary'}" onclick="setResidentFilter('${key}')">${label} (${count})</button>`
+ ).join(' ');
+ document.getElementById('main').innerHTML=
+  head('PG Residents','Manage resident profiles, food preferences, current stays and complete checkout history.','<button class="btn" onclick="addResident()">+ Add Resident</button>')+
+  cards([['Total Residents',counts.all],['Active Residents',counts.active],['Checked Out',counts.checkedOut],['Inactive',counts.inactive]])+
+  `<div class="card"><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">${filterButtons}</div><div class="field" style="margin-bottom:14px"><label>Search by Resident Name or Mobile Number</label><input type="search" value="${esc(window.residentListSearch||'')}" placeholder="Enter name or mobile number" oninput="searchResidents(this.value)"></div>`+
+  `<p class="muted">Showing ${filtered.length} of ${all.length} resident records. Checked-out resident history is preserved.</p>`+
+  table(['Resident','Food Type','Menu Details','Current / Previous Bed','Joining Date','Checkout Date','Status','Action'],rows)+
+  '</div>';
+}
+window.setResidentFilter=function(filter){
+ window.residentListFilter=filter;
+ residents();
+};
+window.searchResidents=function(value){
+ window.residentListSearch=value;
+ const input=document.querySelector('#main input[type="search"]');
+ const position=input?input.selectionStart:null;
+ residents();
+ const next=document.querySelector('#main input[type="search"]');
+ if(next){next.focus();if(position!==null)next.setSelectionRange(position,position);}
+};
+window.addResident=function(){residentForm(null)};
+window.editResident=function(id){const r=db.residents.find(x=>x.id===id);if(r)residentForm(r)};
+function settings(){let s=db.society;document.getElementById('main').innerHTML=head('Society Settings','Society profile, maintenance rules, contact and operational preferences','<button class="btn" onclick="saveSettings()">Save Settings</button>')+`<div class="card"><form id="settingsForm"><div class="formgrid">${field('Society Name','name',s.name)}${field('Address','address',s.address)}${field('Total Flats','totalFlats',s.totalFlats,'number')}${field('Monthly Maintenance / Flat','monthlyDue',s.monthlyDue,'number')}${field('Late Fee','lateFee',s.lateFee,'number')}${field('Financial Year','financialYear',s.financialYear)}${field('GSTIN (optional)','gstin',s.gstin)}${field('Email','email',s.email)}${field('Phone / WhatsApp','phone',s.phone)}${field('Emergency Contact','emergency',s.emergency)}${field('Water Unit','waterUnit',s.waterUnit)}${field('Electricity Unit','electricityUnit',s.electricityUnit)}</div></form></div><div class="card" style="margin-top:16px"><h2>Demo / Data Controls</h2><p class="muted">Data is stored in this browser using localStorage. Use Reset Demo Data to restore sample records.</p><button class="btn danger" onclick="resetDemo()">Reset Demo Data</button></div>`}
+window.saveSettings=function(){
+ let f=document.getElementById('settingsForm');
+ let o=Object.fromEntries(new FormData(f).entries());
+ o.name=o.name.trim();
+ o.totalFlats=Number(o.totalFlats);
+ o.monthlyDue=Number(o.monthlyDue);
+ o.lateFee=Number(o.lateFee);
+ if(!o.name){alert('Please enter the society name.');return}
+ if(!Number.isInteger(o.totalFlats)||o.totalFlats<1||o.totalFlats>50){alert('Total flats must be a whole number between 1 and 50.');return}
+ if(!Number.isFinite(o.monthlyDue)||o.monthlyDue<0){alert('Monthly maintenance must be zero or greater.');return}
+ if(!Number.isFinite(o.lateFee)||o.lateFee<0){alert('Late fee must be zero or greater.');return}
+ if(o.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(o.email)){alert('Please enter a valid email address.');return}
+ db.society={...db.society,...o};save();render();alert('Settings saved')
+};window.resetDemo=function(){if(confirm('Restore the approved fictional client demo records? This resets demo records only. Your 24-hour countdown will not restart.')){db=seedClientDemo();save();render()}};
+window.del=function(k,i){if(confirm('Delete this record?')){db[k].splice(i,1);save();render()}};
+function reservations(){
+ if(!Array.isArray(db.reservations))db.reservations=[];
+ if(!Array.isArray(db.beds))db.beds=[];
+ const rows=db.reservations.map((r,i)=>{
+  const p=(db.properties||[]).find(x=>x.id===r.propertyId);
+  const b=(db.buildings||[]).find(x=>x.id===r.buildingId);
+  const room=(db.rooms||[]).find(x=>x.id===r.roomId);
+  const bed=(db.beds||[]).find(x=>x.id===r.bedId);
+  const actions=r.status==='Confirmed'?`<button class="btn" onclick="convertPgBooking('${esc(r.id)}')">Convert to Resident</button> <button class="btn danger" onclick="cancelPgBooking('${esc(r.id)}')">Cancel</button>`:'—';
+  return `<tr><td><b>${esc(r.name)}</b><div class="muted">${esc(r.mobile||'')}</div></td><td>${esc(p?.name||'—')}<div class="muted">${esc(b?.name||'')} / ${esc(room?.name||'')} / ${esc(bed?.label||'')}</div></td><td>${esc(r.bookingDate||r.date||'—')}</td><td>${esc(r.expectedJoinDate||r.checkInDate||'—')}</td><td>${money(r.agreedRent||0)}</td><td>${money(r.advanceAmount||0)}</td><td>${esc(r.status||'Confirmed')}</td><td>${actions}</td></tr>`;
+ });
+ document.getElementById('main').innerHTML=head('Bookings & Reservations','Reserve available beds, record booking advances and convert confirmed bookings into resident occupancy.','<button class="btn" onclick="addPgBooking()">+ Add Booking</button>')+cards([['Total Bookings',db.reservations.length],['Confirmed',db.reservations.filter(x=>x.status==='Confirmed').length],['Converted',db.reservations.filter(x=>x.status==='Converted').length],['Cancelled',db.reservations.filter(x=>x.status==='Cancelled').length],['Reserved Beds',db.beds.filter(x=>x.status==='Reserved').length]])+table(['Prospective Resident','Property / Bed','Booking Date','Expected Joining','Agreed Monthly Rent','Advance','Status','Actions'],rows);
+}
+function bookingOptionList(items,idFn,labelFn,selected){
+ return items.map(x=>`<option value="${esc(idFn(x))}" ${idFn(x)===selected?'selected':''}>${esc(labelFn(x))}</option>`).join('');
+}
+function addPgBooking(){
+ const properties=db.properties||[];
+ if(!properties.length){alert('Please add a property first.');return;}
+ const propertyId=db.activePropertyId||properties[0].id;
+ const property=properties.find(x=>x.id===propertyId);
+ const defaultFrequency=property&&property.stayModel==='Short-stay'?'Daily':'Monthly';
+ const buildings=(db.buildings||[]).filter(x=>x.propertyId===propertyId);
+ const buildingId=buildings[0]?.id||'';
+ const floors=(db.buildings||[]).find(x=>x.id===buildingId)?.floorNames||[];
+ const floorName=floors[0]||'';
+ const rooms=(db.rooms||[]).filter(x=>x.buildingId===buildingId&&x.floorName===floorName);
+ const roomId=rooms[0]?.id||'';
+ const beds=(db.beds||[]).filter(x=>x.roomId===roomId&&x.status==='Available');
+ const selectField=(label,name,options,change='')=>'<div class="field"><label>'+label+'</label><select name="'+name+'" '+change+' required>'+options+'</select></div>';
+ const frequencyOptions=['Monthly','Daily'].map(v=>'<option value="'+v+'" '+(v===defaultFrequency?'selected':'')+'>'+v+'</option>').join('');
+ const fields=[
+  selectField('Property','propertyId',bookingOptionList(properties,x=>x.id,x=>x.name,propertyId), 'onchange="bookingPropertyChanged()"'),
+  selectField('Building','buildingId',bookingOptionList(buildings,x=>x.id,x=>x.name,buildingId), 'onchange="bookingBuildingChanged()"'),
+  selectField('Floor','floorName',floors.map(x=>'<option value="'+esc(x)+'">'+esc(x)+'</option>').join(''), 'onchange="bookingFloorChanged()"'),
+  selectField('Room','roomId',bookingOptionList(rooms,x=>x.id,x=>x.name+' ('+x.code+')',roomId), 'onchange="bookingRoomChanged()"'),
+  selectField('Available Bed','bedId',bookingOptionList(beds,x=>x.id,x=>x.label,beds[0]?.id||''), ''),
+  field('Prospective Resident Name','name','','text','required'),
+  field('Mobile Number','mobile','','tel','required'),
+  field('Email','email','','email'),
+  field('Booking Date','bookingDate',todayISO(),'date','required'),
+  field('Expected Joining / Check-in Date','expectedJoinDate',todayISO(),'date','required'),
+  selectField('Billing Frequency','billingFrequency',frequencyOptions),
+  field('Agreed Monthly Rent','agreedRent',0,'number','min="0" step="0.01"'),
+  field('Daily Rate (per occupied night)','dailyRate',0,'number','min="0" step="0.01"'),
+  field('Planned Check-out Date (daily bookings)','checkOutDate','','date'),
+  field('Advance / Booking Amount','advanceAmount',0,'number','min="0" step="0.01" required'),
+  select('Food Type','foodType',['Veg','Non-Veg'],'Veg'),
+  '<div class="field"><label>Menu Details</label><textarea name="menuDetails" rows="3" placeholder="Meal preferences, restrictions or menu instructions"></textarea></div>'
+ ];
+ fields[4]=selectField('Available Bed','bedId',bookingOptionList(beds,x=>x.id,x=>x.label,beds[0]?.id||''));
+ addForm('Add PG Booking',fields,o=>{
+  o.name=String(o.name||'').trim();
+  o.mobile=String(o.mobile||'').trim();
+  if(!o.name||!o.mobile){alert('Please enter the resident name and mobile number.');return false;}
+  if(!o.bookingDate||!o.expectedJoinDate||o.expectedJoinDate<o.bookingDate){alert('Expected joining date must be on or after the booking date.');return false;}
+  const property=(db.properties||[]).find(x=>x.id===o.propertyId);
+  const building=(db.buildings||[]).find(x=>x.id===o.buildingId);
+  const room=(db.rooms||[]).find(x=>x.id===o.roomId);
+  const bed=(db.beds||[]).find(x=>x.id===o.bedId);
+  if(!property||!building||building.propertyId!==property.id||!room||room.buildingId!==building.id||room.floorName!==o.floorName||!bed||bed.roomId!==room.id||bed.status!=='Available'){alert('The selected property, room or bed is no longer available. Please select an available bed again.');return false;}
+  const activeBooking=(db.reservations||[]).find(x=>x.bedId===bed.id&&['Confirmed','Reserved'].includes(x.status));
+  if(activeBooking){alert('This bed already has an active booking.');return false;}
+  const frequency=o.billingFrequency==='Daily'?'Daily':'Monthly';
+  const rent=Number(o.agreedRent||0),dailyRate=Number(o.dailyRate||0),advance=Number(o.advanceAmount);
+  if(!Number.isFinite(advance)||advance<0){alert('Advance / booking amount must be zero or greater.');return false;}
+  if(frequency==='Monthly'&&(!Number.isFinite(rent)||rent<=0)){alert('Please enter a valid monthly rent greater than zero.');return false;}
+  if(frequency==='Daily'){
+   if(!Number.isFinite(dailyRate)||dailyRate<=0){alert('Please enter a valid daily rate greater than zero.');return false;}
+   if(!o.checkOutDate||o.checkOutDate<=o.expectedJoinDate){alert('For daily bookings, the check-out date must be after the check-in date.');return false;}
+  }
+  const record={id:'BOOK-'+Date.now(),propertyId:property.id,buildingId:building.id,floorName:room.floorName,roomId:room.id,bedId:bed.id,name:o.name,mobile:o.mobile,email:String(o.email||'').trim(),bookingDate:o.bookingDate,date:o.bookingDate,expectedJoinDate:o.expectedJoinDate,checkInDate:o.expectedJoinDate,arrivalDate:o.expectedJoinDate,billingFrequency:frequency,agreedRent:frequency==='Monthly'?rent:0,dailyRate:frequency==='Daily'?dailyRate:0,checkOutDate:frequency==='Daily'?o.checkOutDate:'',advanceAmount:advance,foodType:o.foodType||'Veg',menuDetails:String(o.menuDetails||'').trim(),status:'Confirmed'};
+  db.reservations.push(record);
+  bed.status='Reserved';bed.reservationId=record.id;bed.reservationName=record.name;
+ });
+}
+window.addPgBooking=addPgBooking;window.bookingSetOptions=function(el,items,idFn,labelFn,placeholder){
+ if(!el)return;
+ el.innerHTML=`<option value="">${placeholder}</option>`+items.map(x=>`<option value="${esc(idFn(x))}">${esc(labelFn(x))}</option>`).join('');
+};
+window.bookingPropertyChanged=function(){
+ const f=document.getElementById('genericForm');if(!f)return;
+ const items=(db.buildings||[]).filter(x=>x.propertyId===f.elements.propertyId.value);
+ bookingSetOptions(f.elements.buildingId,items,x=>x.id,x=>x.name,'Select building');
+ bookingBuildingChanged();
+};
+window.bookingBuildingChanged=function(){
+ const f=document.getElementById('genericForm');if(!f)return;
+ const b=(db.buildings||[]).find(x=>x.id===f.elements.buildingId.value);
+ const floors=b?(b.floorNames||[]):[];
+ f.elements.floorName.innerHTML=floors.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('')||'<option value="">No floors available</option>';
+ bookingFloorChanged();
+};
+window.bookingFloorChanged=function(){
+ const f=document.getElementById('genericForm');if(!f)return;
+ const rooms=(db.rooms||[]).filter(x=>x.buildingId===f.elements.buildingId.value&&x.floorName===f.elements.floorName.value);
+ bookingSetOptions(f.elements.roomId,rooms,x=>x.id,x=>x.name+' ('+x.code+')','Select room');
+ bookingRoomChanged();
+};
+window.bookingRoomChanged=function(){
+ const f=document.getElementById('genericForm');if(!f)return;
+ const beds=(db.beds||[]).filter(x=>x.roomId===f.elements.roomId.value&&x.status==='Available');
+ bookingSetOptions(f.elements.bedId,beds,x=>x.id,x=>x.label,'Select available bed');
+};
+window.cancelPgBooking=function(id){
+ const r=(db.reservations||[]).find(x=>x.id===id);
+ if(!r||r.status!=='Confirmed')return;
+ if(!confirm('Cancel this booking and release its reserved bed?'))return;
+ const bed=(db.beds||[]).find(x=>x.id===r.bedId);
+ if(bed&&bed.reservationId===r.id&&bed.status==='Reserved'){bed.status='Available';delete bed.reservationId;delete bed.reservationName;}
+ r.status='Cancelled';r.cancelledAt=todayISO();save();render();
+};
+window.convertPgBooking=function(id){
+ const r=(db.reservations||[]).find(x=>x.id===id);
+ if(!r||r.status!=='Confirmed')return;
+ const bed=(db.beds||[]).find(x=>x.id===r.bedId);
+ if(!bed||bed.status!=='Reserved'||bed.reservationId!==r.id){alert('The reserved bed could not be verified. Please review the booking and bed records.');return;}
+ const frequency=r.billingFrequency==='Daily'?'Daily':'Monthly';
+ const fields=[
+  field('Actual Joining / Check-in Date','joinDate',r.expectedJoinDate||todayISO(),'date','required'),
+  ...(frequency==='Daily'?[field('Actual Planned Check-out Date','checkOutDate',r.checkOutDate||'','date','required')]:[]),
+  select('Food Type','foodType',['Veg','Non-Veg'],r.foodType||'Veg'),
+  '<div class="field"><label>Menu Details</label><textarea name="menuDetails" rows="3">'+esc(r.menuDetails||'')+'</textarea></div>'
+ ];
+ addForm('Convert Booking to Resident',fields,o=>{
+  if(!o.joinDate){alert('Please enter the actual joining date.');return false;}
+  if(db.residents.some(x=>x.bookingId===r.id)){alert('A resident has already been created from this booking.');return false;}
+  if(bed.status!=='Reserved'||bed.reservationId!==r.id){alert('This bed reservation has changed. Please review it before converting.');return false;}
+  const date=new Date(o.joinDate+'T00:00:00');
+  if(!Number.isFinite(date.getTime())){alert('Please enter a valid joining date.');return false;}
+  let actualCheckout='';
+  if(frequency==='Daily'){
+   actualCheckout=String(o.checkOutDate||'');
+   if(!actualCheckout||actualCheckout<=o.joinDate){alert('The check-out date must be after the actual check-in date. A stay is billed by occupied nights.');return false;}
+   if(Number(r.dailyRate||0)<=0){alert('The booking does not have a valid daily rate. Please review it before check-in.');return false;}
+  }
+  const daysInMonth=new Date(date.getFullYear(),date.getMonth()+1,0).getDate();
+  const remainingDays=daysInMonth-date.getDate()+1;
+  const monthlyRent=frequency==='Monthly'?Number(r.agreedRent||0):0;
+  const firstMonthRent=frequency==='Monthly'?Math.round((monthlyRent/daysInMonth)*remainingDays*100)/100:0;
+  const resident={id:'RES-'+Date.now(),bookingId:r.id,name:r.name,mobile:r.mobile,email:r.email||'',joinDate:o.joinDate,status:'Active',foodType:o.foodType||r.foodType||'Veg',menuDetails:String(o.menuDetails||'').trim(),bedId:bed.id,roomId:r.roomId,propertyId:r.propertyId,billingFrequency:frequency,agreedRent:monthlyRent,monthlyRent:monthlyRent,dailyRate:frequency==='Daily'?Number(r.dailyRate||0):0,checkOutDate:actualCheckout,firstMonthRent:firstMonthRent,firstMonthDays:frequency==='Monthly'?remainingDays:0,advanceAmount:Number(r.advanceAmount||0)};
+  db.residents.push(resident);
+  bed.status='Occupied';bed.residentId=resident.id;bed.residentName=resident.name;delete bed.reservationId;delete bed.reservationName;
+  r.status='Converted';r.residentId=resident.id;r.actualJoinDate=o.joinDate;r.actualCheckOutDate=actualCheckout;r.firstMonthRent=firstMonthRent;
+ });
+};
+function checkin(){
+ const bookings=(db.reservations||[]).filter(r=>r.status==='Confirmed');
+ const bookingRows=bookings.map(r=>{
+  const p=(db.properties||[]).find(x=>x.id===r.propertyId);
+  const b=(db.buildings||[]).find(x=>x.id===r.buildingId);
+  const room=(db.rooms||[]).find(x=>x.id===r.roomId);
+  const bed=(db.beds||[]).find(x=>x.id===r.bedId);
+  return `<tr><td><b>${esc(r.name||'')}</b></td><td>${esc(r.mobile||'')}</td><td>${esc(p?.name||'—')} / ${esc(b?.name||'')} / ${esc(room?.name||'')} / ${esc(bed?.label||'')}</td><td>${esc(r.expectedJoinDate||r.checkInDate||'—')}</td><td>${money(r.agreedRent||0)}</td><td><button class="btn" onclick="convertPgBooking('${esc(r.id)}')">Check In</button></td></tr>`;
+ });
+ const active=(db.residents||[]).filter(r=>(r.status||'Active')==='Active');
+ const residentRows=active.map(r=>{
+  const bed=(db.beds||[]).find(b=>b.residentId===r.id);
+  const room=bed?(db.rooms||[]).find(x=>x.id===bed.roomId):null;
+  return `<tr><td><b>${esc(r.name||'')}</b></td><td>${esc(r.mobile||'')}</td><td>${esc(room?.name||'Not assigned')} ${esc(bed?.label||'')}</td><td>${esc(r.joinDate||'—')}</td><td>${esc(r.foodType||'Not set')}</td><td><button class="btn danger" onclick="checkOutPgResident('${esc(r.id)}')">Check Out</button></td></tr>`;
+ });
+ document.getElementById('main').innerHTML=
+  head('Check-in & Check-out','Manage resident arrivals, active stays and departures.')+
+  cards([['Pending Check-ins',bookings.length],['Active Residents',active.length],['Available Beds',(db.beds||[]).filter(b=>b.status==='Available').length],['Occupied Beds',(db.beds||[]).filter(b=>b.status==='Occupied').length]])+
+  '<div class="card"><h2>Pending Check-ins</h2><p class="muted">Convert confirmed bookings into active resident stays.</p>'+
+  table(['Prospective Resident','Property / Bed','Expected Joining','Monthly Rent','Action'],bookingRows)+'</div>'+
+  '<div class="card" style="margin-top:16px"><h2>Active Residents – Check-out</h2><p class="muted">Record departures and release the residentâ€™s verified occupied bed.</p>'+
+  table(['Resident','Mobile','Assigned Bed','Joining Date','Food Type','Action'],residentRows)+'</div>';
+}
+window.checkOutPgResident=function(id){
+ const r=(db.residents||[]).find(x=>x.id===id);
+ if(!r||(r.status||'Active')!=='Active'){alert('This resident is not currently active.');return;}
+ modal('Resident Check-out',`<form id="checkoutForm"><div class="formgrid">${field('Resident Name','residentName',r.name||'')}${field('Actual Check-out Date','checkOutDate',todayISO(),'date','required')}<div class="field"><label>Checkout Notes / Reason (optional)</label><textarea name="checkoutNotes" rows="3" placeholder="Enter any departure notes">${esc(r.checkoutNotes||'')}</textarea></div></div>${formActions()}</form>`);
+ document.getElementById('checkoutForm').onsubmit=e=>{
+  e.preventDefault();
+  const o=Object.fromEntries(new FormData(e.target).entries());
+  if(!o.checkOutDate){alert('Please enter the actual checkout date.');return;}
+  const date=new Date(o.checkOutDate+'T00:00:00');
+  if(!Number.isFinite(date.getTime())){alert('Please enter a valid checkout date.');return;}
+  const linkedBed=(db.beds||[]).find(b=>b.residentId===r.id);
+  let bed=null;
+  if(r.bedId){
+   bed=(db.beds||[]).find(b=>b.id===r.bedId);
+   if(!bed||bed.status!=='Occupied'||bed.residentId!==r.id){alert('The residentâ€™s bed assignment could not be verified. No records were changed.');return;}
+  }else if(linkedBed){
+   alert('A bed is linked to this resident but the resident assignment is inconsistent. No records were changed.');return;
+  }
+  r.lastBedId=r.bedId||'';
+  r.lastRoomId=r.roomId||'';
+  r.lastPropertyId=r.propertyId||'';
+  r.status='Checked Out';
+  r.checkOutDate=o.checkOutDate;
+  r.checkoutNotes=String(o.checkoutNotes||'').trim();
+  r.bedId='';
+  r.roomId='';
+  r.propertyId='';
+  if(bed){
+   bed.status='Available';
+   bed.residentName='';
+   delete bed.residentId;
+  }
+  const booking=(db.reservations||[]).find(x=>x.id===r.bookingId);
+  if(booking)booking.actualCheckOutDate=o.checkOutDate;
+  save();
+  closeModal();
+  render();
+  alert('Resident checked out successfully. Resident history has been preserved and the verified bed is available again.');
+ };
+};
+function pgProperty(id){
+ return (db.properties||[]).find(p=>p.id===id)||null;
+}
+function pgMoney(amount,propertyId){
+ const p=pgProperty(propertyId);
+ const code=(p&&p.currency)||'INR';
+ try{
+  return new Intl.NumberFormat(undefined,{style:'currency',currency:code,minimumFractionDigits:2,maximumFractionDigits:2}).format(Number(amount||0));
+ }catch(e){
+  return code+' '+Number(amount||0).toFixed(2);
+ }
+}
+function pgBalance(c){
+ return Math.max(0,Math.round((Number(c.amount||0)-Number(c.paidAmount||0))*100)/100);
+}
+function pgRefreshChargeStatus(c){
+ const balance=pgBalance(c);
+ c.status=balance<=0?'Paid':Number(c.paidAmount||0)>0?'Partially Paid':c.dueDate<todayISO()?'Overdue':'Pending';
+}
+function generatePgRentCharges(){
+ if(!Array.isArray(db.charges))db.charges=[];
+ const today=todayISO();
+ const todayDate=new Date(today+'T00:00:00');
+ let created=0;
+ for(const r of (db.residents||[])){
+  const status=String(r.status||'active').toLowerCase();
+  const isActive=['active','checked in','occupied'].includes(status);
+  const isCheckedOut=status==='checked out';
+  if(!isActive&&!isCheckedOut)continue;
+  const join=String(r.joinDate||'').slice(0,10);
+  if(!join||join>today)continue;
+  const joined=new Date(join+'T00:00:00');
+  if(Number.isNaN(joined.getTime()))continue;
+  const frequency=r.billingFrequency==='Daily'?'Daily':'Monthly';
+  if(frequency==='Daily'){
+   const rate=Number(r.dailyRate||0);
+   if(!(rate>0))continue;
+   const checkout=String(r.checkOutDate||'').slice(0,10);
+   const lastNight=checkout?new Date(checkout+'T00:00:00'):todayDate;
+   if(Number.isNaN(lastNight.getTime()))continue;
+   lastNight.setDate(lastNight.getDate()-1);
+   const endDate=lastNight<todayDate?lastNight:todayDate;
+   const night=new Date(joined);
+   while(night<=endDate){
+    const y=night.getFullYear();
+    const m=String(night.getMonth()+1).padStart(2,'0');
+    const d=String(night.getDate()).padStart(2,'0');
+    const nightDate=y+'-'+m+'-'+d;
+    const exists=db.charges.some(c=>c.residentId===r.id&&c.kind==='Daily'&&c.period===nightDate);
+    if(!exists){
+     db.charges.push({
+      id:'PG-CHG-'+Date.now()+'-'+Math.random().toString(36).slice(2,7),
+      residentId:r.id,propertyId:r.propertyId,kind:'Daily',
+      period:nightDate,label:'Daily stay - night of '+nightDate,
+      startDate:nightDate,dueDate:nightDate,amount:Math.round(rate*100)/100,
+      paidAmount:0,status:'Pending',createdAt:today,
+      notes:'One occupied night; check-out date is excluded'
+     });
+     created++;
+    }
+    night.setDate(night.getDate()+1);
+   }
+   continue;
+  }
+  if(!isActive)continue;
+  const rent=Number(r.monthlyRent||r.agreedRent||0);
+  if(!(rent>0))continue;
+  const firstPeriod=join.slice(0,7);
+  const firstExists=db.charges.some(c=>c.residentId===r.id&&c.kind==='Prorated');
+  if(!firstExists){
+   const daysInMonth=new Date(joined.getFullYear(),joined.getMonth()+1,0).getDate();
+   const days=daysInMonth-joined.getDate()+1;
+   const amount=Number(r.firstMonthRent)>0?Number(r.firstMonthRent):Math.round((rent/daysInMonth)*days*100)/100;
+   db.charges.push({
+    id:'PG-CHG-'+Date.now()+'-'+Math.random().toString(36).slice(2,7),
+    residentId:r.id,propertyId:r.propertyId,kind:'Prorated',
+    period:firstPeriod,label:'First month prorated rent',
+    startDate:join,dueDate:join,amount:amount,paidAmount:0,
+    status:'Pending',createdAt:today,
+    notes:'Prorated from actual joining date through month end'
+   });
+   created++;
+  }
+  let cursor=new Date(joined.getFullYear(),joined.getMonth()+1,1);
+  while(cursor<=todayDate){
+   const y=cursor.getFullYear();
+   const m=String(cursor.getMonth()+1).padStart(2,'0');
+   const period=y+'-'+m;
+   const exists=db.charges.some(c=>c.residentId===r.id&&c.kind==='Monthly'&&c.period===period);
+   if(!exists){
+    const due=period+'-01';
+    db.charges.push({
+     id:'PG-CHG-'+Date.now()+'-'+Math.random().toString(36).slice(2,7),
+     residentId:r.id,propertyId:r.propertyId,kind:'Monthly',
+     period:period,label:'Monthly rent - '+period,
+     startDate:due,dueDate:due,amount:rent,paidAmount:0,
+     status:'Pending',createdAt:today,notes:'Recurring monthly rent'
+    });
+    created++;
+   }
+   cursor.setMonth(cursor.getMonth()+1);
+  }
+ }
+ for(const c of db.charges)pgRefreshChargeStatus(c);
+ if(created)save();
+ return created;
+}
+function pgChoice(label,name,items,selected=''){
+ return '<div class="field"><label>'+esc(label)+'</label><select name="'+esc(name)+'" required>'+
+ items.map(x=>'<option value="'+esc(x.value)+'" '+(x.value===selected?'selected':'')+'>'+esc(x.label)+'</option>').join('')+
+ '</select></div>';
+}
+window.pgEditRentCharge=function(id){
+ const c=db.charges.find(x=>x.id===id);
+ if(!c)return;
+ addForm('Review Rent Bill',[
+  field('Billing description','label',c.label||''),
+  field('Billing period','period',c.period||''),
+  field('Due date','dueDate',c.dueDate||todayISO(),'date','required'),
+  field('Bill amount','amount',Number(c.amount||0),'number','min="0.01" step="0.01" required'),
+  field('Owner notes','notes',c.notes||'')
+ ],o=>{
+  const amount=Number(o.amount);
+  if(!(amount>0)||amount<Number(c.paidAmount||0)){
+   alert('Bill amount must be positive and cannot be less than payments already received.');
+   return false;
+  }
+  c.label=o.label.trim()||'Rent bill';
+  c.period=o.period.trim();
+  c.dueDate=o.dueDate;
+  c.amount=Math.round(amount*100)/100;
+  c.notes=o.notes.trim();
+  pgRefreshChargeStatus(c);
+ });
+};
+window.pgRecordCollection=function(residentId){
+ const r=(db.residents||[]).find(x=>x.id===residentId);
+ if(!r)return;
+ const outstanding=db.charges.filter(c=>c.residentId===residentId).reduce((s,c)=>s+pgBalance(c),0);
+ if(outstanding<=0){alert('There are no outstanding rent bills for this resident.');return;}
+ addForm('Record Collection',[
+  field('Resident','residentName',r.name,'text','readonly'),
+  field('Collection amount','amount','','number','min="0.01" step="0.01" required'),
+  field('Payment date','date',todayISO(),'date','required'),
+  select('Payment method','method',['Cash','Bank Transfer','UPI','Card','Online','Other'],'Cash'),
+  field('Reference / transaction number','reference')
+ ],o=>{
+  const amount=Math.round(Number(o.amount)*100)/100;
+  if(!(amount>0)||amount>outstanding+0.001){
+   alert('Enter a positive amount not exceeding this residentâ€™s outstanding rent balance of '+pgMoney(outstanding,r.propertyId)+'.');
+   return false;
+  }
+  let remaining=amount;
+  const bills=db.charges.filter(c=>c.residentId===residentId&&pgBalance(c)>0).sort((a,b)=>String(a.dueDate).localeCompare(String(b.dueDate)));
+  const allocations=[];
+  for(const c of bills){
+   if(remaining<=0)break;
+   const applied=Math.min(remaining,pgBalance(c));
+   c.paidAmount=Math.round((Number(c.paidAmount||0)+applied)*100)/100;
+   remaining=Math.round((remaining-applied)*100)/100;
+   pgRefreshChargeStatus(c);
+   allocations.push({chargeId:c.id,amount:applied});
+  }
+  db.pgPayments.push({
+   id:'PG-PAY-'+Date.now(),residentId:r.id,propertyId:r.propertyId,
+   amount:amount,date:o.date,method:o.method,reference:o.reference.trim(),
+   allocations:allocations,receiptNo:'HGP-'+Date.now()
+  });
+ });
+};
+
+window.pgPrintRentDocument=function(type,id){
+ const main=document.getElementById('main');
+ const win=window.open('','_blank');
+ if(!win){alert('Please allow pop-ups for HabitaGrid to print documents.');return;}
+ const money=(n,pid)=>pgMoney(n,pid);
+ const propertyFor=pid=>pgProperty(pid)||{};
+ const escText=v=>esc(String(v==null?'':v));
+ let title='',body='';
+ if(type==='statement'){
+  title='Tenant Rent Statement';
+  body=main?main.innerHTML:'';
+ }else if(type==='bill'){
+  const c=(db.charges||[]).find(x=>x.id===id);
+  if(!c){win.close();alert('Rent bill not found.');return;}
+  const r=(db.residents||[]).find(x=>x.id===c.residentId)||{};
+  const p=propertyFor(c.propertyId);
+  title='Rent Bill';
+  body='<div class="doc-head"><h1>HABITAGRID</h1><h2>RENT BILL</h2></div>'+
+   '<h2>'+escText(p.name||'')+'</h2>'+
+   '<p>'+escText(p.address||'')+', '+escText(p.city||'')+', '+escText(p.state||'')+' '+escText(p.pincode||'')+'</p>'+
+   '<p>Phone: '+escText(p.phone||'')+' | Email: '+escText(p.email||'')+'</p>'+
+   '<hr><h3>Resident details</h3>'+
+   '<p><b>Name:</b> '+escText(r.name||'')+' &nbsp; <b>Mobile:</b> '+escText(r.mobile||'')+'</p>'+
+   '<p><b>Bill reference:</b> '+escText(c.id)+' &nbsp; <b>Due date:</b> '+escText(c.dueDate||'')+'</p>'+
+   '<table><thead><tr><th>Description</th><th>Billing period</th><th>Amount</th><th>Paid</th><th>Balance</th></tr></thead><tbody>'+
+   '<tr><td>'+escText(c.label||'Rent')+'</td><td>'+escText(c.period||'')+'</td><td>'+money(c.amount,c.propertyId)+'</td><td>'+money(c.paidAmount,c.propertyId)+'</td><td>'+money(pgBalance(c),c.propertyId)+'</td></tr>'+
+   '</tbody></table><h2 class="total">Balance due: '+money(pgBalance(c),c.propertyId)+'</h2>'+
+   '<p class="muted">Please pay on or before the due date. Contact the property manager for payment assistance.</p>'+
+   '<div class="sign">Authorized signature</div>';
+ }else if(type==='receipt'){
+  const pay=(db.pgPayments||[]).find(x=>x.id===id);
+  if(!pay){win.close();alert('Payment receipt not found.');return;}
+  const r=(db.residents||[]).find(x=>x.id===pay.residentId)||{};
+  const p=propertyFor(pay.propertyId);
+  const allocations=(pay.allocations||[]).map(a=>{
+   const c=(db.charges||[]).find(x=>x.id===a.chargeId);
+   return '<tr><td>'+escText(c?(c.label||c.period||'Rent'):'Rent bill')+'</td><td>'+escText(c?c.period||'':'')+'</td><td>'+money(a.amount,pay.propertyId)+'</td></tr>';
+  }).join('');
+  title='Payment Receipt';
+  body='<div class="doc-head"><h1>HABITAGRID</h1><h2>PAYMENT RECEIPT</h2></div>'+
+   '<h2>'+escText(p.name||'')+'</h2>'+
+   '<p>'+escText(p.address||'')+', '+escText(p.city||'')+', '+escText(p.state||'')+' '+escText(p.pincode||'')+'</p>'+
+   '<p>Phone: '+escText(p.phone||'')+' | Email: '+escText(p.email||'')+'</p>'+
+   '<hr><p><b>Receipt number:</b> '+escText(pay.receiptNo||pay.id)+'</p>'+
+   '<p><b>Payment date:</b> '+escText(pay.date||'')+'</p>'+
+   '<p><b>Received from:</b> '+escText(r.name||'')+' &nbsp; <b>Mobile:</b> '+escText(r.mobile||'')+'</p>'+
+   '<p><b>Payment method:</b> '+escText(pay.method||'')+' &nbsp; <b>Reference:</b> '+escText(pay.reference||'')+'</p>'+
+   '<table><thead><tr><th>Applied towards</th><th>Billing period</th><th>Amount received</th></tr></thead><tbody>'+
+   (allocations||'<tr><td>Rent collection</td><td>—</td><td>'+money(pay.amount,pay.propertyId)+'</td></tr>')+
+   '</tbody></table><h2 class="total">Total received: '+money(pay.amount,pay.propertyId)+'</h2>'+
+   '<p class="muted">This receipt acknowledges the payment amount received. Any remaining rent balance is shown in the tenant statement.</p>'+
+   '<div class="sign">Authorized signature</div>';
+ }else{win.close();return;}
+ win.document.open();
+ win.document.write('<!doctype html><html><head><meta charset="utf-8"><title>'+escText(title)+'</title><style>'+
+ '@page{size:A4;margin:18mm}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#172033;font-size:12px;line-height:1.55;margin:0}h1{font-size:23px;letter-spacing:2px;margin:0;color:#17345b}h2{font-size:17px;margin:12px 0 6px}h3{font-size:14px;margin:16px 0 6px}.doc-head{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #17345b;padding-bottom:12px;margin-bottom:18px}.doc-head h2{color:#17345b}hr{border:0;border-top:1px solid #ccd3df;margin:16px 0}table{width:100%;border-collapse:collapse;margin:18px 0}th,td{border:1px solid #ccd3df;padding:9px;text-align:left}th{background:#eef2f7}.total{text-align:right;margin-top:22px;color:#17345b}.muted{color:#5e6878}.sign{margin-top:65px;border-top:1px solid #777;width:220px;padding-top:8px;text-align:center}.btn,button{display:none!important}.panel,.card{border:1px solid #ccd3df;padding:12px;margin:12px 0;border-radius:5px;break-inside:avoid}.grid,.grid2{display:block}.notice{border:1px solid #ccd3df;padding:10px;margin-top:15px}.doc-head{display:flex}.total{font-size:18px}@media print{body{print-color-adjust:exact;-webkit-print-color-adjust:exact}}'+
+ '</style></head><body>'+body+'</body></html>');
+ win.document.close();
+ win.onload=function(){win.focus();win.print();};
+};
+window.pgViewTenantStatement=function(id){
+ const r=(db.residents||[]).find(x=>x.id===id);
+ if(!r){alert('Resident record not found.');return;}
+ const propertyId=r.propertyId;
+ const booking=(db.reservations||[]).find(x=>x.id===r.bookingId);
+ const advance=Number((booking&&booking.advanceAmount!=null)?booking.advanceAmount:(r.advanceAmount||0));
+ const charges=(db.charges||[]).filter(x=>x.residentId===r.id).slice().sort((a,b)=>String(a.dueDate||'').localeCompare(String(b.dueDate||'')));
+ const payments=(db.pgPayments||[]).filter(x=>x.residentId===r.id).slice().sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
+ const deposits=(db.deposits||[]).filter(x=>x.residentId===r.id);
+ const billed=charges.reduce((n,x)=>n+Number(x.amount||0),0);
+ const paid=charges.reduce((n,x)=>n+Number(x.paidAmount||0),0);
+ const outstanding=charges.reduce((n,x)=>n+pgBalance(x),0);
+ const rentRows=charges.map(x=>'<tr><td>'+esc(x.label||x.period||'Rent')+'</td><td>'+esc(x.dueDate||'?')+'</td><td>'+pgMoney(x.amount||0,propertyId)+'</td><td>'+pgMoney(x.paidAmount||0,propertyId)+'</td><td>'+pgMoney(pgBalance(x),propertyId)+'</td><td>'+esc(x.status||'Pending')+'</td></tr>');
+ const paymentRows=payments.map(x=>'<tr><td>'+esc(x.receiptNo||x.id||'?')+'</td><td>'+esc(x.date||'?')+'</td><td>'+esc(x.method||'?')+'</td><td>'+esc(x.reference||'?')+'</td><td>'+pgMoney(x.amount||0,propertyId)+'</td></tr>');
+ const depositRows=deposits.map(x=>'<tr><td>'+esc(x.date||'?')+'</td><td>'+esc(x.status||'Recorded')+'</td><td>'+pgMoney(x.amount||x.depositAmount||0,propertyId)+'</td></tr>');
+ document.getElementById('main').innerHTML=
+  head('Tenant Rent Statement','Rent account and payment history for '+esc(r.name),'<button class="btn secondary" onclick="go(\'payments\')">Back to Rent & Payments</button> <button class="btn" onclick="pgPrintRentDocument(\'statement\',\''+esc(r.id)+'\')">Print statement</button>')+
+  cards([
+   ['Total rent billed',pgMoney(billed,propertyId)],
+   ['Rent paid',pgMoney(paid,propertyId)],
+   ['Outstanding rent',pgMoney(outstanding,propertyId)],
+   ['Booking advance recorded separately',pgMoney(advance,propertyId)]
+  ])+
+  '<div class="panel"><h3>Resident details</h3><p><b>'+esc(r.name)+'</b> | '+esc(r.mobile||'')+'</p><p>Joining date: '+esc(r.joinDate||'?')+' | Billing: '+esc(r.billingFrequency||'Monthly')+'</p><p>Monthly rent: '+pgMoney(r.monthlyRent||r.agreedRent||0,propertyId)+' | Daily rate: '+pgMoney(r.dailyRate||0,propertyId)+'</p></div>'+
+  '<div class="panel"><h3>Rent bill history</h3>'+table(['Description','Due date','Bill amount','Paid','Balance','Status'],rentRows)+'</div>'+
+  '<div class="panel"><h3>Rent payment receipts</h3>'+table(['Receipt','Payment date','Method','Reference','Amount'],paymentRows)+'</div>'+
+  '<div class="panel"><h3>Booking advance</h3><p>'+pgMoney(advance,propertyId)+' | recorded separately and not automatically deducted from rent.</p></div>'+
+  '<div class="panel"><h3>Security deposit records</h3>'+(depositRows.length?table(['Date','Status','Amount'],depositRows):'<p class="muted">No resident-linked security-deposit transaction is recorded.</p>')+'</div>'+
+  '<div class="notice"><b>Included PG services:</b> Food, drinks and laundry are included services. They are not separately chargeable rent statement items.</div>';
+};
+
+function pgRentPaymentsPage(){
+ const generated=generatePgRentCharges();
+ const charges=(db.charges||[]).slice().sort((a,b)=>String(b.dueDate).localeCompare(String(a.dueDate)));
+ const residents=db.residents||[];
+ const rows=charges.map(c=>{
+  const r=residents.find(x=>x.id===c.residentId);
+  const p=pgProperty(c.propertyId);
+  const balance=pgBalance(c);
+  return '<tr><td><b>'+esc(r?r.name:'Resident record unavailable')+'</b></td>'+
+   '<td>'+esc(p?p.name:'Property unavailable')+'</td>'+
+   '<td>'+esc(c.label||c.period||'Rent')+'</td>'+
+   '<td>'+esc(c.dueDate||'')+'</td>'+
+   '<td>'+pgMoney(c.amount,c.propertyId)+'</td>'+
+   '<td>'+pgMoney(c.paidAmount,c.propertyId)+'</td>'+
+   '<td><b>'+pgMoney(balance,c.propertyId)+'</b></td>'+
+   '<td>'+tag(c.status||'Pending')+'</td>'+
+   '<td><button class="btn secondary" onclick="pgEditRentCharge(\''+esc(c.id)+'\')">Review / Edit</button>'+
+   '<button class="btn secondary" onclick="pgPrintRentDocument(\'bill\',\''+esc(c.id)+'\')">Print bill</button>'+
+   (balance>0&&r?'<button class="btn" onclick="pgRecordCollection(\''+esc(r.id)+'\')">Collect</button>':'')+'</td></tr>';
+ });
+ const active=residents.filter(r=>['active','checked in','occupied'].includes(String(r.status||'').toLowerCase()));
+ const unpaid=charges.filter(c=>pgBalance(c)>0).length;
+ document.getElementById('main').innerHTML=
+  head('Rent & Payments','PG rent bills, owner review, full and partial collections')+
+  (generated?'<div class="notice">'+generated+' rent bill(s) generated from resident joining dates. Please review bills before collecting.</div>':'')+
+  cards([['Rent bills',String(charges.length)],['Outstanding bills',String(unpaid)],['Recorded collections',String((db.pgPayments||[]).length)]])+
+  '<div class="panel"><h3>Generate rent dues</h3><p class="muted">Creates missing first-month prorated bills and monthly bills due on the first of each following month. This runs when the owner opens this page; it does not run while the browser is closed.</p><button class="btn" onclick="window.pgRunRentGeneration()">Generate / Refresh Dues</button></div>'+
+  '<div class="panel"><h3>Rent bills</h3>'+table(['Resident','Property','Description','Due date','Bill amount','Paid','Balance','Status','Action'],rows)+'</div>'+
+  '<div class="panel"><h3>Active residents</h3>'+
+  (active.length?table(['Resident','Monthly rent','Property','Outstanding','Action'],active.map(r=>{
+   const due=charges.filter(c=>c.residentId===r.id).reduce((s,c)=>s+pgBalance(c),0);
+   const p=pgProperty(r.propertyId);
+   return '<tr><td><b>'+esc(r.name)+'</b></td><td>'+pgMoney(r.monthlyRent||r.agreedRent,r.propertyId)+'</td><td>'+esc(p?p.name:'')+'</td><td>'+pgMoney(due,r.propertyId)+'</td><td>'+'<button class="btn secondary" onclick="pgViewTenantStatement(\''+esc(r.id)+'\')">View statement</button>'+(due>0?'<button class="btn" onclick="pgRecordCollection(\''+esc(r.id)+'\')">Record collection</button>':'No dues')+'</td></tr>';
+  })):'<div class="empty">No active residents.</div>')+'</div>'+
+  '<div class="panel"><h3>Recent PG collections</h3>'+
+  table(['Receipt','Resident','Date','Method','Amount','Action'],(db.pgPayments||[]).slice().reverse().slice(0,20).map(p=>{
+   const r=residents.find(x=>x.id===p.residentId);
+   return '<tr><td>'+esc(p.receiptNo||p.id)+'</td><td>'+esc(r?r.name:'Resident unavailable')+'</td><td>'+esc(p.date)+'</td><td>'+esc(p.method)+'</td><td>'+pgMoney(p.amount,p.propertyId)+'</td><td><button class="btn secondary" onclick="pgPrintRentDocument(\'receipt\',\''+esc(p.id)+'\')">Print receipt</button></td></tr>';
+  }))+'</div>';
+}
+window.pgRunRentGeneration=function(){
+ const count=generatePgRentCharges();
+ render();
+ alert(count+' new rent bill(s) generated.');
+};
+function kyc(){
+ const list=db.residents||[];
+ const count=s=>list.filter(r=>(r.kycStatus||'Pending')===s).length;
+ const rows=list.map(r=>`<tr><td>${esc(r.name||'')}</td><td>${esc(r.mobile||'')}</td><td>${esc(r.idProofType||'Not Provided')}</td><td>${esc(r.addressProofType||'Not Provided')}</td><td>${tag(r.kycStatus||'Pending')}</td><td><button class="btn secondary" onclick="editResident('${esc(r.id)}')">Review / Edit</button></td></tr>`);
+ document.getElementById('main').innerHTML=head('KYC & Verification','Review resident identity and address proof details and update verification status.')+
+ '<div class="notice"><b>Prototype privacy notice:</b> Use fictional test details only. Enter masked references only (last 4 characters). Do not enter full Aadhaar/PAN numbers or upload actual identity documents. This prototype stores data in this browser and does not provide secure document storage or encrypted KYC records.</div>'+
+ cards([['Total Residents',list.length],['Pending',count('Pending'),'amber'],['Submitted',count('Submitted')],['Verified',count('Verified'),'green'],['Rejected',count('Rejected'),'red']])+
+ '<div class="section"><h2>Resident KYC Register</h2><p class="muted">Use Review / Edit to update proof details and verification status.</p></div>'+
+ table(['Resident','Mobile','ID Proof Type','Address Proof Type','KYC Status','Action'],rows);
+}
+/* HABITAGRID_PG_FOUR_MODULES_V1 */
+
+function pgModMoney(v,pid){
+ return pgMoney(Number(v||0),pid);
+}
+function pgModPropertyName(id){
+ const p=pgProperty(id);
+ return p?p.name:'Unassigned property';
+}
+function pgModSelect(label,name,items,selected=''){
+ return `<div class="field"><label>${label}</label><select name="${name}">${items.map(x=>`<option value="${esc(x.value)}" ${String(x.value)===String(selected)?'selected':''}>${esc(x.label)}</option>`).join('')}</select></div>`;
+}
+function pgModPropertyOptions(){
+ return (db.properties||[]).map(p=>({value:p.id,label:p.name}));
+}
+function pgModResidentOptions(){
+ return (db.residents||[]).map(r=>({value:r.id,label:r.name}));
+}
+function pgModForm(title,fields,callback){
+ if(!db.properties.length){alert('Please create a property first.');return;}
+ modal(title,`<form id="pgModuleForm"><div class="formgrid">${fields.join('')}</div>${formActions()}</form>`);
+ document.getElementById('pgModuleForm').onsubmit=e=>{
+  e.preventDefault();
+  const o=Object.fromEntries(new FormData(e.target).entries());
+  const result=callback(o);
+  if(result===false)return;
+  closeModal();save();render();
+ };
+}
+function pgModDate(){
+ return new Date().toISOString().slice(0,10);
+}
+
+/* PRICING & PACKAGES */
+function pgPricingPage(){
+ const plans=db.pgPricingPlans||[];
+ const active=plans.filter(x=>x.status==='Active').length;
+ const rows=plans.map(x=>`<tr>
+ <td>${esc(pgModPropertyName(x.propertyId))}</td>
+ <td>${esc(x.name)}</td><td>${esc(x.sharing)}</td>
+ <td>${esc(x.billing)}</td><td>${pgModMoney(x.rate,x.propertyId)}</td>
+ <td>${esc(x.inclusions||'—')}</td><td>${esc(x.status)}</td>
+ <td><button class="btn secondary" onclick="pgTogglePlan('${x.id}')">Change status</button>
+ <button class="btn danger" onclick="pgDeletePlan('${x.id}')">Delete</button></td></tr>`).join('');
+ document.getElementById('main').innerHTML=
+ head('Pricing & Packages','Configure property-specific accommodation rates and packages.',
+ '<button class="btn" onclick="pgAddPlan()">+ Add pricing plan</button>')+
+ cards([['Pricing plans',plans.length],['Active plans',active],['Inactive plans',plans.length-active]])+
+ '<div class="card"><h2>Accommodation pricing</h2>'+
+ table(['Property','Plan','Sharing','Billing','Rate','Inclusions','Status','Actions'],rows)+
+ '<p class="mini">Changes to pricing plans do not automatically change existing resident agreements or bills.</p></div>';
+}
+window.pgAddPlan=function(){
+ pgModForm('Add pricing plan',[
+ pgModSelect('Property','propertyId',pgModPropertyOptions()),
+ field('Plan name','name','','text','required'),
+ pgModSelect('Sharing type','sharing',['Single','Double','Triple','Four Sharing','Custom'].map(x=>({value:x,label:x}))),
+ pgModSelect('Billing frequency','billing',['Monthly','Weekly','Daily'].map(x=>({value:x,label:x}))),
+ field('Rate amount','rate','', 'number','min="1" step="0.01" required'),
+ field('Included facilities','inclusions','','text'),
+ pgModSelect('Status','status',[{value:'Active',label:'Active'},{value:'Inactive',label:'Inactive'}])
+ ],o=>{
+  if(!o.name.trim()||Number(o.rate)<=0){alert('Enter a plan name and a rate greater than zero.');return false;}
+  db.pgPricingPlans.push({...o,id:'PLAN-'+Date.now(),rate:Number(o.rate),createdAt:pgModDate()});
+ });
+};
+window.pgTogglePlan=function(id){
+ const x=db.pgPricingPlans.find(p=>p.id===id);if(!x)return;
+ x.status=x.status==='Active'?'Inactive':'Active';save();render();
+};
+window.pgDeletePlan=function(id){
+ if(!confirm('Delete this pricing plan? Existing resident rents will not change.'))return;
+ db.pgPricingPlans=db.pgPricingPlans.filter(x=>x.id!==id);save();render();
+};
+
+/* DEPOSITS & ADVANCES */
+function pgDepositsPage(){
+ const advances=db.pgAdvances||[],deposits=db.deposits||[];
+ const advTotal=advances.filter(x=>x.status==='Received').reduce((a,x)=>a+Number(x.amount||0),0);
+ const held=deposits.reduce((a,x)=>a+Math.max(0,Number(x.amount||0)-Number(x.refundAmount||0)),0);
+ const refunds=deposits.reduce((a,x)=>a+Number(x.refundAmount||0),0);
+ const ar=advances.map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.residentName)}</td><td>${esc(pgModPropertyName(x.propertyId))}</td><td>${pgModMoney(x.amount,x.propertyId)}</td><td>${esc(x.method)}</td><td>${esc(x.reference||'—')}</td><td>${esc(x.status)}</td></tr>`).join('');
+ const dr=deposits.map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.residentName)}</td><td>${esc(pgModPropertyName(x.propertyId))}</td><td>${pgModMoney(x.amount,x.propertyId)}</td><td>${pgModMoney(x.refundAmount||0,x.propertyId)}</td><td>${pgModMoney(Math.max(0,Number(x.amount||0)-Number(x.refundAmount||0)),x.propertyId)}</td><td>${esc(x.status)}</td><td><button class="btn secondary" onclick="pgRefundDeposit('${x.id}')">Record refund</button></td></tr>`).join('');
+ document.getElementById('main').innerHTML=
+ head('Deposits & Advances','Track booking advances and refundable security deposits separately from rent.',
+ '<button class="btn" onclick="pgAddAdvance()">+ Record advance</button> <button class="btn secondary" onclick="pgAddDeposit()">+ Record security deposit</button>')+
+ cards([['Advances received',pgModMoney(advTotal)],['Security deposits held',pgModMoney(held)],['Deposits refunded',pgModMoney(refunds)]])+
+ '<div class="card"><h2>Booking advances received</h2>'+table(['Date','Resident','Property','Amount','Method','Reference','Status'],ar)+'</div>'+
+ '<div class="card"><h2>Refundable security deposits</h2>'+table(['Date','Resident','Property','Collected','Refunded','Balance held','Status','Action'],dr)+'</div>'+
+ '<div class="notice">Advances and security deposits are tracked separately. They are not treated as rent collections.</div>';
+}
+window.pgAddAdvance=function(){
+ pgModForm('Record booking advance',[
+ pgModSelect('Resident','residentId',pgModResidentOptions()),
+ field('Date received','date',pgModDate(),'date','required'),
+ field('Amount received','amount','','number','min="0.01" step="0.01" required'),
+ pgModSelect('Payment method','method',['Cash','UPI','Bank transfer','Card','Other'].map(x=>({value:x,label:x}))),
+ field('Transaction reference','reference'),
+ field('Notes','notes')
+ ],o=>{
+  const r=db.residents.find(x=>x.id===o.residentId);if(!r)return false;
+  if(Number(o.amount)<=0){alert('Enter an amount greater than zero.');return false;}
+  db.pgAdvances.push({id:'ADV-'+Date.now(),propertyId:r.propertyId,residentId:r.id,residentName:r.name,date:o.date,amount:Number(o.amount),method:o.method,reference:o.reference,notes:o.notes,status:'Received'});
+ });
+};
+window.pgAddDeposit=function(){
+ pgModForm('Record refundable security deposit',[
+ pgModSelect('Resident','residentId',pgModResidentOptions()),
+ field('Date received','date',pgModDate(),'date','required'),
+ field('Deposit amount','amount','','number','min="0.01" step="0.01" required'),
+ pgModSelect('Payment method','method',['Cash','UPI','Bank transfer','Card','Other'].map(x=>({value:x,label:x}))),
+ field('Transaction reference','reference'),
+ field('Notes','notes')
+ ],o=>{
+  const r=db.residents.find(x=>x.id===o.residentId);if(!r)return false;
+  if(Number(o.amount)<=0){alert('Enter an amount greater than zero.');return false;}
+  db.deposits.push({id:'DEP-'+Date.now(),propertyId:r.propertyId,residentId:r.id,residentName:r.name,date:o.date,amount:Number(o.amount),method:o.method,reference:o.reference,notes:o.notes,refundAmount:0,status:'Held'});
+ });
+};
+window.pgRefundDeposit=function(id){
+ const d=db.deposits.find(x=>x.id===id);if(!d)return;
+ const remaining=Math.max(0,Number(d.amount||0)-Number(d.refundAmount||0));
+ if(!remaining){alert('This deposit has already been fully refunded.');return;}
+ const raw=prompt('Enter refund amount. Remaining refundable balance: '+pgModMoney(remaining,d.propertyId));
+ if(raw===null)return;
+ const amount=Number(raw);
+ if(!Number.isFinite(amount)||amount<=0||amount>remaining){alert('Enter a valid amount not exceeding the remaining deposit.');return;}
+ d.refundAmount=Number(d.refundAmount||0)+amount;
+ d.refundDate=pgModDate();
+ d.status=d.refundAmount>=Number(d.amount)?'Refunded':'Partially refunded';
+ save();render();
+};
+
+/* FOOD & SERVICES */
+function pgServicesPage(){
+ const settings=db.pgServiceSettings||[];
+ const residents=db.residents||[];
+ const rows=residents.map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(pgModPropertyName(r.propertyId))}</td><td>${esc(r.foodType||'Not specified')}</td><td>${esc(r.menuDetails||'Not specified')}</td><td>${esc(r.status||'')}</td></tr>`).join('');
+ const sr=settings.map(x=>`<tr><td>${esc(pgModPropertyName(x.propertyId))}</td><td>${esc(x.menuDetails||'—')}</td><td>${esc(x.mealTimings||'—')}</td><td>${esc(x.notes||'—')}</td><td><button class="btn secondary" onclick="pgEditService('${x.propertyId}')">Edit</button></td></tr>`).join('');
+ document.getElementById('main').innerHTML=
+ head('Food & Services','Manage included meals, drinks, laundry and resident food preferences.',
+ '<button class="btn" onclick="pgEditService()">Configure property services</button>')+
+ '<div class="notice"><b>Included PG services:</b> Food, drinks and laundry are included in the accommodation service. They must not be billed as separate resident charges.</div>'+
+ '<div class="card"><h2>Property service settings</h2>'+table(['Property','Menu details','Meal timings','Notes','Action'],sr)+'</div>'+
+ '<div class="card"><h2>Resident food preferences</h2>'+table(['Resident','Property','Food type','Menu details','Status'],rows)+
+ '<p class="mini">Food preferences are stored on each resident record, not on the room or bed.</p></div>';
+}
+window.pgEditService=function(propertyId){
+ const existing=(db.pgServiceSettings||[]).find(x=>x.propertyId===propertyId)||{};
+ const props=pgModPropertyOptions();
+ const fields=[
+ pgModSelect('Property','propertyId',props,propertyId||existing.propertyId||''),
+ field('Menu details','menuDetails',existing.menuDetails||''),
+ field('Meal timings','mealTimings',existing.mealTimings||''),
+ field('Service notes','notes',existing.notes||'')
+ ];
+ pgModForm('Configure included PG services',fields,o=>{
+  const p=db.properties.find(x=>x.id===o.propertyId);if(!p)return false;
+  let x=db.pgServiceSettings.find(y=>y.propertyId===o.propertyId);
+  if(!x){x={propertyId:o.propertyId,foodIncluded:true,drinksIncluded:true,laundryIncluded:true};db.pgServiceSettings.push(x);}
+  x.menuDetails=o.menuDetails;x.mealTimings=o.mealTimings;x.notes=o.notes;
+  x.foodIncluded=true;x.drinksIncluded=true;x.laundryIncluded=true;
+ });
+};
+
+/* PG EXPENSES & INCOME */
+function pgFinancePage(){
+ const expenses=db.pgExpenses||[],income=db.pgOtherIncome||[],payments=db.pgPayments||[];
+ const collected=payments.reduce((a,x)=>a+Number(x.amount||0),0);
+ const spent=expenses.reduce((a,x)=>a+Number(x.amount||0),0);
+ const other=income.reduce((a,x)=>a+Number(x.amount||0),0);
+ const er=expenses.map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(pgModPropertyName(x.propertyId))}</td><td>${esc(x.category)}</td><td>${esc(x.vendor||'—')}</td><td>${pgModMoney(x.amount,x.propertyId)}</td><td>${esc(x.notes||'—')}</td></tr>`).join('');
+ const ir=income.map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(pgModPropertyName(x.propertyId))}</td><td>${esc(x.source)}</td><td>${pgModMoney(x.amount,x.propertyId)}</td><td>${esc(x.notes||'—')}</td></tr>`).join('');
+ document.getElementById('main').innerHTML=
+ head('Expenses & Income','PG operating financial overview. Rent, advances and deposits remain separate.',
+ '<button class="btn" onclick="pgAddExpense()">+ Add expense</button> <button class="btn secondary" onclick="pgAddOtherIncome()">+ Add other income</button>')+
+ cards([['Rent collected',pgModMoney(collected)],['Operating expenses',pgModMoney(spent)],['Other income',pgModMoney(other)],['Net operating movement',pgModMoney(collected+other-spent)]])+
+ '<div class="notice">Booking advances and refundable security deposits are excluded from income. Rent collections are taken from the Rent & Payments module.</div>'+
+ '<div class="card"><h2>Operating expenses</h2>'+table(['Date','Property','Category','Vendor','Amount','Notes'],er)+'</div>'+
+ '<div class="card"><h2>Other PG income</h2>'+table(['Date','Property','Source','Amount','Notes'],ir)+'</div>';
+}
+window.pgAddExpense=function(){
+ pgModForm('Add PG operating expense',[
+ pgModSelect('Property','propertyId',pgModPropertyOptions()),
+ field('Date','date',pgModDate(),'date','required'),
+ pgModSelect('Category','category',['Repairs','Utilities','Staff','Cleaning','Supplies','Maintenance','Other'].map(x=>({value:x,label:x}))),
+ field('Vendor / Payee','vendor'),
+ field('Amount','amount','','number','min="0.01" step="0.01" required'),
+ field('Notes','notes')
+ ],o=>{
+  if(Number(o.amount)<=0){alert('Enter an amount greater than zero.');return false;}
+  db.pgExpenses.push({id:'PGEXP-'+Date.now(),...o,amount:Number(o.amount)});
+ });
+};
+window.pgAddOtherIncome=function(){
+ pgModForm('Add other PG income',[
+ pgModSelect('Property','propertyId',pgModPropertyOptions()),
+ field('Date received','date',pgModDate(),'date','required'),
+ field('Income source','source','','text','required'),
+ field('Amount received','amount','','number','min="0.01" step="0.01" required'),
+ field('Notes','notes')
+ ],o=>{
+  if(!o.source.trim()||Number(o.amount)<=0){alert('Enter an income source and a valid amount.');return false;}
+  db.pgOtherIncome.push({id:'PGINC-'+Date.now(),...o,amount:Number(o.amount)});
+ });
+};
+
+const pages={pricing:pgPricingPage,deposits:pgDepositsPage,services:pgServicesPage,finance:pgFinancePage,payments:pgRentPaymentsPage,dashboard,reservations,residents,kyc,checkin,properties,buildings:pgBuildings,rooms:pgRooms,flats,tenants,maintenance,complaints,visitors,parking,amenities,staff,notices,meetings,expenses,utilities,assets,tasks,documents,reports,settings};
+window.addEventListener('error',e=>{let el=document.getElementById('app');if(el&&!current) return; if(el) el.insertAdjacentHTML('afterbegin','<div class="error"><h2>Application error</h2><pre>'+esc(e.error?.stack||e.message)+'</pre><button class="btn" onclick="this.parentElement.remove()">Dismiss</button></div>')});
+login();
+})();
+</script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
